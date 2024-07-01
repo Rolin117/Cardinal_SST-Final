@@ -221,3 +221,29 @@ main {
     font-weight: bold;
     margin: 10px 0 10px 0;
 }
+
+
+.search-btn {
+    padding: 0.6rem 1rem;
+    font-size: 1rem; /* Tamaño de fuente para dispositivos grandes */
+    border: none;
+    background-color: #02D693;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    margin-left: 1rem;
+  }
+  
+  .search-btn[type="reset"] {
+    background-color: #ff2e2e;
+  }
+  
+  .search-btn:hover, .search-btn:focus {
+    background-color: #00A36E;
+    color: #FFF;
+  }
+  
+  .search-btn[type="reset"]:hover, .search-btn[type="reset"]:focus {
+    background-color: #e10000;
+  }

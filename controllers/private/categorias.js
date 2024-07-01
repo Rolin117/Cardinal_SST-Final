@@ -7,10 +7,10 @@ const SEARCH_FORM = document.getElementById('searchForm');
 // Constantes para establecer los elementos de la tabla.
 const TABLE_BODY = document.getElementById('tarjetas');
 // Constantes para establecer los elementos del componente Modal.
-const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
+const SAVE_MODAL = new bootstrap.Modal(document.getElementById('saveModal')),
     MODAL_TITLE = document.getElementById('modalTitle');
 // Constantes para establecer los elementos del formulario de guardar.
-const SAVE_FORM = document.getElementById('saveForm'),
+const SAVE_FORM = document.getElementById('saveForm'), 
     ID_CATEGORIA = document.getElementById('id_categoria'),
     NOMBRE_CATEGORIA = document.getElementById('nombre_cat'),
     DESCRIPCION_CATEGORIA = document.getElementById('descripcion_cat'),
