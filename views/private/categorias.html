@@ -42,7 +42,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6 align-items-center justify-content-center">
-                            <form id="saveForm">
+                <form id="saveForm">
                                 <div class="modal-body">
                                     <input type="number" class="d-none" id="id_categoria" name="id_categoria">
 
@@ -52,10 +52,10 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="message-text" class="col-form-label">Descripción:</label>
-                                        <textarea class="form-control" id="descripcion_cat" name="descripcion_cat"></textarea>
+                                        <textarea class="form-control" id="descripcion_cat"
+                                            name="descripcion_cat"></textarea>
                                     </div>
                                 </div>
-                            </form>
                         </div>
                         <!-- Sección para añadir imagen de la categoría -->
                         <div class="col-md-6 d-flex align-items-center justify-content-center">
@@ -63,14 +63,17 @@
                                 style="display: none; height: 26rem;">
                             <i id="addImageIcon" class="fa fa-upload fa-5x"
                                 style="cursor: pointer; display: block; color: rgb(0, 0, 0);"></i>
-                            <input type="file" name="imagen" id="inputGroupFile01" accept="image/*" style="display: none;">
+                            <input type="file" name="imagen" id="inputGroupFile01" accept="image/*"
+                                style="display: none;">
                         </div>
 
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary" >Agregar categoría</button>
+                        <button type="submit" class="btn btn-primary">Agregar categoría</button>
                     </div>
+                </form>
+
                 </div>
             </div>
         </div>
@@ -80,7 +83,7 @@
 
             <div class="barra-busqueda">
                 <form class="d-flex" role="search" id="searchForm">
-                    <input class="form-control me-2" type="search" placeholder="Buscar categoria..."
+                    <input class="form-control me-2" type="search" name="search" placeholder="Buscar categoria..."
                         aria-label="Search">
                     <button class="boton-busqueda" type="submit">Buscar</button>
                 </form>

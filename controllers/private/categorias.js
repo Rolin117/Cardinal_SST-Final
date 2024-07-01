@@ -1,5 +1,7 @@
 // Constante para completar la ruta de la API.
 const CATEGORIA_API = 'services/private/categorias.php';
+const USER_API = 'services/private/administrador.php';
+
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
 // Constantes para establecer los elementos de la tabla.
@@ -100,8 +102,7 @@ const fillTable = async (form = null) => {
             </div>
             `;
         });
-        // Se muestra un mensaje de acuerdo con el resultado.
-        ROWS_FOUND.textContent = DATA.message;
+
     } else {
         sweetAlert(4, DATA.error, true);
     }
@@ -143,6 +144,8 @@ const openUpdate = async (id) => {
         ID_CATEGORIA.value = ROW.id_categoria;
         NOMBRE_CATEGORIA.value = ROW.nombre_cat;
         DESCRIPCION_CATEGORIA.value = ROW.descripcion_cat;
+        set();
+        document.getElementById('imagePreview').src = `${SERVER_URL}images/categorias/${ROW.imagen}`;
     } else {
         sweetAlert(2, DATA.error, false);
     }
