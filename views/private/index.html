@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Llamada al icono de la página web -->
+  <link type="image/png" rel="icon" href="../../resources/img/logo.png">
+  <title>SST</title>
+  <link rel="stylesheet" href="../../resources/css/private/index.css" type="text/css">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+  <!-- Titulo como barra de navegacion -->
+  <nav class="navbar navbar-light">
+    <a href="#" class="logo-i">
+      <img src="../../resources/img/logo.png" alt="">
+      Suministros y servicios técnicos
+    </a>
+  </nav>
+
+  <!-- Todo el contenido del login -->
+  <div class="card mb-4">
+    <div class="card-body p-4">
+      <h3 class="card-title mb-4 text-center">Inicio de sesión</h3>
+
+      <form id="loginform" action="/login" method="post">
+        <div class="text-center">
+            <div class="inputs">
+              <div class="form-group mb-3">
+                <input type="email" class="form-control textbox" id="correo_admin" name="correo_admin" placeholder="Correo..." required>
+              </div>
+              <div class="form-group mb-3">
+                <input type="password" class="form-control textbox" id="contrasenia_admin" name="contrasenia_admin" placeholder="Contraseña..." required>
+              </div>
+            </div>
+            <a href="" class="contra-link">Olvide mi contraseña</a>
+            
+            <div class="text-center contenedor-boton">
+              <button class="boton" type="submit">Iniciar sesión</button>
+            </div>
+      </form>
+    </div>
+  </div>
+  <script src="https://kit.fontawesome.com/yourcode.js"></script>
+  <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
+  <script type="text/javascript" src="../../controllers/utils/components.js"></script>
+  <script type="text/javascript" src="../../controllers/private/index.js"></script>
+
+</body>
+
+</html>

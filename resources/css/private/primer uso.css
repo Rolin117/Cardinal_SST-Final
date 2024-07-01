@@ -1,0 +1,78 @@
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #ffff;
+}
+
+.navbar {
+  background-color: #ffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.logo-i {
+  text-decoration: none;
+  color: black !important;
+  font-size: 20px;
+}
+
+.logo-i img {
+  height: 30px;
+  width: 30px;
+  margin-left: 2rem;
+}
+
+.titulo {
+  display: flex;
+  font-size: 1.25rem;
+  text-align: left;
+}
+
+.card {
+  display: flex;
+  width: 65%;
+  margin: 30px auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  position: relative;
+}
+
+.form-text {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.boton {
+  background-color: #00B207;
+  border: none;
+  color: #ffff;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: 700;
+  padding: 0.8rem 2rem;  /* Modificado para ser más adaptable */
+  border-radius: 43px;
+  transition: padding 0.3s ease;
+} 
+
+.boton a:hover {
+  background-color: #01A307;
+}
+
+@media (min-width: 768px) {
+  .boton {
+    padding: 0.8rem 4rem; /* Más padding en tablets */
+  }
+}
+
+@media (min-width: 992px) {
+  .boton {
+    padding: 0.8rem 8rem; /* Más padding en escritorios */
+  }
+}
+
+.area-btn {
+  margin-top: 2.5rem;
+}
