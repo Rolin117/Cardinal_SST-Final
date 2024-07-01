@@ -15,9 +15,17 @@ const SAVE_FORM = document.getElementById('saveForm'),
     IMAGEN_CATEGORIA = document.getElementById('imagen');
 
 // Método del evento para cuando el documento ha cargado.
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     // Llamada a la función para llenar la tabla con los registros existentes.
     fillTable();
+
+    const DATA = await fetchData(USER_API, 'readProfile');
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        fillTable();
+    } else {
+        sweetAlert(2, DATA.error, null);
+    }
 });
 
 // Método del evento para cuando se envía el formulario de buscar.
@@ -60,7 +68,6 @@ SAVE_FORM.addEventListener('submit', async (event) => {
 */
 const fillTable = async (form = null) => {
     // Se inicializa el contenido de la tabla.
-    ROWS_FOUND.textContent = '';
     TABLE_BODY.innerHTML = '';
     // Se verifica la acción a realizar.
     (form) ? action = 'searchRows' : action = 'readAll';
