@@ -14,11 +14,9 @@ class ProductoHandler
     protected $nombre = null;
     protected $precio = null;
     protected $descripcion = null;
-    protected $cantidad = null;
     protected $imagen = null;
     protected $id_categoria = null;
     protected $id_admin = null;
-    protected $id_oferta = null;
 
     // Constante para establecer la ruta de las imágenes.
     const RUTA_IMAGEN = '../../images/productos/';
@@ -40,9 +38,9 @@ class ProductoHandler
     
     public function createRow()
     {
-        $sql = 'INSERT INTO tb_productos(nombre_producto, precio_producto, c_descripcion, cantidad_producto, imagen, id_categoria, id_admin, id_oferta)
-                VALUES(?, ?, ?, ?, ?, ?, ?, ?)';
-        $params = array($this->nombre, $this->precio, $this->descripcion, $this->cantidad, $this->imagen, $this->id_categoria, $this->id_admin, $this->id_oferta);
+        $sql = 'INSERT INTO tb_productos(nombre_producto, precio_producto, c_descripcion, imagen, id_categoria)
+                VALUES(?, ?, ?, ?, ?, ?)';
+        $params = array($this->nombre, $this->precio, $this->descripcion, $this->imagen, $this->id_categoria);
         return Database::executeRow($sql, $params);
     }
 
@@ -63,7 +61,7 @@ return Database::getRows($sql);
 
     public function readOne()
     {
-        $sql = 'SELECT id_producto, nombre_producto, precio_producto, descripcion, cantidad_producto, imagen, id_categoria, id_admin, id_oferta
+        $sql = 'SELECT id_producto, nombre_producto, precio_producto, descripcion, imagen, id_categoria, id_oferta
                 FROM tb_productos
                 WHERE id_producto = ?';
         $params = array($this->id);
@@ -73,9 +71,9 @@ return Database::getRows($sql);
     public function updateRow()
     {
         $sql = 'UPDATE tb_productos
-                SET nombre_producto = ?, precio_producto = ?, descripcion = ?, cantidad_producto = ?, imagen = ?, id_categoria = ?, id_admin = ?, id_oferta = ?
+                SET nombre_producto = ?, precio_producto = ?, descripcion = ?, imagen = ?, id_categoria = ?
                 WHERE id_producto = ?';
-        $params = array($this->nombre, $this->precio, $this->descripcion, $this->cantidad, $this->imagen, $this->id_categoria, $this->id_admin, $this->id_oferta, $this->id);
+        $params = array($this->nombre, $this->precio, $this->descripcion, $this->imagen, $this->id_categoria, $this->id);
         return Database::executeRow($sql, $params);
     }
 

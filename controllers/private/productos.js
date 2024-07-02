@@ -1,4 +1,5 @@
 // Constantes para completar las rutas de la API.
+const USER_API = 'services/private/administrador.php';
 const PRODUCTO_API = 'services/private/productos.php';
 const CATEGORIA_API = 'services/private/categorias.php';
 
@@ -6,25 +7,29 @@ const SEARCH_FORM = document.getElementById('searchForm');
 
 const TABLE_BODY = document.getElementById('tarjetas');
 
-const SAVE_MODAL = new bootstrap.Modal('exampleModal'),
-    MODAL_TITLE = document.getElementById('exampleModalLabel');
+const SAVE_MODAL = new bootstrap.Modal(document.getElementById('saveModal')),
+    MODAL_TITLE = document.getElementById('modalTitle');
 
 const SAVE_FORM = document.getElementById('saveForm'),
     ID_PRODUCTO = document.getElementById('id_producto'),
     NOMBRE_PRODUCTO = document.getElementById('nombre_producto'),
     DESCRIPCION_PRODUCTO = document.getElementById('descripcion'),
     PRECIO_PRODUCTO = document.getElementById('precio_producto');
+    IMAGEN_PRODUCTO = document.getElementById('imagen');
 
-// document.addEventListener('DOMContentLoaded', async () => {
-//     // Petición para obtener los datos del usuario que ha iniciado sesión.
-//     const DATA = await fetchData(USER_API, 'readProfile');
-//     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-//     if (DATA.status) {
-//         fillTable();
-//     } else {
-//         sweetAlert(2, DATA.error, null);
-//     }
-// });
+// Método del evento para cuando el documento ha cargado.
+document.addEventListener('DOMContentLoaded', async () => {
+    // Llamada a la función para llenar la tabla con los registros existentes.
+    fillTable();
+
+    const DATA = await fetchData(USER_API, 'readProfile');
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        fillTable();
+    } else {
+        sweetAlert(2, DATA.error, null);
+    }
+});
 
 
 
@@ -36,15 +41,21 @@ SEARCH_FORM.addEventListener('submit', (event) => {
 
 
 SAVE_FORM.addEventListener('submit', async (event) => {
+    // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
+    // Se verifica la acción a realizar.
     (ID_PRODUCTO.value) ? action = 'updateRow' : action = 'createRow';
+    // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(SAVE_FORM);
+    // Petición para guardar los datos del formulario.
     const DATA = await fetchData(PRODUCTO_API, action, FORM);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
-        //document.getElementById('inputGroupFile01').value = '';
+        // Se cierra la caja de diálogo.
         SAVE_MODAL.hide();
-        SAVE_FORM.reset();
+        // Se muestra un mensaje de éxito.
         sweetAlert(1, DATA.message, true);
+        // Se carga nuevamente la tabla para visualizar los cambios.
         fillTable();
     } else {
         sweetAlert(2, DATA.error, false);
@@ -62,7 +73,7 @@ const fillTable = async (form = null) => {
             TABLE_BODY.innerHTML += `
             <div class="col">
                 <div class="card h-100 border-light">
-                    <img src="../../resources/img/tornillo.jpg" class="card-img-top" alt="..." loading="lazy">
+                    <img src="${SERVER_URL}images/productos/${row.imagen}" class="card-img-top" alt="..." loading="lazy">
                     <div class="card-body">
                         <h5 class="card-title">${row.nombre_producto}</h5>
                         <div class="descripcion-precio">    
@@ -89,9 +100,9 @@ const fillTable = async (form = null) => {
 
 
 const openCreate = () => {
-    change();
     // Se muestra la caja de diálogo con su título.
     SAVE_MODAL.show();
+    MODAL_TITLE.textContent = 'Crear producto';
     // Se prepara el formulario.
     SAVE_FORM.reset();
     fillSelectCategoria(CATEGORIA_API, 'readAll', 'categoriaProducto');
@@ -99,7 +110,6 @@ const openCreate = () => {
 
 
 const openUpdate = async (id) => {
-    change();
     // Se define un objeto con los datos del registro seleccionado.
     const FORM = new FormData();
     FORM.append('id_producto', id);
