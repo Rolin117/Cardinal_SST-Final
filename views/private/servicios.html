@@ -32,57 +32,34 @@
 
     <main>
         <!-- Modal para agregar servicios -->
-        <div class="modal fade" id="modal-servicio-add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="saveModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo servicio</h1>
+                        <h1 class="modal-title fs-5" id="modalTitle"></h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">Nombre:</label>
-                                <input type="text" class="form-control" id="recipient-name">
-                            </div>
-                            <div class="mb-3">
-                                <label for="message-text" class="col-form-label">Descripción:</label>
-                                <textarea class="form-control" id="message-text"></textarea>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary">Agregar servicio</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    <form id="saveForm">
+                        <div class="modal-body">
+                            <input type="number" class="d-none" id="id_servicio" name="id_servicio">
 
-        <!-- modal para editar servicios -->
-        <div class="modal fade" id="modal-servicio-edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Editar servicio</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
                             <div class="mb-3">
                                 <label for="recipient-name" class="col-form-label">Nombre:</label>
-                                <input type="text" class="form-control" id="recipient-name">
+                                <input type="text" class="form-control" id="nombre_servicio" name="nombre_servicio">
                             </div>
                             <div class="mb-3">
                                 <label for="message-text" class="col-form-label">Descripción:</label>
-                                <textarea class="form-control" id="message-text"></textarea>
+                                <textarea class="form-control" id="descripcion_servicio"
+                                    name="descripcion_servicio"></textarea>
                             </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary">Editar servicio</button>
-                    </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">Agregar servicio</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -91,18 +68,26 @@
             <h4 class="titulo">Servicios</h4>
 
             <div class="barra-busqueda">
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Buscar servicio..." aria-label="Search">
+                <form class="d-flex" role="search" id="searchForm">
+                    <input class="form-control me-2" type="search" name="search" placeholder="Buscar servicio..."
+                        aria-label="Search">
                     <button class="boton-busqueda" type="submit">Buscar</button>
+                    <button type="reset" class="search-btn" onclick="fillTable()">X</button>
                 </form>
             </div>
 
-            <button class="boton-agregar" data-bs-toggle="modal" data-bs-target="#modal-servicio-add">
+            <button type="button" class="boton-agregar" onclick="openCreate()">
                 <img src="../../resources/img/icon-agregar.svg" alt="">Agregar servicio
             </button>
         </div>
 
-        
+        <div class="contenedor-cards">
+                <div class="row row-cols-1 row-cols-md-2 g-2" id="tarjetas">
+
+                </div>
+        </div>
+    </div>
+
     </main>
 
     <footer>
@@ -120,6 +105,10 @@
     <!-- Plantillas -->
     <script src="../../resources/js/private/nav.js"></script>
     <script src="../../resources/js/private/footer.js"></script>
+
+    <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="../../controllers/utils/components.js"></script>
+    <script type="text/javascript" src="../../controllers/private/servicios.js"></script>
 </body>
 
 </html>

@@ -21,7 +21,7 @@ class ServicioHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT id_servicio, nombre_servicio, descripcion_servicio, id_admin
+        $sql = 'SELECT id_servicio, nombre_servicio, descripcion_servicio
                 FROM tb_servicios
                 WHERE nombre_servicio LIKE ? OR descripcion_servicio LIKE ?
                 ORDER BY nombre_servicio';
@@ -31,15 +31,15 @@ class ServicioHandler
 
     public function createRow()
     {
-        $sql = 'INSERT INTO tb_servicios(nombre_servicio, descripcion_servicio, id_admin)
-                VALUES(?, ?, ?)';
-        $params = array($this->nombre, $this->descripcion, $this->id_admin);
+        $sql = 'INSERT INTO tb_servicios(nombre_servicio, descripcion_servicio)
+                VALUES(?, ?)';
+        $params = array($this->nombre, $this->descripcion);
         return Database::executeRow($sql, $params);
     }
 
     public function readAll()
     {
-        $sql = 'SELECT id_servicio, nombre_servicio, descripcion_servicio, id_admin
+        $sql = 'SELECT id_servicio, nombre_servicio, descripcion_servicio
                 FROM tb_servicios
                 ORDER BY nombre_servicio';
         return Database::getRows($sql);
@@ -47,7 +47,7 @@ class ServicioHandler
 
     public function readOne()
     {
-        $sql = 'SELECT id_servicio, nombre_servicio, descripcion_servicio, id_admin
+        $sql = 'SELECT id_servicio, nombre_servicio, descripcion_servicio
                 FROM tb_servicios
                 WHERE id_servicio = ?';
         $params = array($this->id);
@@ -57,9 +57,9 @@ class ServicioHandler
     public function updateRow()
     {
         $sql = 'UPDATE tb_servicios
-                SET nombre_servicio = ?, descripcion_servicio = ?, id_admin = ?
+                SET nombre_servicio = ?, descripcion_servicio = ?
                 WHERE id_servicio = ?';
-        $params = array($this->nombre, $this->descripcion, $this->id_admin, $this->id);
+        $params = array($this->nombre, $this->descripcion, $this->id);
         return Database::executeRow($sql, $params);
     }
 
