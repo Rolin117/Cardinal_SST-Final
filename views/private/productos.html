@@ -32,27 +32,28 @@
 
     <main>
         <!-- Modal para agregar un nuevo producto -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="saveModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Nuevo producto</h5>
+                        <h5 class="modal-title" id="modalTitle"></h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="row">
                         <div class="col-md-6 align-items-center justify-content-center">
-                            <form>
+                            <form id="saveForm">
                                 <div class="modal-body">
                                     <input type="number" class="d-none" id="id_producto" name="id_producto">
 
                                     <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Nombre:</label>
-                                        <input type="text" class="form-control" id="nombre_producto" name="nombre_producto">
+                                        <input type="text" class="form-control" id="nombre_producto"
+                                            name="nombre_producto">
                                     </div>
                                     <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Precio:</label>
-                                        <input type="number" class="form-control" id="precio_producto" name="precio_producto">
+                                        <input type="number" class="form-control" id="precio_producto"
+                                            name="precio_producto">
                                     </div>
                                     <div class="mb-3">
                                         <label for="message-text" class="col-form-label">Descripción:</label>
@@ -66,7 +67,6 @@
                                         </select>
                                     </div>
                                 </div>
-                            </form>
                         </div>
                         <!-- Sección para añadir imagen del producto -->
                         <div class="col-md-6 d-flex align-items-center justify-content-center">
@@ -74,15 +74,19 @@
                                 style="display: none; height: 26rem;">
                             <i id="addImageIcon" class="fa fa-upload fa-5x"
                                 style="cursor: pointer; display: block; color: rgb(0, 0, 0);"></i>
-                            <input type="file" id="inputGroupFile01" accept="image/*" style="display: none;">
+                            <input type="file" name="imagen" id="inputGroupFile01" accept="image/*"
+                                style="display: none;">
                         </div>
 
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Agregar producto</button>
+                    </div>
+                    </form>
+
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary">Agregar producto</button>
-                </div>
+
             </div>
         </div>
         </div>
@@ -92,13 +96,14 @@
 
             <div class="barra-busqueda">
                 <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" name="searchForm" placeholder="Buscar producto..." aria-label="Search">
+                    <input class="form-control me-2" type="search" name="searchForm" placeholder="Buscar producto..."
+                        aria-label="Search">
                     <button class="boton-busqueda" type="submit">Buscar</button>
                     <button type="reset" class="search-btn" onclick="fillTable()">X</button>
                 </form>
             </div>
 
-            <button class="boton-agregar" onclick="openCreate()">
+            <button type="button" class="boton-agregar" onclick="openCreate()">
                 <img src="../../resources/img/icon-agregar.svg" alt="">Agregar producto
             </button>
 
@@ -128,8 +133,6 @@
     <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
 
     <!--LInk del controlador de la pagina web-->
-    <script type="text/javascript" src="../../controllers/public/inicio.js"></script>
-
     <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
     <script type="text/javascript" src="../../controllers/utils/components.js"></script>
     <script type="text/javascript" src="../../controllers/private/productos.js"></script>

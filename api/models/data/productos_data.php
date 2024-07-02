@@ -62,17 +62,6 @@ class ProductoData extends ProductoHandler
         }
     }
 
-    public function setCantidad($value)
-    {
-        if (Validator::validateNaturalNumber($value)) {
-            $this->cantidad = $value;
-            return true;
-        } else {
-            $this->data_error = 'La cantidad no es válida';
-            return false;
-        }
-    }
-
     public function setImagen($file, $filename = null)
     {
         if (Validator::validateImageFile($file, 1000)) {
@@ -127,18 +116,7 @@ class ProductoData extends ProductoHandler
             return false;
         }
     }
-
-    public function setIdOferta($value)
-    {
-        if ($value === null || Validator::validateNaturalNumber($value)) {
-            $this->id_oferta = $value;
-            return true;
-        } else {
-            $this->data_error = 'El identificador de la oferta es incorrecto';
-            return false;
-        }
-    }
-
+    
     /*
      *  Métodos para obtener los atributos adicionales.
      */
