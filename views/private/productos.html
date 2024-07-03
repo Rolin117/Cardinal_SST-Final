@@ -74,7 +74,7 @@
                                 style="display: none; height: 26rem;">
                             <i id="addImageIcon" class="fa fa-upload fa-5x"
                                 style="cursor: pointer; display: block; color: rgb(0, 0, 0);"></i>
-                            <input type="file" name="imagen" id="inputGroupFile01" accept="image/*"
+                            <input type="file" name="imagen_producto" id="inputGroupFile01" accept="image/*"
                                 style="display: none;">
                         </div>
 
@@ -95,8 +95,8 @@
             <h4 class="titulo">Productos</h4>
 
             <div class="barra-busqueda">
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" name="searchForm" placeholder="Buscar producto..."
+                <form class="d-flex" role="search" id="searchForm">
+                    <input class="form-control me-2" type="search"  name="search" placeholder="Buscar producto..."
                         aria-label="Search">
                     <button class="boton-busqueda" type="submit">Buscar</button>
                     <button type="reset" class="search-btn" onclick="fillTable()">X</button>
@@ -112,22 +112,6 @@
         <div class="row row-cols-1 row-cols-md-3 g-3" id="tarjetas">
 
         </div><!--Fin de la etiqueta de productos-->
-        <table class="table table-hover">
-            <!-- Encabezado de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
-            <thead>
-                <tr>
-                    <td colspan="4" id="rowsFound"></td>
-                </tr>
-                <tr>
-                    <th>IMAGEN</th>
-                    <th>NOMBRE</th>
-                    <th>DESCRIPCIÓN</th>
-                    <th>ACCIONES</th>
-                </tr>
-            </thead>
-            <!-- Cuerpo de la tabla para mostrar un registro por fila -->
-            <tbody id="tableBody"></tbody>
-        </table>
     </main>
 
     <footer class="">
@@ -152,7 +136,6 @@
     <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
     <script type="text/javascript" src="../../controllers/utils/components.js"></script>
     <script type="text/javascript" src="../../controllers/private/productos.js"></script>
-    
 </body>
 
 </html>

@@ -15,7 +15,7 @@ const SAVE_FORM = document.getElementById('saveForm'),
     NOMBRE_PRODUCTO = document.getElementById('nombre_producto'),
     DESCRIPCION_PRODUCTO = document.getElementById('descripcion'),
     PRECIO_PRODUCTO = document.getElementById('precio_producto');
-    IMAGEN_PRODUCTO = document.getElementById('imagen');
+    IMAGEN_PRODUCTO = document.getElementById('imagen_producto');
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', async () => {
@@ -73,7 +73,7 @@ const fillTable = async (form = null) => {
             TABLE_BODY.innerHTML += `
             <div class="col">
                 <div class="card h-100 border-light">
-                    <img src="${SERVER_URL}images/productos/${row.imagen}" class="card-img-top" alt="..." loading="lazy">
+                    <img src="${SERVER_URL}images/productos/${row.imagen_producto}" class="card-img-top" alt="..." loading="lazy">
                     <div class="card-body">
                         <h5 class="card-title">${row.nombre_producto}</h5>
                         <div class="descripcion-precio">    
@@ -130,8 +130,7 @@ const openUpdate = async (id) => {
         DESCRIPCION_PRODUCTO.value = ROW.descripcion;
         PRECIO_PRODUCTO.value = ROW.precio_producto;
         fillSelectCategoria(CATEGORIA_API, 'readAll', 'categoriaProducto', ROW.id_categoria);
-        set();
-        document.getElementById('imagePreview').src = `${SERVER_URL}images/productos/${ROW.imagen}`;
+        document.getElementById('imagePreview').src = `${SERVER_URL}images/productos/${ROW.imagen_producto}`;
     } else {
         sweetAlert(2, DATA.error, false);
     }
