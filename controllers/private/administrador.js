@@ -120,7 +120,6 @@ const openCreate = () => {
     MODAL_TITLE.textContent = 'Crear administrador';
     // Se prepara el formulario.
     SAVE_FORM.reset();
-    ID_ADMIN.value = '';
 }
 
 /*
