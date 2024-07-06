@@ -3,6 +3,7 @@ require_once('../../models/data/productos_data.php');
 
 if (isset($_GET['action'])) {
     session_start();
+
     $producto = new ProductoData;
     $result = array('status' => 0, 'message' => null, 'dataset' => null, 'error' => null, 'exception' => null, 'fileStatus' => null);
     if (isset($_SESSION['id_administrador'])) {

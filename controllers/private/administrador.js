@@ -98,7 +98,7 @@ const fillTable = async (form = null) => {
                                     <button class="boton-accion boton-editar" onclick="openUpdate(${row.id_administrador})">
                                         <img src="../../resources/img/icon-editar.svg" alt="">
                                     </button>
-                                    <button class="boton-accion boton-eliminar" onclick="openUpdate(${row.id_administrador})">
+                                    <button class="boton-accion boton-eliminar" onclick="openDelete(${row.id_administrador})">
                                         <img src="../../resources/img/icon-eliminar.svg" alt="">
                                     </button>
                                 </td>

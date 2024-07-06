@@ -10,12 +10,12 @@ define('USERNAME', 'root');
 define('PASSWORD', '');
 
  // Intentar establecer conexión con la base de datos
-//  $conn = new mysqli(SERVER, USERNAME, PASSWORD, DATABASE);
+//   $conn = new mysqli(SERVER, USERNAME, PASSWORD, DATABASE);
 
-//  if ($conn->connect_error) {
-//     die("Conexión fallida: " . $conn->connect_error);
-//  } else {
-//     echo "¡Conexión exitosa!";
-//  }
+//   if ($conn->connect_error) {
+//      die("Conexión fallida: " . $conn->connect_error);
+//   } else {
+//      echo "¡Conexión exitosa!";
+//   }
 
-//  $conn->close();
+//   $conn->close();
