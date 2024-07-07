@@ -10,8 +10,8 @@ class OfertaHandler
      *   Declaración de atributos para el manejo de datos.
      */
     protected $id= null;
-    protected $titulo = null;
-    protected $descripcion = null;  
+    protected $nombre_oferta = null;
+    protected $descripcion_oferta = null;  
     protected $descuento = null;
     protected $producto = null;
 
@@ -21,11 +21,11 @@ class OfertaHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT id_oferta, titulo, descripcion, descuento, idProducto, nombreProducto
+        $sql = 'SELECT id_oferta, nombre_oferta, descripcion_oferta, descuento, idProducto, nombreProducto
         from tb_ofertas
         INNER JOIN tb_productos USING(idProducto)
-        WHERE titulo LIKE ? OR nombreProducto LIKE ?
-        ORDER BY titulo';
+        WHERE nombre_oferta LIKE ? OR nombreProducto LIKE ?
+        ORDER BY nombre_oferta';
         $params = array($value, $value);
         return Database::getRows($sql, $params);
     }
@@ -47,25 +47,25 @@ class OfertaHandler
             Database::executeRow($sqlUpdate, $paramsUpdate);
 
             // Ahora procedemos con la inserción en tb_ofertas
-            $sqlInsert = 'INSERT INTO tb_ofertas(titulo, descripcion, descuento, idProducto)
+            $sqlInsert = 'INSERT INTO tb_ofertas(nombre_oferta, descripcion_oferta, descuento, idProducto)
                       VALUES(?, ?, ?, ?)';
-            $paramsInsert = array($this->titulo, $this->descripcion, $this->descuento, $this->producto);
+            $paramsInsert = array($this->nombre_oferta, $this->descripcion_oferta, $this->descuento, $this->producto);
             return Database::executeRow($sqlInsert, $paramsInsert);
         }
     }
 
     public function readAll()
     {
-        $sql = 'SELECT id_oferta, titulo, descripcion, descuento, nombreProducto
+        $sql = 'SELECT id_oferta, nombre_oferta, descripcion_oferta, descuento, nombreProducto
                 FROM tb_ofertas
                 INNER JOIN tb_productos USING(idProducto)
-                ORDER BY titulo';
+                ORDER BY nombre_oferta';
         return Database::getRows($sql);
     }
 
     public function readOne()
     {
-        $sql = 'SELECT id_oferta, titulo, descripcion, descuento, idProducto
+        $sql = 'SELECT id_oferta, nombre_oferta, descripcion_oferta, descuento, idProducto
                 FROM tb_ofertas
                 WHERE id_oferta = ?';
         $params = array($this->id);
@@ -75,9 +75,9 @@ class OfertaHandler
     public function updateRow()
     {
         $sql = 'UPDATE tb_ofertas
-                SET titulo = ?, descripcion = ?, descuento = ?, idProducto = ?
+                SET nombre_oferta = ?, descripcion_oferta = ?, descuento = ?, idProducto = ?
                 WHERE id_oferta = ?';
-        $params = array($this->titulo, $this->descripcion, $this->descuento, $this->producto, $this->id);
+        $params = array($this->nombre_oferta, $this->descripcion_oferta, $this->descuento, $this->producto, $this->id);
         return Database::executeRow($sql, $params);
     }
 

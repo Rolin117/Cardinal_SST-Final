@@ -31,7 +31,7 @@ class OfertaData extends OfertaHandler
     public function setTitulo($value, $min = 2, $max = 100)
     {
         if (Validator::validateAlphanumeric($value) && Validator::validateLength($value, $min, $max)) {
-            $this->titulo = $value;
+            $this->nombre_oferta = $value;
             return true;
         } else {
             $this->data_error = 'El título debe ser alfanumérico y tener una longitud entre ' . $min . ' y ' . $max;
@@ -42,7 +42,7 @@ class OfertaData extends OfertaHandler
     public function setDescripcion($value, $min = 2, $max = 255)
     {
         if (Validator::validateString($value) && Validator::validateLength($value, $min, $max)) {
-            $this->descripcion = $value;
+            $this->descripcion_oferta = $value;
             return true;
         } else {
             $this->data_error = 'La descripción contiene caracteres no válidos o no cumple con la longitud permitida';
