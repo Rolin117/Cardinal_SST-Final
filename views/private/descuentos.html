@@ -36,40 +36,49 @@
             aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Nueva oferta</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
+                    <form>
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Nueva oferta</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="number" class="d-none" id="id_descuento" name="id_descuento">
                             <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">Nombre:</label>
-                                <input type="text" class="form-control" id="recipient-name">
+                                <label for="nombre" class="col-form-label">Nombre:</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre">
                             </div>
                             <div class="mb-3">
-                                <label for="message-text" class="col-form-label">Descripción:</label>
-                                <textarea class="form-control" id="message-text"></textarea>
+                                <label for="descripcion" class="col-form-label">Descripción:</label>
+                                <textarea class="form-control" id="descripcion" name="descripcion"></textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">Descuento:</label>
-                                <input type="number" id="porcentage" name="porcentage" min="0" max="100" step="0.01"
-                                    required class="form-control" id="recipient-name">
+                                <label for="descuento" class="col-form-label">Descuento:</label>
+                                <input type="number" name="descuento" min="0" max="100" step="0.01"
+                                    required class="form-control" id="descuento">
+                            </div>
+                            <div class="mb-3">
+                                <label for="producto" class="col-form-label">Productos:</label>
+                                <select id="producto" name="producto" class="form-select">
+                                    <option selected>productos...</option>
+                                    <option>...</option>
+                                </select>
                             </div>
                             <div class="barra-busqueda-modal">
                                 <form class="d-flex" role="search">
                                     <input class="form-control me-2" type="search" placeholder="Buscar producto..."
                                         aria-label="Search">
                                     <button class="boton-busqueda-modal" type="submit">Search</button>
-                                    <input class="form-control me-2" type="search" placeholder="Buscar producto..." aria-label="Search">
+                                    <input class="form-control me-2" type="search" placeholder="Buscar producto..."
+                                        aria-label="Search">
                                     <button class="boton-busqueda-modal" type="submit">Buscar</button>
                                 </form>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary">Agregar oferta</button>
-                    </div>
+                            </div>  
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary">Agregar oferta</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -103,7 +112,8 @@
                                     <input class="form-control me-2" type="search" placeholder="Buscar producto..."
                                         aria-label="Search">
                                     <button class="boton-busqueda-modal" type="submit">Search</button>
-                                    <input class="form-control me-2" type="search" placeholder="Buscar producto..." aria-label="Search">
+                                    <input class="form-control me-2" type="search" placeholder="Buscar producto..."
+                                        aria-label="Search">
                                     <button class="boton-busqueda-modal" type="submit">Buscar</button>
                                 </form>
                             </div>
@@ -135,13 +145,14 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="elementos-s">
             <h4 class="titulo">Descuentos</h4>
 
             <div class="barra-busqueda">
                 <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Buscar descuento..." aria-label="Search">
+                    <input class="form-control me-2" type="search" placeholder="Buscar descuento..."
+                        aria-label="Search">
                     <button class="boton-busqueda" type="submit">Buscar</button>
                 </form>
             </div>
