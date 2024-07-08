@@ -1,5 +1,4 @@
 const CATEGORIA_API = 'services/private/categorias.php';
-const USER_API = 'services/private/administrador.php';
 
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');

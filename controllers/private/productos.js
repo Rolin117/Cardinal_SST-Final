@@ -1,5 +1,4 @@
 // Constantes para completar las rutas de la API.
-const USER_API = 'services/private/administrador.php';
 const PRODUCTO_API = 'services/private/productos.php';
 const CATEGORIA_API = 'services/private/categorias.php';
 

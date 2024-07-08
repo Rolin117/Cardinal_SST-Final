@@ -1,0 +1,13 @@
+PHP:
+ - Manejo de errores y excepciones
+ - Comentarios claros
+ - Nomenclatura clara
+ - Validación de datos
+ - Responsabilidad única
+
+JS:
+ - Uso consistente de comentarios
+ - Nombres de constantes 
+ - Manejo adecuado de eventos
+ - Validación de datos
+ - Separación de funciones

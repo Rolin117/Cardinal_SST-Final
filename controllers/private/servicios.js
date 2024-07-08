@@ -1,6 +1,4 @@
-// Constante para completar la ruta de la API.
 const SERVICIO_API = 'services/private/servicios.php';
-const USER_API = 'services/private/administrador.php';
 
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
