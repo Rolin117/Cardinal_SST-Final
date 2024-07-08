@@ -1,4 +1,3 @@
-// Constante para completar la ruta de la API.
 const CATEGORIA_API = 'services/private/categorias.php';
 const USER_API = 'services/private/administrador.php';
 

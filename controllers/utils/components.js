@@ -5,6 +5,7 @@
 const SERVER_URL = 'http://localhost/Cardinal_SST-Final/api/';
 // const SERVER_URL = 'http://localhost/Cardinal/api/';
 
+
 /*
 *   Función para mostrar un mensaje de confirmación.
 *   Requiere la librería sweetalert para funcionar.

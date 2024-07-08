@@ -20,7 +20,7 @@ class OfertaData extends OfertaHandler
     public function setIdO($value)
     {
         if (Validator::validateNaturalNumber($value)) {
-            $this->id = $value;
+            $this->id_oferta = $value;
             return true;
         } else {
             $this->data_error = 'El identificador de la oferta es incorrecto';
@@ -52,11 +52,11 @@ class OfertaData extends OfertaHandler
 
     public function setDescuento($value)
     {
-        if (Validator::validateMoney($value)) {
+        if (Validator::validateNaturalNumberDiscount($value)) {
             $this->descuento = $value;
             return true;
         } else {
-            $this->data_error = 'El descuento no es válido';
+            $this->data_error = 'El descuento debe ser un número del 1 al 100';
             return false;
         }
     }
@@ -64,7 +64,7 @@ class OfertaData extends OfertaHandler
     public function setProducto($value)
     {
         if (Validator::validateNaturalNumber($value)) {
-            $this->producto = $value;
+            $this->id_producto = $value;
             return true;
         } else {
             $this->data_error = 'El identificador del producto es incorrecto';

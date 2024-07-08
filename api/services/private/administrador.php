@@ -6,7 +6,6 @@ require_once('../../models/data/administrador_data.php');
 if (isset($_GET['action'])) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
     session_start();
-  
     // Se instancia la clase correspondiente.
     $administrador = new AdministradorData;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
@@ -147,7 +146,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             default:
-                $result['error'] = 'Acción no disponible dentro de la sesión';
+                $result['error'] = 'Acción no disponible dentro de la sesión';                
         }
     } else {
         // Se compara la acción a realizar cuando el administrador no ha iniciado sesión.

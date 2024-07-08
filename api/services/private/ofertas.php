@@ -1,6 +1,6 @@
 <?php
 // Se incluye la clase del modelo.
-require_once('../../models/data/servicios_data.php');
+require_once('../../models/data/ofertas_data.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
@@ -27,17 +27,17 @@ if (isset($_GET['action'])) {
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$ofertas->setTitulo($_POST['nombre']) or
-                    !$ofertas->setDescripcion($_POST['descripcion']) or
+                    !$ofertas->setTitulo($_POST['nombre_oferta']) or
+                    !$ofertas->setDescripcion($_POST['descripcion_oferta']) or
                     !$ofertas->setDescuento($_POST['descuento']) or
-                    !$ofertas->setProducto($_POST['producto'])
+                    !$ofertas->setProducto($_POST['ofertaProducto'])
                 ) {
                     $result['error'] = $ofertas->getDataError();
                 } elseif ($ofertas->createRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'servicio creada correctamente';
+                    $result['message'] = 'oferta creada correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al crear la servicio';
+                    $result['error'] = 'Ocurrió un problema al crear la oferta';
                 }
                 break;
             case 'readAll':
@@ -45,45 +45,45 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } else {
-                    $result['error'] = 'No existen servicios registrados';
+                    $result['error'] = 'No existen oferta registrados';
                 }
                 break;
             case 'readOne':
-                if (!$ofertas->setIdO($_POST['id_descuento'])) {
+                if (!$ofertas->setIdO($_POST['id_oferta'])) {
                     $result['error'] = $ofertas->getDataError();
                 } elseif ($result['dataset'] = $ofertas->readOne()) {
                     $result['status'] = 1;
                 } else {
-                    $result['error'] = 'servicio inexistente';
+                    $result['error'] = 'oferta inexistente';
                 }
                 break;
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$ofertas->setIdO($_POST['id_descuento']) or
-                    !$ofertas->setTitulo($_POST['nombre']) or
-                    !$ofertas->setDescripcion($_POST['descripcion']) or
+                    !$ofertas->setIdO($_POST['id_oferta']) or
+                    !$ofertas->setTitulo($_POST['nombre_oferta']) or
+                    !$ofertas->setDescripcion($_POST['descripcion_oferta']) or
                     !$ofertas->setDescuento($_POST['descuento']) or
-                    !$ofertas->setProducto($_POST['producto'])
+                    !$ofertas->setProducto($_POST['ofertaProducto'])
                 ) {
                     $result['error'] = $ofertas->getDataError();
                 } elseif ($ofertas->updateRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'servicio modificado correctamente';
+                    $result['message'] = 'oferta modificado correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al modificar el servicio';
+                    $result['error'] = 'Ocurrió un problema al modificar el oferta';
                 }
                 break;
             case 'deleteRow':
                 if (
-                    !$ofertas->setIdO($_POST['id_descuento'])
+                    !$ofertas->setIdO($_POST['id_oferta'])
                 ) {
                     $result['error'] = $ofertas->getDataError();
                 } elseif ($ofertas->deleteRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'servicio eliminado correctamente';
+                    $result['message'] = 'oferta eliminado correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al eliminar la servicio';
+                    $result['error'] = 'Ocurrió un problema al eliminar la oferta';
                 }
                 break;
             default:

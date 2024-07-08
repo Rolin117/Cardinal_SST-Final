@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../../resources/css/private/descuentos.css">
+    <link rel="stylesheet" href="../../resources/css/private/productos.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Descuentos</title>
 
@@ -32,437 +33,74 @@
     <main>
 
         <!-- Modal para añadir descuentos -->
-        <div class="modal fade" id="modal-descuento-add" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
+        <div class="modal fade" id="saveModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
                 <div class="modal-content">
-                    <form>
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Nueva oferta</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitle"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form id="saveForm">
                         <div class="modal-body">
-                            <input type="number" class="d-none" id="id_descuento" name="id_descuento">
+
+                            <input type="number" class="d-none" id="id_oferta" name="id_oferta">
+
                             <div class="mb-3">
-                                <label for="nombre" class="col-form-label">Nombre:</label>
-                                <input type="text" class="form-control" id="nombre" name="nombre">
-                            </div>
-                            <div class="mb-3">
-                                <label for="descripcion" class="col-form-label">Descripción:</label>
-                                <textarea class="form-control" id="descripcion" name="descripcion"></textarea>
+                                <label for="nombre_oferta" class="col-form-label">Nombre:</label>
+                                <input type="text" class="form-control" id="nombre_oferta" name="nombre_oferta">
                             </div>
                             <div class="mb-3">
                                 <label for="descuento" class="col-form-label">Descuento:</label>
-                                <input type="number" name="descuento" min="0" max="100" step="0.01"
-                                    required class="form-control" id="descuento">
+                                <input type="number" class="form-control" id="descuento" name="descuento">
                             </div>
                             <div class="mb-3">
-                                <label for="producto" class="col-form-label">Productos:</label>
-                                <select id="producto" name="producto" class="form-select">
+                                <label for="descripcion_oferta" class="col-form-label">Descripción:</label>
+                                <textarea class="form-control" id="descripcion_oferta"
+                                    name="descripcion_oferta"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="inputState" class="form-label">Producto:</label>
+                                <select id="ofertaProducto" name="ofertaProducto" class="form-select">
                                     <option selected>productos...</option>
                                     <option>...</option>
                                 </select>
                             </div>
-                            <div class="barra-busqueda-modal">
-                                <form class="d-flex" role="search">
-                                    <input class="form-control me-2" type="search" placeholder="Buscar producto..."
-                                        aria-label="Search">
-                                    <button class="boton-busqueda-modal" type="submit">Search</button>
-                                    <input class="form-control me-2" type="search" placeholder="Buscar producto..."
-                                        aria-label="Search">
-                                    <button class="boton-busqueda-modal" type="submit">Buscar</button>
-                                </form>
-                            </div>  
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">Agregar oferta</button>
+                            </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-primary">Agregar oferta</button>
-                        </div>
+
                     </form>
                 </div>
             </div>
         </div>
 
-        <!-- Modal para editar Descuentos -->
-        <div class="modal fade" id="modal-descuento-edit" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Oferta</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">Nombre:</label>
-                                <input type="text" class="form-control" id="recipient-name">
-                            </div>
-                            <div class="mb-3">
-                                <label for="message-text" class="col-form-label">Descripción:</label>
-                                <textarea class="form-control" id="message-text"></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">Descuento:</label>
-                                <input type="number" id="porcentage" name="porcentage" min="0" max="100" step="0.01"
-                                    required class="form-control" id="recipient-name">
-                            </div>
-                            <div class="barra-busqueda-modal">
-                                <form class="d-flex" role="search">
-                                    <input class="form-control me-2" type="search" placeholder="Buscar producto..."
-                                        aria-label="Search">
-                                    <button class="boton-busqueda-modal" type="submit">Search</button>
-                                    <input class="form-control me-2" type="search" placeholder="Buscar producto..."
-                                        aria-label="Search">
-                                    <button class="boton-busqueda-modal" type="submit">Buscar</button>
-                                </form>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary">Editar oferta</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Modal para el boton de eliminar -->
-        <div class="modal" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Advertencia</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>¿Esta seguro de eliminar esta oferta?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary">Eliminar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+
 
         <div class="elementos-s">
             <h4 class="titulo">Descuentos</h4>
 
             <div class="barra-busqueda">
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Buscar descuento..."
+                <form class="d-flex" role="search" id="searchForm">
+                    <input class="form-control me-2" type="search" name="search" placeholder="Buscar descuento..."
                         aria-label="Search">
                     <button class="boton-busqueda" type="submit">Buscar</button>
+                    <button type="reset" class="search-btn" onclick="fillTable()">X</button>
                 </form>
             </div>
 
-            <button class="boton-agregar" data-bs-toggle="modal" data-bs-target="#modal-descuento-add">
+            <button type="button" class="boton-agregar" onclick="openCreate()">
                 <img src="../../resources/img/icon-agregar.svg" alt="">Agregar descuento
             </button>
 
         </div>
 
-        <div class="section_padding_b">
-            <div class="container-tc">
-                <h2 style="text-align: center;">Productos con descuentos</h2>
-                <div class="row">
-                    <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <div class="card" style="width: 18rem;">
-                            <img src="../../resources/img/espatula.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h6 class="card-title">Espatula</h6>
-                                <div class="price mb-1">
-                                    <span class="org_price">$3.00</span>
-                                    <span class="prev_price">$6.50 antes</span>
-                                </div>
-                                <div class="btn-container">
-                                    <button class="boton-editar" data-bs-toggle="modal"
-                                        data-bs-target="#modal-descuento-edit">
-                                        Editar
-                                    </button>
-                                    <a href="" id="btn-card" class=""></a>
-                                    <button class="add-to-favorites-btn">
-                                        <img src="../../resources/img/borrar.png" alt="Eliminar">
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="row row-cols-1 row-cols-md-3 g-3" id="tarjetas">
 
+        </div><!--Fin de la etiqueta de productos-->
 
-                    <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <div class="card" style="width: 18rem;">
-                            <img src="../../resources/img/tubos.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h6 class="card-title">Tubos de PVC</h6>
-                                <div class="price mb-1">
-                                    <span class="org_price">$10.00</span>
-                                    <span class="prev_price">$15.00 antes</span>
-                                </div>
-                                <div class="btn-container">
-                                    <button class="boton-editar" data-bs-toggle="modal"
-                                        data-bs-target="#modal-descuento-edit">
-                                        Editar
-                                    </button>
-                                    <a href="" id="btn-card" class=""></a>
-                                    <button class="add-to-favorites-btn">
-                                        <img src="../../resources/img/borrar.png" alt="Agregar a Favoritos">
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <div class="card" style="width: 18rem;">
-                            <img src="../../resources/img/lamina.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h6 class="card-title">Laminas</h6>
-                                <div class="price mb-1">
-                                    <span class="org_price">$15.00</span>
-                                    <span class="prev_price">$20.99 antes</span>
-                                </div>
-                                <div class="btn-container">
-                                    <button class="boton-editar" data-bs-toggle="modal"
-                                        data-bs-target="#modal-descuento-edit">
-                                        Editar
-                                    </button>
-                                    <a href="" id="btn-card" class=""></a>
-                                    <button class="add-to-favorites-btn">
-                                        <img src="../../resources/img/borrar.png" alt="Agregar a Favoritos">
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <div class="card" style="width: 18rem;">
-                            <img src="../../resources/img/ceramicas.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h6 class="card-title">Ceramicas para piso</h6>
-                                <div class="price mb-1">
-                                    <span class="org_price">$6.50</span>
-                                    <span class="prev_price">$8.99 antes</span>
-                                </div>
-                                <div class="btn-container">
-                                    <button class="boton-editar" data-bs-toggle="modal"
-                                        data-bs-target="#modal-descuento-edit">
-                                        Editar
-                                    </button>
-                                    <a href="" id="btn-card" class=""></a>
-                                    <button class="add-to-favorites-btn">
-                                        <img src="../../resources/img/borrar.png" alt="Agregar a Favoritos">
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="section_padding_b">
-            <div class="container-tc">
-                <h2 style="text-align: center;"></h2>
-                <div class="row">
-                    <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <div class="card" style="width: 18rem;">
-                            <img src="../../resources/img/fierro.jpeg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h6 class="card-title">Fierro</h6>
-                                <div class="price mb-1">
-                                    <span class="org_price">$15.99</span>
-                                    <span class="prev_price">$20.00 antes</span>
-                                </div>
-                                <div class="btn-container">
-                                    <button class="boton-editar" data-bs-toggle="modal"
-                                        data-bs-target="#modal-descuento-edit">
-                                        Editar
-                                    </button>
-                                    <a href="" id="btn-card" class=""></a>
-                                    <button class="add-to-favorites-btn">
-                                        <img src="../../resources/img/borrar.png" alt="Agregar a Favoritos">
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <div class="card" style="width: 18rem;">
-                            <img src="../../resources/img/ladrillo.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h6 class="card-title">Ladrillo</h6>
-                                <div class="price mb-1">
-                                    <span class="org_price">$3.00</span>
-                                    <span class="prev_price">$5.00 antes</span>
-                                </div>
-                                <div class="btn-container">
-                                    <button class="boton-editar" data-bs-toggle="modal"
-                                        data-bs-target="#modal-descuento-edit">
-                                        Editar
-                                    </button>
-                                    <a href="" id="btn-card" class=""></a>
-                                    <button class="add-to-favorites-btn">
-                                        <img src="../../resources/img/borrar.png" alt="Agregar a Favoritos">
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <div class="card" style="width: 18rem;">
-                            <img src="../../resources/img/arena.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h6 class="card-title">Arena</h6>
-                                <div class="price mb-1">
-                                    <span class="org_price">$0.60</span>
-                                    <span class="prev_price">$1.00 antes</span>
-                                </div>
-                                <div class="btn-container">
-                                    <button class="boton-editar" data-bs-toggle="modal"
-                                        data-bs-target="#modal-descuento-edit">
-                                        Editar
-                                    </button>
-                                    <a href="" id="btn-card" class=""></a>
-                                    <button class="add-to-favorites-btn">
-                                        <img src="../../resources/img/borrar.png" alt="Agregar a Favoritos">
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <div class="card" style="width: 18rem;">
-                            <img src="../../resources/img/pintura.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h6 class="card-title">Cubo de pintura</h6>
-                                <div class="price mb-1">
-                                    <span class="org_price">$25.00</span>
-                                    <span class="prev_price">$30.99 antes</span>
-                                </div>
-                                <div class="btn-container">
-                                    <button class="boton-editar" data-bs-toggle="modal"
-                                        data-bs-target="#modal-descuento-edit">
-                                        Editar
-                                    </button>
-                                    <a href="" id="btn-card" class=""></a>
-                                    <button class="add-to-favorites-btn">
-                                        <img src="../../resources/img/borrar.png" alt="Agregar a Favoritos">
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="section_padding_b">
-            <div class="container-tc">
-                <h2 style="text-align: center;"></h2>
-                <div class="row">
-                    <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <div class="card" style="width: 18rem;">
-                            <img src="../../resources/img/brocha.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h6 class="card-title">Brocha</h6>
-                                <div class="price mb-1">
-                                    <span class="org_price">$3.00</span>
-                                    <span class="prev_price">$5.00 antes</span>
-                                </div>
-                                <div class="btn-container">
-                                    <button class="boton-editar" data-bs-toggle="modal"
-                                        data-bs-target="#modal-descuento-edit">
-                                        Editar
-                                    </button>
-                                    <a href="" id="btn-card" class=""></a>
-                                    <button class="add-to-favorites-btn">
-                                        <img src="../../resources/img/borrar.png" alt="Agregar a Favoritos">
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <div class="card" style="width: 18rem;">
-                            <img src="../../resources/img/alambre.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h6 class="card-title">Alambre</h6>
-                                <div class="price mb-1">
-                                    <span class="org_price">$0.30</span>
-                                    <span class="prev_price">$0.90 antes</span>
-                                </div>
-                                <div class="btn-container">
-                                    <button class="boton-editar" data-bs-toggle="modal"
-                                        data-bs-target="#modal-descuento-edit">
-                                        Editar
-                                    </button>
-                                    <a href="" id="btn-card" class=""></a>
-                                    <button class="add-to-favorites-btn">
-                                        <img src="../../resources/img/borrar.png" alt="Agregar a Favoritos">
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <div class="card" style="width: 18rem;">
-                            <img src="../../resources/img/alambre_cobre.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h6 class="card-title">Alambre de Cobre</h6>
-                                <div class="price mb-1">
-                                    <span class="org_price">$0.80</span>
-                                    <span class="prev_price">$1.30 antes</span>
-                                </div>
-                                <div class="btn-container">
-                                    <button class="boton-editar" data-bs-toggle="modal"
-                                        data-bs-target="#modal-descuento-edit">
-                                        Editar
-                                    </button>
-                                    <a href="" id="btn-card" class=""></a>
-                                    <button class="add-to-favorites-btn">
-                                        <img src="../../resources/img/borrar.png" alt="Agregar a Favoritos">
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <div class="card" style="width: 18rem;">
-                            <img src="../../resources/img/baterias.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h6 class="card-title">Baterias 4V</h6>
-                                <div class="price mb-1">
-                                    <span class="org_price">$1.40</span>
-                                    <span class="prev_price">$1.99 antes</span>
-                                </div>
-                                <div class="btn-container">
-                                    <button class="boton-editar" data-bs-toggle="modal"
-                                        data-bs-target="#modal-descuento-edit">
-                                        Editar
-                                    </button>
-                                    <a href="" id="btn-card" class=""></a>
-                                    <button class="add-to-favorites-btn">
-                                        <img src="../../resources/img/borrar.png" alt="Agregar a Favoritos">
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </main>
 
     <footer class="">
@@ -477,13 +115,14 @@
     <!-- Llamada al framework y librería de mensajes -->
     <script type="text/javascript" src="../../resources/js/bootstrap.bundle.min.js"></script>
 
-
-    <!--LInk del controlador de la pagina web-->
-    <script type="text/javascript" src="../../controllers/public/inicio.js"></script>
-
     <!-- Plantillas -->
     <script src="../../resources/js/private/nav.js"></script>
     <script src="../../resources/js/private/footer.js"></script>
+
+    <!--LInk del controlador de la pagina web-->
+    <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="../../controllers/utils/components.js"></script>
+    <script type="text/javascript" src="../../controllers/private/descuentos.js"></script>
 </body>
 
 </html>

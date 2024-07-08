@@ -1,4 +1,6 @@
 const HEADER = document.querySelector('header');
+const USER_API = 'services/private/administrador.php';
+
 
 
 HEADER.innerHTML = `
@@ -13,7 +15,7 @@ HEADER.innerHTML = `
         <li><a href="categorias.html">Categorias</a></li>
         <li><a href="servicios.html">Servicios</a></li>
         <li><a href="descuentos.html">Descuentos</a></li>
-        <li><a href="index.html">Cerrar Sesión</a></li>
+        <li><a href="#" onclick="logOut()">Cerrar Sesión</a></li>
     </ul>
 </div>
 `;

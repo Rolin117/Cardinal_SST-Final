@@ -1,7 +1,6 @@
-//Alvaro me copie de productos cambia los campos por tu tabla de ofertas pra que no de error
-
 // Constantes para completar las rutas de la API.
 const USER_API = 'services/private/administrador.php';
+const PRODUCTO_API = 'services/private/productos.php';
 const DESCUENTOS_API = 'services/private/ofertas.php';
 
 const SEARCH_FORM = document.getElementById('searchForm');
@@ -12,11 +11,10 @@ const SAVE_MODAL = new bootstrap.Modal(document.getElementById('saveModal')),
     MODAL_TITLE = document.getElementById('modalTitle');
 
 const SAVE_FORM = document.getElementById('saveForm'),
-    ID_DESCUENTO = document.getElementById('id_descuento'),
+    ID_DESCUENTO = document.getElementById('id_oferta'),
     NOMBRE_OFERTA = document.getElementById('nombre_oferta'),
-    DESCRIPCION_DESCUENTO = document.getElementById('descripcion'),
+    DESCRIPCION_DESCUENTO = document.getElementById('descripcion_oferta'),
     DESCUENTO = document.getElementById('descuento');
-    PRODUCTO_OFERTA = document.getElementById('producto_oferta');
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', async () => {
@@ -45,7 +43,7 @@ SAVE_FORM.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
     // Se verifica la acción a realizar.
-    (ID_PRODUCTO.value) ? action = 'updateRow' : action = 'createRow';
+    (ID_DESCUENTO.value) ? action = 'updateRow' : action = 'createRow';
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(SAVE_FORM);
     // Petición para guardar los datos del formulario.
@@ -74,19 +72,18 @@ const fillTable = async (form = null) => {
             TABLE_BODY.innerHTML += `
             <div class="col">
                 <div class="card h-100 border-light">
-                    <img src="${SERVER_URL}images/productos/${row.imagen_producto}" class="card-img-top" alt="..." loading="lazy">
                     <div class="card-body">
-                        <h5 class="card-title">${row.nombre_producto}</h5>
+                        <h5 class="card-title">${row.nombre_oferta}</h5>
                         <div class="descripcion-precio">    
-                            <p class="card-text">$${row.precio_producto}</p>
+                            <p class="card-text">%${row.descuento}</p>
                         </div>
                         <div class="botones-cards">
-                            <button type="button" class="boton-editar" onclick="openUpdate(${row.id_producto})">
-                                <img src="../../resources/img/icon-editar.svg" alt="">Editar producto
+                            <button type="button" class="boton-editar" onclick="openUpdate(${row.id_oferta})">
+                                <img src="../../resources/img/icon-editar.svg" alt="">Editar oferta
                             </button>
 
-                            <button type="button" class="boton-eliminar" onclick="openDelete(${row.id_producto})">
-                                <img src="../../resources/img/icon-eliminar.svg" alt="">Eliminar producto
+                            <button type="button" class="boton-eliminar" onclick="openDelete(${row.id_oferta})">
+                                <img src="../../resources/img/icon-eliminar.svg" alt="">Eliminar oferta
                             </button>
                         </div>
                     </div>
@@ -103,42 +100,41 @@ const fillTable = async (form = null) => {
 const openCreate = () => {
     // Se muestra la caja de diálogo con su título.
     SAVE_MODAL.show();
-    MODAL_TITLE.textContent = 'Crear producto';
+    MODAL_TITLE.textContent = 'Crear oferta';
+    fillSelectProductos(PRODUCTO_API, 'readAll', 'ofertaProducto');
     // Se prepara el formulario.
     SAVE_FORM.reset();
+
 }
 
 
 const openUpdate = async (id) => {
     // Se define un objeto con los datos del registro seleccionado.
     const FORM = new FormData();
-    FORM.append('id_producto', id);
+    FORM.append('id_oferta', id);
     // Petición para obtener los datos del registro solicitado.
     const DATA = await fetchData(DESCUENTOS_API, 'readOne', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
         SAVE_MODAL.show();
-        MODAL_TITLE.textContent = 'Actualizar producto';
+        MODAL_TITLE.textContent = 'Actualizar oferta';
         // Se prepara el formulario.
         SAVE_FORM.reset();
-        //EXISTENCIAS_PRODUCTO.disabled = true;
         // Se inicializan los campos con los datos.
         const ROW = DATA.dataset;
-        ID_DESCUENTO.value = ROW.id_descuento;
+        ID_DESCUENTO.value = ROW.id_oferta;
         NOMBRE_OFERTA.value = ROW.nombre_oferta;
-        DESCRIPCION_DESCUENTO.value = ROW.descripcion;
+        DESCRIPCION_DESCUENTO.value = ROW.descripcion_oferta;
         DESCUENTO.value = ROW.descuento;
-        PRODUCTO_OFERTA.value = ROW.producto_oferta;
-        fillSelectCategoria(CATEGORIA_API, 'readAll', 'categoriaProducto', ROW.id_categoria);
-        document.getElementById('imagePreview').src = `${SERVER_URL}images/productos/${ROW.imagen_producto}`;
+        fillSelectProductos(PRODUCTO_API, 'readAll', 'ofertaProducto', ROW.idProducto);
     } else {
         sweetAlert(2, DATA.error, false);
     }
 }
 
 const openDelete = async (id) => {
-    const RESPONSE = await confirmAction('¿Desea eliminar el producto de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar la oferta de forma permanente?');
     if (RESPONSE) {
         const FORM = new FormData();
         FORM.append('id_oferta', id);
