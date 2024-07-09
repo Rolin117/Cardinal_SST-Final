@@ -36,7 +36,7 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['message'] = 'servicio creada correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al crear la servicio';
+                    $result['error'] = 'Ocurrió un problema al crear el servicio';
                 }
                 break;
             case 'readAll':
@@ -80,11 +80,12 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['message'] = 'servicio eliminado correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al eliminar la servicio';
+                    $result['error'] = 'Ocurrió un problema al eliminar el servicio';
                 }
                 break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
+
         }
         // Se obtiene la excepción del servidor de base de datos por si ocurrió un problema.
         $result['exception'] = Database::getException();

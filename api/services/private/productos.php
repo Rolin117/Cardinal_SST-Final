@@ -1,6 +1,8 @@
 <?php
 require_once('../../models/data/productos_data.php');
 
+
+
 if (isset($_GET['action'])) {
     session_start();
 

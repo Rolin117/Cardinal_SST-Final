@@ -2,6 +2,7 @@
 // Se incluye la clase del modelo.
 require_once('../../models/data/administrador_data.php');
 
+
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
@@ -161,7 +162,10 @@ if (isset($_GET['action'])) {
                 break;
             case 'signUp':
                 $_POST = Validator::validateForm($_POST);
-                if (
+                if ($administrador->readAll()) {
+                    $result['error'] = 'Ya existe al menos un usuario registrado';
+                } elseif (
+
                     !$administrador->setNombre($_POST['nombre_admin']) or
                     !$administrador->setApellido($_POST['apellido_admin']) or
                     !$administrador->setCorreo($_POST['correo_admin']) or
