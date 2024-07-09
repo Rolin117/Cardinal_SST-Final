@@ -2,19 +2,30 @@
 // Se incluye la clase del modelo.
 require_once('../../models/data/administrador_data.php');
 
-
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
     session_start();
+
     // Se instancia la clase correspondiente.
     $administrador = new AdministradorData;
+
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
-    $result = array('status' => 0, 'session' => 0, 'message' => null, 'dataset' => null, 'error' => null, 'exception' => null, 'username' => null);
-    // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
+    $result = array(
+        'status' => 0,
+        'session' => 0,
+        'message' => null,
+        'dataset' => null,
+        'error' => null,
+        'exception' => null,
+        'username' => null
+    );
+
+    // Se verifica si existe una sesión iniciada como administrador, de lo contrario se procede según las acciones disponibles.
     if (isset($_SESSION['id_administrador'])) {
         $result['session'] = 1;
-        // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
+
+        // Switch para manejar las acciones cuando hay una sesión activa de administrador.
         switch ($_GET['action']) {
             case 'searchRows':
                 if (!Validator::validateSearch($_POST['search'])) {
@@ -29,10 +40,10 @@ if (isset($_GET['action'])) {
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$administrador->setNombre($_POST['nombre_admin']) or
-                    !$administrador->setApellido($_POST['apellido_admin']) or
-                    !$administrador->setCorreo($_POST['correo_admin']) or
-                    !$administrador->setTelefono($_POST['telefono_admin']) or
+                    !$administrador->setNombre($_POST['nombre_admin']) ||
+                    !$administrador->setApellido($_POST['apellido_admin']) ||
+                    !$administrador->setCorreo($_POST['correo_admin']) ||
+                    !$administrador->setTelefono($_POST['telefono_admin']) ||
                     !$administrador->setClave($_POST['contrasenia_admin'])
                 ) {
                     $result['error'] = $administrador->getDataError();
@@ -65,10 +76,10 @@ if (isset($_GET['action'])) {
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$administrador->setId($_POST['id_administrador']) or
-                    !$administrador->setNombre($_POST['nombre_admin']) or
-                    !$administrador->setApellido($_POST['apellido_admin']) or
-                    !$administrador->setCorreo($_POST['correo_admin']) or
+                    !$administrador->setId($_POST['id_administrador']) ||
+                    !$administrador->setNombre($_POST['nombre_admin']) ||
+                    !$administrador->setApellido($_POST['apellido_admin']) ||
+                    !$administrador->setCorreo($_POST['correo_admin']) ||
                     !$administrador->setTelefono($_POST['telefono_admin'])
                 ) {
                     $result['error'] = $administrador->getDataError();
@@ -96,7 +107,7 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['username'] = $_SESSION['correo'];
                 } else {
-                    $result['error'] = 'correo de administrador indefinido';
+                    $result['error'] = 'Correo de administrador indefinido';
                 }
                 break;
             case 'logOut':
@@ -117,9 +128,9 @@ if (isset($_GET['action'])) {
             case 'editProfile':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$administrador->setNombre($_POST['nombreEmpleado']) or
-                    !$administrador->setApellido($_POST['apellidoEmpleado']) or
-                    !$administrador->setCorreo($_POST['correoEmpleado']) or
+                    !$administrador->setNombre($_POST['nombreEmpleado']) ||
+                    !$administrador->setApellido($_POST['apellidoEmpleado']) ||
+                    !$administrador->setCorreo($_POST['correoEmpleado']) ||
                     !$administrador->setTelefono($_POST['telefonoEmpleado'])
                 ) {
                     $result['error'] = $administrador->getDataError();
@@ -147,10 +158,11 @@ if (isset($_GET['action'])) {
                 }
                 break;
             default:
-                $result['error'] = 'Acción no disponible dentro de la sesión';                
+                $result['error'] = 'Acción no disponible dentro de la sesión';
+                break;
         }
     } else {
-        // Se compara la acción a realizar cuando el administrador no ha iniciado sesión.
+        // Switch para manejar las acciones cuando no hay una sesión activa de administrador.
         switch ($_GET['action']) {
             case 'readUsers':
                 if ($administrador->readAll()) {
@@ -165,11 +177,10 @@ if (isset($_GET['action'])) {
                 if ($administrador->readAll()) {
                     $result['error'] = 'Ya existe al menos un usuario registrado';
                 } elseif (
-
-                    !$administrador->setNombre($_POST['nombre_admin']) or
-                    !$administrador->setApellido($_POST['apellido_admin']) or
-                    !$administrador->setCorreo($_POST['correo_admin']) or
-                    !$administrador->setTelefono($_POST['telefono_admin']) or
+                    !$administrador->setNombre($_POST['nombre_admin']) ||
+                    !$administrador->setApellido($_POST['apellido_admin']) ||
+                    !$administrador->setCorreo($_POST['correo_admin']) ||
+                    !$administrador->setTelefono($_POST['telefono_admin']) ||
                     !$administrador->setClave($_POST['contrasenia_admin'])
                 ) {
                     $result['error'] = $administrador->getDataError();
@@ -181,7 +192,7 @@ if (isset($_GET['action'])) {
                 } else {
                     $result['error'] = 'Ocurrió un problema al registrar el administrador';
                 }
-            break;
+                break;
             case 'logIn':
                 $_POST = Validator::validateForm($_POST);
                 if ($administrador->checkUser($_POST['correo_admin'], $_POST['contrasenia_admin'])) {
@@ -193,14 +204,19 @@ if (isset($_GET['action'])) {
                 break;
             default:
                 $result['error'] = 'Acción no disponible fuera de la sesión';
+                break;
         }
     }
+
     // Se obtiene la excepción del servidor de base de datos por si ocurrió un problema.
     $result['exception'] = Database::getException();
+
     // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
     header('Content-type: application/json; charset=utf-8');
+
     // Se imprime el resultado en formato JSON y se retorna al controlador.
     print(json_encode($result));
 } else {
     print(json_encode('Recurso no disponible'));
 }
+?>
