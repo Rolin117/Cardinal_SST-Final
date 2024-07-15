@@ -118,12 +118,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al cerrar la sesión';
                 }
                 break;
-            case 'readProfile':
-                if ($result['dataset'] = $administrador->readProfile()) {
-                    $result['status'] = 1;
-                } else {
-                    $result['error'] = 'Ocurrió un problema al leer el perfil';
-                }
+
                 break;
             case 'editProfile':
                 $_POST = Validator::validateForm($_POST);

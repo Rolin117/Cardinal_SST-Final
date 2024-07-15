@@ -26,6 +26,7 @@ const SAVE_FORM = document.getElementById('saveForm'),
 //     CORREO_ADMIN2 = document.getElementById('correoAdministradorr')
 
 document.addEventListener('DOMContentLoaded', async () => {
+    loadTemplate();
     fillTable();
 
     // Petición para obtener los datos del usuario que ha iniciado sesión.

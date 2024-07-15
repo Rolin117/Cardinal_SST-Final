@@ -23,3 +23,26 @@ HEADER.innerHTML = `
 document.querySelector('.menu-toggle').addEventListener('click', function() {
     document.querySelector('.navigation').classList.toggle('active');
 });
+
+const loadTemplate = async () => {
+    // Petición para obtener en nombre del usuario que ha iniciado sesión.
+    const DATA = await fetchData(USER_API, 'getUser');
+    // Se verifica si el usuario está autenticado, de lo contrario se envía a iniciar sesión.
+    if (DATA.session) {
+        // Se comprueba si existe un alias definido para el usuario, de lo contrario se muestra un mensaje con la excepción.
+        if (DATA.status) {
+            // Se agrega el encabezado de la página web antes del contenido principal.
+
+
+        } else {
+            sweetAlert(3, DATA.error, false, 'index.html');
+        }
+    } else {
+        // Se comprueba si la página web es la principal, de lo contrario se direcciona a iniciar sesión.
+        if (location.pathname.endsWith('index.html')) {
+            // Se agrega el encabezado de la página web antes del contenido principal.
+        } else {
+            location.href = 'index.html';
+        }
+    }
+}
