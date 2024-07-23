@@ -17,11 +17,8 @@ const SAVE_FORM = document.getElementById('saveForm'),
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', async () => {
     loadTemplate();
-    
-    // Llamada a la función para llenar la tabla con los registros existentes.
-    fillTable();
 
-    const DATA = await fetchData(USER_API, 'readProfile');
+    const DATA = await fetchData(USER_API, 'getUser');
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         fillTable();

@@ -9,18 +9,6 @@ if (isset($_GET['action'])) {
 
     // Se instancia la clase correspondiente.
     $administrador = new AdministradorData;
-
-    // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
-    $result = array(
-        'status' => 0,
-        'session' => 0,
-        'message' => null,
-        'dataset' => null,
-        'error' => null,
-        'exception' => null,
-        'username' => null
-    );
-
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se procede según las acciones disponibles.
     if (isset($_SESSION['id_administrador'])) {
         $result['session'] = 1;
@@ -103,9 +91,9 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'getUser':
-                if (isset($_SESSION['correo'])) {
+                if (isset($_SESSION['correo_admin'])) {
                     $result['status'] = 1;
-                    $result['username'] = $_SESSION['correo'];
+                    $result['username'] = $_SESSION['correo_admin'];
                 } else {
                     $result['error'] = 'Correo de administrador indefinido';
                 }

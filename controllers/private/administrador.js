@@ -27,10 +27,9 @@ const SAVE_FORM = document.getElementById('saveForm'),
 
 document.addEventListener('DOMContentLoaded', async () => {
     loadTemplate();
-    fillTable();
 
     // Petición para obtener los datos del usuario que ha iniciado sesión.
-    const DATA = await fetchData(ADMINISTRADOR_API, 'readProfile');
+    const DATA = await fetchData(ADMINISTRADOR_API, 'getUser');
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         fillTable();
