@@ -15,10 +15,10 @@ FOOTER.innerHTML = `
         <li><a href="categorias.html">Categorías</a></li>
         <li><a href="servicios.html">Servicios</a></li>
         <li><a href="descuentos.html">Descuentos</a></li>
-        <li><a href=".html">Usuarios</a></li>
-        <li><a href=".html">Administradores</a></li>
-        <li><a href=".html">Pedidos</a></li>
-        <li><a href=".html">Perfil</a></li>
+        <li><a href="usuarios.html">Usuarios</a></li>
+        <li><a href="administradores.html">Administradores</a></li>
+        <li><a href="pedidos.html">Pedidos</a></li>
+        <li><a href="perfil.html">Perfil</a></li>
     </ul>
 </div>c
 </div>
