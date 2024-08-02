@@ -1,0 +1,105 @@
+.logo {
+    color: #333;
+    text-decoration: none;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+}
+
+.logo img {
+    width: 40px;
+    height: 50px;
+    margin-right: 20px;
+}
+
+header {
+    position: relative; /* Cambiado de absolute para mejorar el flujo del documento */
+    width: 100%;
+    height: auto; /* Cambiado para ajustar el contenido */
+    background: #FFFFFF;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 15px 15px rgba(0, 0, 0, 0.05);
+    flex-wrap: wrap; /* Permite que los elementos se ajusten al tamaño de la pantalla */
+}
+
+.navigation a:hover {
+    color: #00B207;
+}
+
+.group {
+    display: flex;
+    align-items: center;
+    width: 100%; /* Ocupar todo el ancho en móviles */
+    flex-direction: column; /* Cambia a columna en tamaños pequeños */
+}
+
+header ul {
+    position: relative;
+    display: flex;
+    gap: 30px;
+    width: 100%; /* Ocupar todo el ancho en móviles */
+    justify-content: space-around; /* Espacio distribuido uniformemente */
+}
+
+header ul li {
+    list-style: none;
+}
+
+header ul li a {
+    text-decoration: none;
+    font-size: .8rem;
+    color: #000000;
+    letter-spacing: 0.2em;
+}
+
+.menu-toggle {
+    display: none; /* Ocultar por defecto */
+}
+
+@media screen and (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .navigation {
+        margin-top: 3rem;
+        display: none; /* Ocultar la navegación por defecto en móviles */
+        flex-direction: column;
+        width: 100%;
+        background: white;
+        position: absolute;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        top: 80px; /* Ajustar según el alto del header */
+        left: 0;
+        z-index: 1000;
+    }
+
+    .navigation.active {
+        display: flex; /* Mostrar cuando se active el menú toggle */
+    }
+}
+
+/* Ajustes adicionales para pantallas muy pequeñas */
+@media screen and (max-width: 480px) {
+    .navigation li a {
+        padding: 10px 20px;
+        font-size: 16px; /* Hacer el texto más grande para facilitar la lectura */
+    }
+}
+
+.menu-toggle img {
+    height: 30px;
+    width: 30px;
+}
+
+.menu-toggle {
+    background: none;
+    border-style: none;
+}
+
+.footer-nav {
+    display: flex;
+    padding: 1rem 0 1rem 0;
+}
