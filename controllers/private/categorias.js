@@ -141,7 +141,6 @@ const openUpdate = async (id) => {
         ID_CATEGORIA.value = ROW.id_categoria;
         NOMBRE_CATEGORIA.value = ROW.nombre_cat;
         DESCRIPCION_CATEGORIA.value = ROW.descripcion_cat;
-        set();
         document.getElementById('imagePreview').src = `${SERVER_URL}images/categorias/${ROW.imagen}`;
     } else {
         sweetAlert(2, DATA.error, false);

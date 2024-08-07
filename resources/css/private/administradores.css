@@ -1,116 +1,21 @@
-body {
-    font-family: "Poppins", sans-serif;
-    background-color: #ffff;
-}
-
 main {
-    margin-top: 6rem;
-    margin-bottom: 5rem;
-}
-
-canvas {
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    width: 100%; /* Asegúrate de que el canvas tome todo el ancho del contenedor */
-}
-
-.grafica {
-    margin-bottom: 20px; /* Agrega un margen inferior si es necesario */
-}
-
-.tb-clientes {
-    width: 100%; /* Asegura que la tabla ocupe todo el ancho de su contenedor */
-}
-
-.table-responsive {
-    overflow-x: auto;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .grafica, .tb-clientes {
-        width: 100%; /* Las tablas y las gráficas ocupan todo el ancho en dispositivos pequeños */
-    }
-
-    .table {
-        display: block;
-        width: 100%;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch; /* Mejora la experiencia de desplazamiento en dispositivos táctiles */
-    }
-
-    .table thead, .table tbody, .table tr, .table th, .table td {
-        display: block;
-        width: 100%;
-    }
-
-    .table thead tr {
-        position: absolute;
-        top: -9999px;
-        left: -9999px;
-    }
-
-    .table tr {
-        border: 1px solid #ddd;
-        margin-bottom: 5px;
-    }
-
-    .table td {
-        border: none;
-        border-bottom: 1px solid #ddd;
-        position: relative;
-        padding-left: 50%;
-        text-align: left;
-    }
-
-    .table td:before {
-        content: attr(data-label);
-        position: absolute;
-        left: 0;
-        width: 45%;
-        padding-left: 15px;
-        font-weight: bold;
-    }
-}
-
-.stat-card {
-    border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
-}
-
-.stat-card:hover {
-    transform: translateY(-5px);
-}
-
-.stat-number {
-    font-size: 2em;
-    font-weight: bold;
-}
-
-h5 {
-    font-weight: normal;
-}
-
-.container {
-    gap: rem;
-}
-
-th {
-    background-color: #D6D6D6;
+    margin: 6rem 3rem 10rem 3rem;
 }
 
 .boton-agregar {
-    background-color: #00B207;
+    background-color: #00B207; /* Verde */
     border: none;
-    color: #ffff;
+    color: #ffffff;
     text-decoration: none;
     font-size: 14px;
     font-weight: 700;
     border-radius: 43px;
     transition: padding 0.3s ease;
-    padding: 0.5rem 1rem;  /* Modificado para ser más adaptable */
+    padding: 0.5rem 1rem;
+}
+
+.boton-agregar:hover {
+    background-color: #007B04; /* Verde oscuro */
 }
 
 .boton-agregar img {
@@ -120,15 +25,19 @@ th {
 }
 
 .boton-editar {
-    background-color: #FABF15;
+    background-color: #FABF15; /* Amarillo */
     border: none;
-    color: #ffff;
+    color: #ffffff;
     text-decoration: none;
     font-size: 14px;
     font-weight: 700;
     border-radius: 43px;
     transition: padding 0.3s ease;
-    padding: 0.5rem 1rem;  /* Modificado para ser más adaptable */
+    padding: 0.5rem 1rem;
+}
+
+.boton-editar:hover {
+    background-color: #C29711; /* Amarillo oscuro */
 }
 
 .boton-editar img {
@@ -138,15 +47,19 @@ th {
 }
 
 .boton-eliminar {
-    background-color: #C93E07;
+    background-color: #C93E07; /* Rojo */
     border: none;
-    color: #ffff;
+    color: #ffffff;
     text-decoration: none;
     font-size: 14px;
     font-weight: 700;
     border-radius: 43px;
     transition: padding 0.3s ease;
-    padding: 0.5rem 1rem;  /* Modificado para ser más adaptable */
+    padding: 0.5rem 1rem;
+}
+
+.boton-eliminar:hover {
+    background-color: #962E05; /* Rojo oscuro */
 }
 
 .boton-eliminar img {
@@ -195,9 +108,7 @@ th {
     height: 24px;
 }
 
-.boton-accion:hover {
-    background-color: #0056b3; /* Color de fondo al pasar el ratón */
-}
+
 
 .boton-accion.boton-editar {
     margin-right: 0.5rem; /* Espacio entre botones */

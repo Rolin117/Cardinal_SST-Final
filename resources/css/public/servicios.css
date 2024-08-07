@@ -90,15 +90,15 @@ main {
 }
 
 .boton-editar {
-    background-color: #FABF15;
+    background-color: #00B207;
     border: none;
     color: #ffff;
     text-decoration: none;
-    font-size: 10px;
+    font-size: 13px;
     font-weight: 700;
     border-radius: 43px;
     transition: padding 0.3s ease;
-    padding: 0.5rem 1rem;
+    padding: .8rem 1.5rem;
     /* Modificado para ser más adaptable */
 }
 

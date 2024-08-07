@@ -44,14 +44,15 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al crear el administrador';
                 }
                 break;
-            case 'readAll':
-                if ($result['dataset'] = $administrador->readAll()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
-                } else {
-                    $result['error'] = 'No existen administradores registrados';
-                }
-                break;
+                case 'readAll':
+                    if ($result['dataset'] = $administrador->readAll()) {
+                        $result['status'] = 1;
+                        $result['session_admin_id'] = $_SESSION['id_administrador']; // Añadir el ID del administrador de la sesión
+                        $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                    } else {
+                        $result['error'] = 'No existen administradores registrados';
+                    }
+                    break;
             case 'readOne':
                 if (!$administrador->setId($_POST['id_administrador'])) {
                     $result['error'] = 'Administrador incorrecto';

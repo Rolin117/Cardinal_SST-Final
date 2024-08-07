@@ -16,6 +16,8 @@
 
     <!-- Obligatorio !important -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrQkzgZOg+s4bW3s2DgZlQ14U6P9cnzo3R6SE+Olq5Rtf2mF2D7HTl7zjnd4N/TCgKLTlAqTPs57gXgLiw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
@@ -33,50 +35,46 @@
     <main>
 
         <!-- Modal para agregar una nueva categoria -->
-        <div class="modal fade" id="saveModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalTitle"></h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 align-items-center justify-content-center">
-                      <form id="saveForm">
-                                <div class="modal-body">
-                                    <input type="number" class="d-none" id="id_categoria" name="id_categoria">
-
-                                    <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label">Nombre:</label>
-                                        <input type="text" class="form-control" id="nombre_cat" name="nombre_cat">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="message-text" class="col-form-label">Descripción:</label>
-                                        <textarea class="form-control" id="descripcion_cat"
-                                            name="descripcion_cat"></textarea>
-                                    </div>
-                                </div>
-                        </div>
-                        <!-- Sección para añadir imagen de la categoría -->
-                        <div class="col-md-6 d-flex align-items-center justify-content-center">
-                            <img id="imagePreview" src="#" alt="Imagen del producto" class="img-thumbnail"
-                                style="display: none; height: 26rem;">
-                            <i id="addImageIcon" class="fa fa-upload fa-5x"
-                                style="cursor: pointer; display: block; color: rgb(0, 0, 0);"></i>
-                            <input type="file" name="imagen" id="inputGroupFile01" accept="image/*"
-                                style="display: none;">
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Agregar categoría</button>
-                    </div>
-                 </form>
-
-                </div>
-            </div>
-        </div>
+        <div class="modal fade" id="saveModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="modalTitle" aria-hidden="true">
+       <div class="modal-dialog modal-lg modal-dialog-centered">
+           <div class="modal-content">
+               <div class="modal-header">
+                   <h1 class="modal-title fs-5" id="modalTitle"></h1>
+                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <!-- Formulario para crear o actualizar un registro -->
+               <form id="saveForm">
+                   <div class="modal-body row g-3">
+                       <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+                       <input type="number" class="d-none" id="id_categoria" name="id_categoria">
+                       
+                       <div class="col-sm-12 col-md-6">
+                           <label for="nombre_cat" class="form-label">Nombre</label>
+                           <input id="nombre_cat" type="text" name="nombre_cat" class="form-control" required>
+                       </div>
+                       
+                       <div class="col-sm-12 col-md-6">
+                           <label for="descripcion_cat" class="form-label">Descripción</label>
+                           <textarea id="descripcion_cat" name="descripcion_cat" class="form-control" required></textarea>
+                       </div>
+                       
+                       <div class="col-sm-12 col-md-6">
+                           <label for="imagen" class="form-label">Imagen</label>
+                           <input id="imagen" type="file" name="imagen" class="form-control" accept=".png, .jpg" required>
+                       </div>
+                       
+                       <div class="col-sm-12 col-md-6">
+                           <img id="imagePreview" src="#" alt="Previsualización de imagen" class="img-thumbnail" style="display: none; max-height: 200px;">
+                       </div>
+                   </div>
+                   <div class="modal-footer">
+                       <button type="submit" class="btn btn-primary">Guardar</button>
+                   </div>
+               </form>
+           </div>
+       </div>
+   </div>
 
         <div class="elementos-s">
             <h4 class="titulo">categorías</h4>
