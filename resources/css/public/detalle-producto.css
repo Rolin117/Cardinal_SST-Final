@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+main {
+    margin-top: 10rem;
+}
+
+/* Container for the entire details section */
+.details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Card container */
+.contenedor-card {
+    display: flex;
+    max-width: 800px;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+/* Image container */
+.contenedor-card img {
+    width: 50%;
+    object-fit: cover;
+}
+
+/* Product information container */
+.info-producto {
+    width: 50%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Product title */
+.info-producto h3 {
+    margin-top: 0;
+}
+
+/* Price and discount */
+.info-producto h4 {
+    margin: 10px 0;
+}
+
+/* Input styling */
+.info-producto input[type="number"] {
+    width: 50%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Button styling */
+.boton-carrito {
+    background-color: #00B207;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.boton-carrito {
+    display: flex;
+    margin-top: 1.5rem;
+    width: 70%;
+    justify-content: center;
+}
+
+.boton-carrito:hover {
+    background-color: #009706;
+}
+
+.boton-carrito a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Product details */
+.detalles-producto {
+    max-width: 800px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.detalles-producto p {
+    line-height: 1.6;
+    margin-top: 2rem;
+    padding-left: 2rem;
+}
+
+.precio-producto {
+    color: #5F5F5F;
+    margin: 1rem 0 1rem 0;
+}
+
+.oferta-producto {
+    color: #C93E07;
+    margin: 0 0 1rem 0;
+
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .contenedor-card {
+        flex-direction: column;
+    }
+
+    .contenedor-card img,
+    .info-producto {
+        width: 100%;
+    }
+}

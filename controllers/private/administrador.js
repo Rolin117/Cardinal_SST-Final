@@ -77,38 +77,36 @@ SAVE_FORM.addEventListener('submit', async (event) => {
 *   Retorno: ninguno.
 */
 const fillTable = async (form = null) => {
-    // Se inicializa el contenido de la tabla.
     TABLE_BODY.innerHTML = '';
-    // Se verifica la acción a realizar.
     const action = form ? 'searchRows' : 'readAll';
-    // Petición para obtener los registros disponibles.
     const DATA = await fetchData(ADMINISTRADOR_API, action, form);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+
     if (DATA.status) {
-        // Se recorre el conjunto de registros fila por fila.
+        const sessionAdminId = DATA.session_admin_id; // ID del administrador de la sesión
         DATA.dataset.forEach(row => {
-            // Se crean y concatenan las filas de la tabla con los datos de cada registro.
-            TABLE_BODY.innerHTML += `
-                             <tr>
-                                <td scope="row">${row.id_administrador}</td>
-                                <td>${row.nombre_admin}</td>
-                                <td>${row.correo_admin}</td>
-                                <td>${row.telefono_admin}</td>
-                                <td>
-                                    <button class="boton-accion boton-editar" onclick="openUpdate(${row.id_administrador})">
-                                        <img src="../../resources/img/icon-editar.svg" alt="">
-                                    </button>
-                                    <button class="boton-accion boton-eliminar" onclick="openDelete(${row.id_administrador})">
-                                        <img src="../../resources/img/icon-eliminar.svg" alt="">
-                                    </button>
-                                </td>
-                            </tr>
-            `;
+            if (row.id_administrador != sessionAdminId) { // Excluir al administrador que inició sesión
+                TABLE_BODY.innerHTML += 
+                    `<tr>
+                        <td scope="row">${row.id_administrador}</td>
+                        <td>${row.nombre_admin}</td>
+                        <td>${row.correo_admin}</td>
+                        <td>${row.telefono_admin}</td>
+                        <td>
+                            <button class="boton-accion boton-editar" onclick="openUpdate(${row.id_administrador})">
+                                <img src="../../resources/img/icon-editar.svg" alt="">
+                            </button>
+                            <button class="boton-accion boton-eliminar" onclick="openDelete(${row.id_administrador})">
+                                <img src="../../resources/img/icon-eliminar.svg" alt="">
+                            </button>
+                        </td>
+                    </tr>`;
+            }
         });
     } else {
         sweetAlert(4, DATA.error, true);
     }
 }
+
 
 /*
 *   Función para preparar el formulario al momento de insertar un registro.

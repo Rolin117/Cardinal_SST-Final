@@ -28,51 +28,6 @@
 <body>
     <header></header>
     <main class="contenedor">
-        <!-- Modal para Agregar Usuarios -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form class="row g-3" id="saveForm">
-                        <div class="modal-body">
-                            <input type="number" class="d-none" id="id_administrador" name="id_administrador">
-                            <div class="mb-3">
-                                <label for="inputEmail4" class="form-label">Nombre:</label>
-                                <input type="text" class="form-control" id="nombre_admin" name="nombre_admin">
-                            </div>
-                            <div class="mb-3">
-                                <label for="inputPassword4" class="form-label">Apellido:</label>
-                                <input type="text" class="form-control" id="apellido_admin" name="apellido_admin">
-                            </div>
-                            <div class="mb-3">
-                                <label for="inputEmail4" class="form-label">Correo:</label>
-                                <input type="email" class="form-control" id="correo_admin" name="correo_admin">
-                            </div>
-                            <div class="mb-3">
-                                <label for="inputPassword4" class="form-label">Contraseña:</label>
-                                <input type="password" class="form-control" id="contrasenia_admin"
-                                    name="contrasenia_admin">
-                            </div>
-                            <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">Confirmar contraseña:</label>
-                                <input type="password" class="form-control" id="confirmarClave" name="confirmarClave">
-                            </div>
-                            <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">Telefono:</label>
-                                <input type="tel" class="form-control" id="telefono_admin" name="telefono_admin">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-primary">Agregar usuario</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
         <div class="container mt-5">
             <div class="row">
                 <!-- Grafica de los productos más vendidos -->
@@ -120,31 +75,7 @@
                 </div>
             </div>
         </div>
-        <section class="contenedor-usuarios">
-            <div class="botones">
-                <button class="boton-agregar" onclick="openCreate()">
-                    <img src="../../resources/img/icon-agregar.svg" alt="">Agregar usuario
-                </button>
-            </div>
-            <div class="usuarios">
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Correo</th>
-                                <th scope="col">Telefono</th>
-                                <th scope="col">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tableBody">
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
+        
     </main>
     <footer></footer>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -159,6 +90,7 @@
     <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
     <script type="text/javascript" src="../../controllers/utils/components.js"></script>
     <script type="text/javascript" src="../../controllers/private/administrador.js"></script>
+
 </body>
 
 </html>
