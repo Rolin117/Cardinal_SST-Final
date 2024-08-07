@@ -49,7 +49,7 @@ class ProductoHandler
     {
         $sql = 'SELECT 
                     p.id_producto, 
-                    p.imagen, 
+                    p.imagen_producto, 
                     p.nombre_producto, 
                     p.descripcion, 
                     CASE 
