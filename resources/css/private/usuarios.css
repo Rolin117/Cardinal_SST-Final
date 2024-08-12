@@ -1,0 +1,134 @@
+main {
+    margin: 10.5rem 3rem 10rem 3rem;
+}
+
+.titulo {
+    margin: 3rem;
+}
+
+.boton-editar {
+    background-color: #FABF15; /* Amarillo */
+    border: none;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 43px;
+    transition: padding 0.3s ease;
+    padding: 0.5rem 1rem;
+}
+
+.boton-editar:hover {
+    background-color: #C29711; /* Amarillo oscuro */
+}
+
+.boton-editar img {
+    width: 30px;
+    height: 30px;
+    padding-right: 5px;
+}
+
+.boton-eliminar {
+    background-color: #C93E07; /* Rojo */
+    border: none;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 43px;
+    transition: padding 0.3s ease;
+    padding: 0.5rem 1rem;
+}
+
+.boton-eliminar:hover {
+    background-color: #962E05; /* Rojo oscuro */
+}
+
+.boton-eliminar img {
+    width: 30px;
+    height: 30px;
+    padding-right: 5px;
+}
+
+.botones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: 5rem 1rem 0 0;
+}
+
+.usuarios {
+    margin: 1rem 5rem 0 5rem;
+}
+
+.boton-editar {
+    background-color: #FABF15; /* Color de fondo */
+    border: none;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.boton-eliminar {
+    background-color: #C93E07; /* Color de fondo */
+    border: none;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.boton-accion img {
+    width: 24px;
+    height: 24px;
+}
+
+
+
+.boton-accion.boton-editar {
+    margin-right: 0.5rem; /* Espacio entre botones */
+}
+
+/* Estilos generales para la responsividad */
+@media screen and (max-width: 768px) {
+    .botones {
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+    }
+
+    .boton-agregar {
+        width: 100%;  /* Botón a ancho completo en móviles */
+        margin-bottom: 1rem;  /* Espacio entre botones */
+        padding: 1rem; /* Más grande para mejor accesibilidad */
+    }
+
+    .usuarios {
+        margin: 1rem;  /* Menor margen para evitar el desbordamiento horizontal */
+    }
+
+    .table {
+        font-size: 12px; /* Fuente más pequeña para la tabla en dispositivos móviles */
+    }
+
+    .boton-accion {
+        width: 100%; /* Botones a ancho completo en móviles */
+        margin-bottom: 0.5rem; /* Espacio entre botones en móviles */
+    }
+}
+
+/* Ajustar tamaño de imágenes en botones para pequeñas resoluciones */
+@media screen and (max-width: 480px) {
+    .boton-agregar img,
+    .boton-accion img {
+        width: 20px;
+        height: 20px;
+    }
+}
