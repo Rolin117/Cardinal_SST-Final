@@ -34,8 +34,8 @@ const fillTable = async (form = null) => {
     if (DATA.status) {
         DATA.dataset.forEach(row => {
 
-            TABLE_BODY.innerHTML += 
-              `<tr>
+            TABLE_BODY.innerHTML +=
+                `<tr>
                     <td scope="row">${row.id_cliente}</td>
                     <td>${row.nombre_cliente}</td>
                     <td>${row.correo_cliente}</td>
@@ -43,6 +43,9 @@ const fillTable = async (form = null) => {
                     <td>
                         <button class="boton-accion boton-editar" onclick="openUpdate(${row.id_cliente})">
                             <img src="../../resources/img/info.png" alt="">
+                        </button>
+                        <button class="boton-accion boton-eliminar" onclick="openDelete(${row.id_cliente})">
+                            <img src="../../resources/img/icon-eliminar.svg" alt="">
                         </button>
                     </td>
                 </tr>`;
@@ -52,13 +55,34 @@ const fillTable = async (form = null) => {
     }
 }
 
+SAVE_FORM.addEventListener('submit', async (event) => {
+    // Se evita recargar la página web después de enviar el formulario.
+    event.preventDefault();
+    // Se verifica la acción a realizar.
+    // Constante tipo objeto con los datos del formulario.
+    const FORM = new FormData(SAVE_FORM);
+    // Petición para guardar los datos del formulario.
+    const DATA = await fetchData(CLIENTE_API, 'updateRowC', FORM);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        // Se cierra la caja de diálogo.
+        SAVE_MODAL.hide();
+        // Se muestra un mensaje de éxito.
+        sweetAlert(1, DATA.message, true);
+        // Se carga nuevamente la tabla para visualizar los cambios.
+        fillTable();
+    } else {
+        sweetAlert(2, DATA.error, false);
+    }
+});
+
 
 const openUpdate = async (id) => {
     // Se define una constante tipo objeto con los datos del registro seleccionado.
     const FORM = new FormData();
     FORM.append('id_cliente', id);
     // Petición para obtener los datos del registro solicitado.
-    const DATA = await fetchData(CLIENTE_API, 'readOne', FORM);
+    const DATA = await fetchData(CLIENTE_API, 'readOneC', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
@@ -73,9 +97,30 @@ const openUpdate = async (id) => {
         APELLIDO_CLIENTE.value = ROW.apellido_cliente;
         TELEFONO_CLIENTE.value = ROW.telefono_cliente;
         CORREO_CLIENTE.value = ROW.correo_cliente;
-        CONTRASENIA_CLIENTE.value = ROW.contrasenia_cliente;
     } else {
         sweetAlert(2, DATA.error, false);
+    }
+}
+
+const openDelete = async (id) => {
+    // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
+    const RESPONSE = await confirmAction('¿Desea eliminar el usuario de forma permanente?');
+    // Se verifica la respuesta del mensaje.
+    if (RESPONSE) {
+        // Se define una constante tipo objeto con los datos del registro seleccionado.
+        const FORM = new FormData();
+        FORM.append('id_cliente', id);
+        // Petición para eliminar el registro seleccionado.
+        const DATA = await fetchData(CLIENTE_API, 'deleteRowC', FORM);
+        // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+        if (DATA.status) {
+            // Se muestra un mensaje de éxito.
+            await sweetAlert(1, DATA.message, true);
+            // Se carga nuevamente la tabla para visualizar los cambios.
+            fillTable();
+        } else {
+            sweetAlert(2, DATA.error, false);
+        }
     }
 }
 

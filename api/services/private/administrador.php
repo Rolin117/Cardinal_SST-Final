@@ -18,6 +18,44 @@ if (isset($_GET['action'])) {
 
         // Switch para manejar las acciones cuando hay una sesión activa de administrador.
         switch ($_GET['action']) {
+            case 'deleteRowC': // Agrega esta línea
+                if (!$cliente->setId($_POST['id_cliente'])) {
+                    $result['error'] = $cliente->getDataError();
+                } elseif ($cliente->deleteRow()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Cliente eliminado correctamente';
+                } else {
+                    $result['error'] = 'Ocurrió un problema al eliminar el cliente';
+                }
+                break;
+            case 'updateRowC':
+                $_POST = Validator::validateForm($_POST);
+                if (
+                    !$cliente->setId($_POST['id_cliente']) ||
+                    !$cliente->setNombre($_POST['nombre_cliente']) ||
+                    !$cliente->setApellido($_POST['apellido_cliente']) ||
+                    !$cliente->setCorreo($_POST['correo_cliente']) ||
+                    !$cliente->setTelefono($_POST['telefono_cliente']) ||
+                    !$cliente->setClave($_POST['contrasenia_cliente'])
+
+                ) {
+                    $result['error'] = $cliente->getDataError();
+                } elseif ($cliente->updateRow()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Cliente modificado correctamente';
+                } else {
+                    $result['error'] = 'Ocurrió un problema al modificar el cliente';
+                }
+                break;
+            case 'readOneC':
+                if (!$cliente->setId($_POST['id_cliente'])) {
+                    $result['error'] = 'Cliente incorrecto';
+                } elseif ($result['dataset'] = $cliente->readOne()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Cliente inexistente';
+                }
+                break;
             case 'readAllC':
                 if ($result['dataset'] = $cliente->readAll()) {
                     $result['status'] = 1;
@@ -36,6 +74,16 @@ if (isset($_GET['action'])) {
                         $result['error'] = 'No hay coincidencias';
                     }
                     break;       
+
+
+
+
+
+
+
+
+
+
             case 'searchRows':
                 if (!Validator::validateSearch($_POST['search'])) {
                     $result['error'] = Validator::getSearchError();
