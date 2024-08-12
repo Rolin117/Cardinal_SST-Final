@@ -26,6 +26,51 @@
     </header>
 
     <main>
+        <!-- Modal para Agregar Usuarios -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form class="row g-3" id="saveForm">
+                        <div class="modal-body">
+                            <input type="number" class="d-none" id="id_cliente" name="id_cliente">
+                            <div class="mb-3">
+                                <label for="inputEmail4" class="form-label">Nombre:</label>
+                                <input type="text" class="form-control" id="nombre_cliente" name="nombre_cliente">
+                            </div>
+                            <div class="mb-3">
+                                <label for="inputPassword4" class="form-label">Apellido:</label>
+                                <input type="text" class="form-control" id="apellido_cliente" name="apellido_cliente">
+                            </div>
+                            <div class="mb-3">
+                                <label for="inputEmail4" class="form-label">Correo:</label>
+                                <input type="email" class="form-control" id="correo_cliente" name="correo_cliente">
+                            </div>
+                            <div class="mb-3">
+                                <label for="inputPassword4" class="form-label">Contraseña:</label>
+                                <input type="password" class="form-control" id="contrasenia_cliente"
+                                    name="contrasenia_cliente">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-name" class="col-form-label">Confirmar contraseña:</label>
+                                <input type="password" class="form-control" id="confirmarClave" name="confirmarClave">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-name" class="col-form-label">Telefono:</label>
+                                <input type="tel" class="form-control" id="telefono_cliente" name="telefono_cliente">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">Agregar usuario</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
         <h4 class="titulo">Clientes registrados</h4>
 
@@ -69,5 +114,6 @@
     
         <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
         <script type="text/javascript" src="../../controllers/utils/components.js"></script>
+        <script type="text/javascript" src="../../controllers/private/usuarios.js"></script>
 </body>
 </html>

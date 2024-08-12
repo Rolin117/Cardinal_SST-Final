@@ -46,6 +46,35 @@ main {
     padding-right: 5px;
 }
 
+.titulo {
+    margin: 3rem 0 3rem 0;
+}
+
+.input-group {
+    position: relative;
+}
+
+#togglePassword {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+}
+
+#togglePassword img {
+    width: 20px;
+    height: 20px;
+}
+
+#togglePassword img:hover {
+    opacity: 0.8;
+}
+
+
 .boton-eliminar {
     background-color: #C93E07; /* Rojo */
     border: none;

@@ -1,6 +1,8 @@
 <?php
 // Se incluye la clase del modelo.
 require_once('../../models/data/administrador_data.php');
+require_once ('../../models/data/clientes_data.php');
+
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
@@ -9,12 +11,31 @@ if (isset($_GET['action'])) {
 
     // Se instancia la clase correspondiente.
     $administrador = new AdministradorData;
+    $cliente = new ClientesData;
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se procede según las acciones disponibles.
     if (isset($_SESSION['id_administrador'])) {
         $result['session'] = 1;
 
         // Switch para manejar las acciones cuando hay una sesión activa de administrador.
         switch ($_GET['action']) {
+            case 'readAllC':
+                if ($result['dataset'] = $cliente->readAll()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen clientes registrados';
+                }
+                break;
+                case 'searchRowsC':
+                    if (!Validator::validateSearch($_POST['search'])) {
+                        $result['error'] = Validator::getSearchError();
+                    } elseif ($result['dataset'] = $cliente->searchRows()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Existen ' . count($result['dataset']) . ' coincidencias';
+                    } else {
+                        $result['error'] = 'No hay coincidencias';
+                    }
+                    break;       
             case 'searchRows':
                 if (!Validator::validateSearch($_POST['search'])) {
                     $result['error'] = Validator::getSearchError();
@@ -69,7 +90,9 @@ if (isset($_GET['action'])) {
                     !$administrador->setNombre($_POST['nombre_admin']) ||
                     !$administrador->setApellido($_POST['apellido_admin']) ||
                     !$administrador->setCorreo($_POST['correo_admin']) ||
-                    !$administrador->setTelefono($_POST['telefono_admin'])
+                    !$administrador->setTelefono($_POST['telefono_admin']) ||
+                    !$administrador->setClave($_POST['contrasenia_admin'])
+
                 ) {
                     $result['error'] = $administrador->getDataError();
                 } elseif ($administrador->updateRow()) {
