@@ -87,11 +87,11 @@ const fillTable = async (form = null) => {
                         </div>
                         <div class="botones-cards">
                             <button class="boton-editar" onclick="openUpdate(${row.id_categoria})">
-                                <img src="../../resources/img/icon-editar.svg" alt="">Editar
+                                <img src="../../resources/img/icon-editar.svg" alt="">Editar categoria
                             </button>
 
                             <button class="boton-eliminar" onclick="openDelete(${row.id_categoria})">
-                                <img src="../../resources/img/icon-eliminar.svg" alt="">Eliminar
+                                <img src="../../resources/img/icon-eliminar.svg" alt="">Eliminar categoria
                             </button>
                         </div>
                     </div>

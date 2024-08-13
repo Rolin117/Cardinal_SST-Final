@@ -87,7 +87,7 @@ const openUpdate = async (id) => {
     if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
         SAVE_MODAL.show();
-        MODAL_TITLE.textContent = 'Actualizar Usuario';
+        MODAL_TITLE.textContent = 'Información del Usuario';
         // Se prepara el formulario.
         SAVE_FORM.reset();
         // Se inicializan los campos con los datos.
