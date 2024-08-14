@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2? family=Poppins:wght@200;300;400;500;600;700;800;900& display=swap');
+
+
+
+main {
+    margin: 10rem 0 5rem 0;
+}
+
+#profileContainer {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #fafafa;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+}
+
+.profile-title {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #000;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+#profileForm .form-control {
+    width: 90%;
+    margin-bottom: 20px;
+    font-size: 16px;
+    padding: 10px;
+}
+
+#profileForm .btn-edit-profile {
+    background-color: #00B207;
+    border-radius: 43px;
+    color: #fff;
+    border: none;
+    padding: 12px 7rem;
+    font-weight: 700; 
+    font-size: 16px;
+    cursor: pointer;
+    width: auto;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#profileForm .btn-edit-profile:hover {
+    background-color: #009a06;
+    transform: scale(1.05);
+}
+
+.btn-change-password {
+    background-color: #696969;
+    color: #fff;
+    border: none;
+    padding: 12px 4rem;
+    border-radius: 43px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 700; 
+    width: auto;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-change-password:hover {
+    background-color: #929292;
+    transform: scale(1.05);
+}
+
+#profileForm label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #000;
+}
+
+.text-center {
+    margin-top: 20px;
+}
