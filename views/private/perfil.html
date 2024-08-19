@@ -32,6 +32,44 @@
 
     </header>
 
+    <div class="modal fade" id="passwordModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <!-- Contenido del componente Modal -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalTitle">Cambiar contraseña</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!-- Formulario para actualizar contraseña -->
+                <form id="passwordForm">
+                    <div class="modal-body row g-3">
+                        <div class="col-sm-12 col-md-6 offset-md-3">
+                            <label for="claveActual" class="form-label">Contraseña actual</label>
+                            <input id="claveActual" type="password" name="claveActual" class="form-control" required>
+                        </div>
+                        <div class="col-12 text-center">
+                            <span>CONTRASEÑA NUEVA</span>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="claveNueva" class="form-label">Contraseña</label>
+                            <input id="claveNueva" type="password" name="claveNueva" class="form-control" required>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="confirmarClave" class="form-label">Confirmar contraseña</label>
+                            <input id="confirmarClave" type="password" name="confirmarClave" class="form-control"
+                                required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-secondary">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- Contenido principal del documento -->
     <main>
         <div id="profileContainer">
@@ -46,13 +84,13 @@
                     <input id="apellido_admin" type="text" name="apellido_admin" class="form-control" required>
                 </div>
                 <div class="col-sm-12 col-md-6">
-                    <label for="correo_admin" class="form-label">Correo</label>
+                    <label for="correo_admin" class="form-label">Correo electronico:</label>
                     <input id="correo_admin" type="email" name="correo_admin" class="form-control" required>
                 </div>
                 <div class="col-sm-12 col-md-6">
                     <label for="telefono_admin" class="form-label">Telefono</label>
                     <input id="telefono_admin" type="tel" name="telefono_admin" class="form-control" required>
-                </div>        
+                </div>
                 <div class="col-12 text-center">
                     <button type="submit" class="btn-edit-profile"><i class="bi bi-save"></i> Editar perfil</button>
                 </div>
@@ -64,9 +102,9 @@
             </div>
         </div>
     </main>
-    
-    
-    
+
+
+
 
     <footer>
 

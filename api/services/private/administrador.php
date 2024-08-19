@@ -180,38 +180,45 @@ if (isset($_GET['action'])) {
                 break;
 
                 break;
-            case 'editProfile':
-                $_POST = Validator::validateForm($_POST);
-                if (
-                    !$administrador->setNombre($_POST['nombreEmpleado']) ||
-                    !$administrador->setApellido($_POST['apellidoEmpleado']) ||
-                    !$administrador->setCorreo($_POST['correoEmpleado']) ||
-                    !$administrador->setTelefono($_POST['telefonoEmpleado'])
-                ) {
-                    $result['error'] = $administrador->getDataError();
-                } elseif ($administrador->editProfile()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Perfil modificado correctamente';
-                    $_SESSION['correo'] = $_POST['correoEmpleado'];
-                } else {
-                    $result['error'] = 'Ocurrió un problema al modificar el perfil';
-                }
-                break;
-            case 'changePassword':
-                $_POST = Validator::validateForm($_POST);
-                if (!$administrador->checkPassword($_POST['claveActual'])) {
-                    $result['error'] = 'Contraseña actual incorrecta';
-                } elseif ($_POST['claveNueva'] != $_POST['confirmarClave']) {
-                    $result['error'] = 'Confirmación de contraseña diferente';
-                } elseif (!$administrador->setClave($_POST['claveNueva'])) {
-                    $result['error'] = $administrador->getDataError();
-                } elseif ($administrador->changePassword()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Contraseña cambiada correctamente';
-                } else {
-                    $result['error'] = 'Ocurrió un problema al cambiar la contraseña';
-                }
-                break;
+                case 'readProfile':
+                    if ($result['dataset'] = $administrador->readProfile()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['error'] = 'Ocurrió un problema al leer el perfil';
+                    }
+                    break;
+                case 'editProfile':
+                    $_POST = Validator::validateForm($_POST);
+                    if (
+                        !$administrador->setNombre($_POST['nombre_admin']) or
+                        !$administrador->setApellido($_POST['apellido_admin']) or
+                        !$administrador->setCorreo($_POST['correo_admin']) or
+                        !$administrador->setTelefono($_POST['telefono_admin'])
+                    ) {
+                        $result['error'] = $administrador->getDataError();
+                    } elseif ($administrador->editProfile()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Perfil modificado correctamente';
+                        $_SESSION['nombre_admin'] = $_POST['nombre_admin'];
+                    } else {
+                        $result['error'] = 'Ocurrió un problema al modificar el perfil';
+                    }
+                    break;
+                case 'changePassword':
+                    $_POST = Validator::validateForm($_POST);
+                    if (!$administrador->checkPassword($_POST['claveActual'])) {
+                        $result['error'] = 'Contraseña actual incorrecta';
+                    } elseif ($_POST['claveNueva'] != $_POST['confirmarClave']) {
+                        $result['error'] = 'Confirmación de contraseña diferente';
+                    } elseif (!$administrador->setClave($_POST['claveNueva'])) {
+                        $result['error'] = $administrador->getDataError();
+                    } elseif ($administrador->changePassword()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Contraseña cambiada correctamente';
+                    } else {
+                        $result['error'] = 'Ocurrió un problema al cambiar la contraseña';
+                    }
+                    break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
                 break;

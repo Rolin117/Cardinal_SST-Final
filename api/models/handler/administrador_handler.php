@@ -69,6 +69,15 @@ class AdministradorHandler
         $params = array($this->nombre, $this->apellido, $this->correo, $this->telefono, $_SESSION['id_administrador']);
         return Database::executeRow($sql, $params);
     }
+    
+    public function readProfile()
+    {
+        $sql = 'SELECT id_administrador, nombre_admin, apellido_admin, correo_admin, telefono_admin
+                FROM tb_administradores
+                WHERE id_administrador = ?';
+        $params = array($_SESSION['id_administrador']);
+        return Database::getRow($sql, $params);
+    }
 
     /*
      *  Métodos para realizar las operaciones SCRUD (search, create, read, update, and delete).
@@ -125,4 +134,7 @@ class AdministradorHandler
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
+
+    
 }
+
