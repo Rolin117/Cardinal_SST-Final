@@ -18,6 +18,7 @@ FOOTER.innerHTML = `
         <li><a href="usuarios.html">Usuarios</a></li>
         <li><a href="administradores.html">Administradores</a></li>
         <li><a href="pedidos.html">Pedidos</a></li>
+        <li><a href="reportes.html">Reportes</a></li>
         <li><a href="perfil.html">Perfil</a></li>
     </ul>
 </div>c

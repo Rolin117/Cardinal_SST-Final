@@ -1,0 +1,34 @@
+main {
+    margin: 10rem 0 3rem 0;
+}
+
+.report-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: box-shadow 0.3s ease;
+}
+.report-card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,.1);
+}
+.report-card h2 {
+    color: #666666;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+.report-card ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+.report-card ul li {
+    margin-bottom: 10px;
+}
+.report-card ul li a {
+    color: #333;
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+.report-card ul li a:hover {
+    color: #007bff;
+}
