@@ -62,6 +62,17 @@ class ProductoData extends ProductoHandler
         }
     }
 
+    public function setCantidad($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->cantidad = $value;
+            return true;
+        } else {
+            $this->data_error = 'La cantidad debe ser un número entero positivo';
+            return false;
+        }
+    }
+
     public function setImagen($file, $filename = null)
     {
         if (Validator::validateImageFile($file, 100)) {

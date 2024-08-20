@@ -14,6 +14,7 @@ class ProductoHandler
     protected $nombre = null;
     protected $precio = null;
     protected $descripcion = null;
+    protected $cantidad = null;
     protected $imagen = null;
     protected $id_categoria = null;
     protected $id_admin = null;
@@ -38,9 +39,9 @@ class ProductoHandler
 
     public function createRow()
     {
-        $sql = 'INSERT INTO tb_productos(nombre_producto, precio_producto, descripcion, imagen_producto, id_categoria)
-                VALUES(?, ?, ?, ?, ?)';
-        $params = array($this->nombre, $this->precio, $this->descripcion, $this->imagen, $this->id_categoria);
+        $sql = 'INSERT INTO tb_productos(nombre_producto, precio_producto, descripcion, cantidad_producto, imagen_producto, id_categoria)
+                VALUES(?, ?, ?, ?, ?, ?)';
+        $params = array($this->nombre, $this->precio, $this->descripcion, $this->cantidad, $this->imagen, $this->id_categoria);
         return Database::executeRow($sql, $params);
     }
 
@@ -71,7 +72,7 @@ class ProductoHandler
 
     public function readOne()
     {
-        $sql = 'SELECT id_producto, nombre_producto, precio_producto, descripcion, imagen_producto, id_categoria
+        $sql = 'SELECT id_producto, nombre_producto, precio_producto, descripcion, cantidad_producto, imagen_producto, id_categoria
                 FROM tb_productos
                 WHERE id_producto = ?';
         $params = array($this->id);
@@ -81,9 +82,9 @@ class ProductoHandler
     public function updateRow()
     {
         $sql = 'UPDATE tb_productos
-                SET nombre_producto = ?, precio_producto = ?, descripcion = ?, imagen_producto = ?, id_categoria = ?
+                SET nombre_producto = ?, precio_producto = ?, descripcion = ?, cantidad_producto = ?, imagen_producto = ?, id_categoria = ?
                 WHERE id_producto = ?';
-        $params = array($this->nombre, $this->precio, $this->descripcion, $this->imagen, $this->id_categoria, $this->id);
+        $params = array($this->nombre, $this->precio, $this->descripcion, $this->cantidad, $this->imagen, $this->id_categoria, $this->id);
         return Database::executeRow($sql, $params);
     }
 
@@ -103,4 +104,16 @@ class ProductoHandler
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
+
+    public function productosCategoria()
+    {
+        $sql = 'SELECT nombre_producto, precio_producto, cantidad_producto
+                FROM tb_productos
+                INNER JOIN tb_categorias USING(id_categoria)
+                WHERE id_categoria = ?
+                ORDER BY nombre_producto';
+        $params = array($this->id_categoria);
+        return Database::getRows($sql, $params);
+    }
+
 }

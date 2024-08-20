@@ -13,7 +13,8 @@ const SAVE_FORM = document.getElementById('saveForm'),
     ID_PRODUCTO = document.getElementById('id_producto'),
     NOMBRE_PRODUCTO = document.getElementById('nombre_producto'),
     DESCRIPCION_PRODUCTO = document.getElementById('descripcion'),
-    PRECIO_PRODUCTO = document.getElementById('precio_producto');
+    PRECIO_PRODUCTO = document.getElementById('precio_producto'),
+    CANTIDAD_PRODUCTO = document.getElementById('cantidad_producto'),
     IMAGEN_PRODUCTO = document.getElementById('imagen_producto');
 
 // Método del evento para cuando el documento ha cargado.
@@ -127,6 +128,7 @@ const openUpdate = async (id) => {
         NOMBRE_PRODUCTO.value = ROW.nombre_producto;
         DESCRIPCION_PRODUCTO.value = ROW.descripcion;
         PRECIO_PRODUCTO.value = ROW.precio_producto;
+        CANTIDAD_PRODUCTO.value = ROW.cantidad_producto;
         fillSelectCategoria(CATEGORIA_API, 'readAll', 'categoriaProducto', ROW.id_categoria);
         document.getElementById('imagePreview').src = `${SERVER_URL}images/productos/${ROW.imagen_producto}`;
     } else {
