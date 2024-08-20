@@ -116,4 +116,11 @@ class ProductoHandler
         return Database::getRows($sql, $params);
     }
 
+    public function productosAgotados()
+    {
+        $sql = 'SELECT * FROM tb_productos WHERE cantidad_producto = 0';
+        return Database::getRows($sql); // Cambié a getRows para retornar un array de resultados
+    }
+    
+
 }

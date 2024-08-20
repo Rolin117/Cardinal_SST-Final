@@ -59,4 +59,21 @@ class PedidoHandler
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
+
+    public function IngresosMes()
+    {
+        $sql = "SELECT 
+            DATE_FORMAT(fecha, '%Y-%m') AS mes,
+            SUM(total) AS ingresos_totales
+        FROM 
+            tb_pedidos
+        GROUP BY 
+            mes
+        ORDER BY 
+            mes DESC";
+    
+        return Database::getRows($sql);
+    }
+    
+
 }

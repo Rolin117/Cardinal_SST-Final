@@ -61,7 +61,7 @@ class Report extends FPDF
         $usuario_info = $administrador->readProfile();
     
         // Logo
-        $this->image('../../../resources/img/icon.png', 10, 10, 20);
+        $this->image('../../../resources/img/logo.png', 10, 10, 20);
     
         // Título
         $this->setFont('Arial', 'B', 15);
