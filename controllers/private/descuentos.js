@@ -13,7 +13,9 @@ const SAVE_FORM = document.getElementById('saveForm'),
     ID_DESCUENTO = document.getElementById('id_oferta'),
     NOMBRE_OFERTA = document.getElementById('nombre_oferta'),
     DESCRIPCION_DESCUENTO = document.getElementById('descripcion_oferta'),
-    DESCUENTO = document.getElementById('descuento');
+    DESCUENTO = document.getElementById('descuento'),
+    FECHA_INICIO = document.getElementById('fecha_inicio'),
+    FECHA_FIN = document.getElementById('fecha_fin');
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', async () => {
@@ -125,6 +127,8 @@ const openUpdate = async (id) => {
         NOMBRE_OFERTA.value = ROW.nombre_oferta;
         DESCRIPCION_DESCUENTO.value = ROW.descripcion_oferta;
         DESCUENTO.value = ROW.descuento;
+        FECHA_INICIO.value = ROW.fecha_inicio;
+        FECHA_FIN.value = ROW.fecha_fin;
         fillSelectProductos(PRODUCTO_API, 'readAll', 'ofertaProducto', ROW.idProducto);
     } else {
         sweetAlert(2, DATA.error, false);
@@ -145,6 +149,19 @@ const openDelete = async (id) => {
         }
     }
 }
+
+
+    // Obtén la fecha actual en formato YYYY-MM-DD
+    const today = new Date().toISOString().split('T')[0];
+
+    // Establece la fecha mínima para los inputs
+    document.getElementById('fecha_inicio').setAttribute('min', today);
+    document.getElementById('fecha_fin').setAttribute('min', today);
+
+    // Opcional: puedes agregar una validación para que la fecha de fin no sea anterior a la de inicio
+    document.getElementById('fecha_inicio').addEventListener('change', function() {
+        document.getElementById('fecha_fin').setAttribute('min', this.value);
+    });
 
 /*
 *   Función para abrir un reporte automático de productos por categoría.

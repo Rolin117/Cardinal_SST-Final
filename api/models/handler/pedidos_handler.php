@@ -60,6 +60,7 @@ class PedidoHandler
         return Database::executeRow($sql, $params);
     }
 
+    /* Funciones de reportes */
     public function IngresosMes()
     {
         $sql = "SELECT 
@@ -71,9 +72,64 @@ class PedidoHandler
             mes
         ORDER BY 
             mes DESC";
-    
+
         return Database::getRows($sql);
     }
-    
 
+    public function prediccionIngresosMes()
+    {
+        $sql = "SELECT 
+                DATE_FORMAT(v.fecha_venta, '%Y-%m') AS mes,
+                    SUM(p.precio_producto * v.cantidad_vendida * (1 - IFNULL(o.descuento, 0) / 100)) AS ingresos_totales
+                FROM 
+                    tb_ventas v
+                INNER JOIN 
+                    tb_productos p ON v.id_producto = p.id_producto
+                LEFT JOIN 
+                    tb_ofertas o ON v.id_oferta = o.id_oferta
+                GROUP BY 
+                    mes
+                ORDER BY 
+                    mes DESC;
+                ";
+
+        return Database::getRows($sql);
+    }
+
+
+    public function pedidosMes()
+    {
+        $sql = "SELECT 
+                DATE_FORMAT(fecha, '%Y-%m') AS mes,
+                    COUNT(id_pedido) AS total_pedidos,
+                    SUM(total) AS ingresos_totales
+                FROM 
+                    tb_pedidos
+                GROUP BY
+                    mes
+                ORDER BY 
+                    mes DESC;
+                ";
+        return Database::getRows($sql);
+    }
+
+    public function pedidosClientes()
+    {
+        $sql = 'SELECT 
+                    c.nombre_cliente AS nombre_cliente,
+                    c.apellido_cliente AS apellido_cliente,
+                    p.fecha AS fecha_pedido,
+                    p.total AS total_pedido
+                FROM 
+                    tb_pedidos p
+                INNER JOIN 
+                    tb_clientes c 
+                ON 
+                    p.id_cliente = c.id_cliente
+                ORDER BY 
+                    c.nombre_cliente, c.apellido_cliente, p.fecha DESC;
+        ';
+
+        return Database::getRows($sql);
+    }
 }

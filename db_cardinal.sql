@@ -63,7 +63,7 @@ CREATE TABLE tb_pedidos (
     fecha DATE NOT NULL,
     total DECIMAL(10,2) NOT NULL,
     id_cliente INT,
-    FOREIGN KEY (id_cliente) REFERENCES tb_clientes(Hid_cliente)
+    FOREIGN KEY (id_cliente) REFERENCES tb_clientes(id_cliente)
 );
 
 CREATE TABLE tb_detalle_pedido (
@@ -76,3 +76,23 @@ CREATE TABLE tb_detalle_pedido (
     FOREIGN KEY (id_pedido) REFERENCES tb_pedidos(id_pedido),
     FOREIGN KEY (id_producto) REFERENCES tb_productos(id_producto)
 );
+
+CREATE TABLE tb_ventas (
+	id_venta INT PRIMARY KEY AUTO_INCREMENT,
+    id_producto INT,
+    cantidad_vendida INT,
+	fecha_venta DATE,
+    id_oferta INT,
+    FOREIGN KEY (id_producto) REFERENCES tb_productos(id_producto),
+    FOREIGN KEY (id_oferta) REFERENCES tb_ofertas(id_oferta)
+);
+
+
+ALTER TABLE tb_ofertas
+ADD COLUMN estado ENUM('activa', 'inactiva') DEFAULT 'activa';
+
+
+ALTER TABLE tb_ofertas
+ADD COLUMN fecha_inicio DATE DEFAULT NULL,
+ADD COLUMN fecha_fin DATE DEFAULT NULL;
+

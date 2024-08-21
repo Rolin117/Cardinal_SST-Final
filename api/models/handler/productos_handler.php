@@ -105,6 +105,8 @@ class ProductoHandler
         return Database::executeRow($sql, $params);
     }
 
+    /* Funciones de reportes */
+
     public function productosCategoria()
     {
         $sql = 'SELECT nombre_producto, precio_producto, cantidad_producto
@@ -122,5 +124,52 @@ class ProductoHandler
         return Database::getRows($sql); // Cambié a getRows para retornar un array de resultados
     }
     
+
+    public function productosAdmin()
+    {
+        $sql = 'SELECT 
+                    a.nombre_admin AS nombre_administrador,
+                    a.apellido_admin AS apellido_administrador,
+                    p.nombre_producto,
+                    p.precio_producto
+                FROM 
+                    tb_productos p
+                INNER JOIN 
+                    tb_administradores a 
+                ON 
+                    p.id_admin = a.id_administrador
+                ORDER BY 
+                    a.nombre_admin, a.apellido_admin;
+                ';
+        return Database::getRows($sql);
+    }
+
+    public function prediccionProductosDemanda()
+{
+    $sql = "SELECT 
+                p.nombre_producto, 
+                p.precio_producto, 
+                o.nombre_oferta, 
+                SUM(v.cantidad_vendida) AS cantidad_total_vendida,
+                COUNT(v.id_venta) AS veces_en_oferta
+            FROM 
+                tb_productos p
+            INNER JOIN 
+                tb_ofertas o ON p.id_producto = o.id_producto
+            INNER JOIN 
+                tb_ventas v ON p.id_producto = v.id_producto
+            WHERE 
+                v.fecha_venta BETWEEN CURDATE() - INTERVAL 1 MONTH AND CURDATE()
+            GROUP BY 
+                p.nombre_producto, o.nombre_oferta
+            HAVING 
+                cantidad_total_vendida > (SELECT AVG(cantidad_vendida) FROM tb_ventas)
+            ORDER BY 
+                cantidad_total_vendida DESC;
+            ";
+
+    return Database::getRows($sql);
+}
+
 
 }

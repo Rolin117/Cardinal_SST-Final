@@ -17,6 +17,8 @@ class Database
      *   Parámetros: $query (sentencia SQL) y $values (arreglo con los valores para la sentencia SQL).
      *   Retorno: booleano (true si la sentencia se ejecuta satisfactoriamente o false en caso contrario).
      */
+
+    
     public static function executeRow($query, $values)
     {
         try {
@@ -75,6 +77,8 @@ class Database
             return false;
         }
     }
+
+
 
     /*
      *   Método para establecer un mensaje de error personalizado al ocurrir una excepción.

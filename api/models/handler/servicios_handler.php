@@ -70,4 +70,22 @@ class ServicioHandler
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
+
+    public function serviciosAdmin()
+    {
+        $sql = 'SELECT 
+                    a.nombre_admin AS nombre_administrador,
+                    a.apellido_admin AS apellido_administrador,
+                    s.nombre_servicio
+                FROM 
+                    tb_servicios s
+                INNER JOIN 
+                    tb_administradores a 
+                ON 
+                    s.id_admin = a.id_administrador
+                ORDER BY 
+                    a.nombre_admin, a.apellido_admin;
+                ';
+        return Database::getRows($sql);
+    }
 }
