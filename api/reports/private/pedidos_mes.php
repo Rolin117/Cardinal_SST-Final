@@ -6,7 +6,7 @@ require_once('../../helpers/report.php');
 $pdf = new Report;
 
 // Se incluyen las clases para la transferencia y acceso a datos.
-require_once('../../models/data/pedido_data.php');
+require_once('../../models/data/pedidos_data.php');
 
 // Se instancia la clase de datos de pedidos.
 $pedido = new PedidoHandler; // Asume que tienes un handler para pedidos

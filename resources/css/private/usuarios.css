@@ -133,3 +133,25 @@ main {
         height: 20px;
     }
 }
+
+.boton-reporte {
+    background-color: #00B207; /* Verde para el botón de reporte */
+    border: none;
+    color: #ffffff;
+    padding: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.boton-reporte:hover {
+    background-color: #007B00; /* Verde oscuro al pasar el mouse */
+}
+
+.boton-reporte img {
+    width: 24px;
+    height: 24px;
+    padding-right: 5px;
+}

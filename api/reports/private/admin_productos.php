@@ -6,7 +6,7 @@ require_once('../../helpers/report.php');
 $pdf = new Report;
 
 // Se incluyen las clases para la transferencia y acceso a datos.
-require_once('../../models/data/producto_data.php');
+require_once('../../models/data/productos_data.php');
 
 // Se instancian las entidades correspondientes.
 $producto = new ProductoData;

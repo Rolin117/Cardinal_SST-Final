@@ -7,8 +7,8 @@ $pdf = new Report;
 // Se verifica si existe un valor para la categoría, de lo contrario se muestra un mensaje.
 if (isset($_GET['id_categoria'])) {
     // Se incluyen las clases para la transferencia y acceso a datos.
-    require_once('../../models/data/categoria_data.php');
-    require_once('../../models/data/producto_data.php');
+    require_once('../../models/data/categorias_data.php');
+    require_once('../../models/data/productos_data.php');
     // Se instancian las entidades correspondientes.
     $categoria = new CategoriaData;
     $producto = new ProductoData;
@@ -17,7 +17,7 @@ if (isset($_GET['id_categoria'])) {
         // Se verifica si la categoría existe, de lo contrario se muestra un mensaje.
         if ($rowCategoria = $categoria->readOne()) {
             // Se inicia el reporte con el encabezado del documento.
-            $pdf->startReport('Productos de la categoría ' . $rowCategoria['nombre_categoria']);
+            $pdf->startReport('Productos de la categoría ' . $rowCategoria['nombre_cat']);
             // Se verifica si existen registros para mostrar, de lo contrario se imprime un mensaje.
             if ($dataProductos = $producto->productosCategoria()) {
                 // Se establece un color de relleno para los encabezados.
@@ -41,8 +41,7 @@ if (isset($_GET['id_categoria'])) {
                     $pdf->setFillColor($fill ? 230 : 255); // Color de relleno gris más claro y blanco alternante
                     $pdf->cell(126, 10, $pdf->encodeString($rowProducto['nombre_producto']), 1, 0, '', $fill);
                     $pdf->cell(30, 10, $rowProducto['precio_producto'], 1, 0, 'R', $fill);
-                    $pdf->cell(30, 10, $rowProducto['cantidad_producto'], 1, 0, 'R', $fill);
-                    $pdf->cell(30, 10, $estado, 1, 1, 'C', $fill);
+                    $pdf->cell(30, 10, $rowProducto['cantidad_producto'], 1, 1, 'R', $fill);
                     // Alternar color de relleno
                     $fill = !$fill;
                 }

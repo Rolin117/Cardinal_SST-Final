@@ -247,3 +247,25 @@ main {
   .search-btn[type="reset"]:hover, .search-btn[type="reset"]:focus {
     background-color: #e10000;
   }
+
+  .boton-reporte {
+    background-color: #E3AC00; /* Color verde para el botón de reporte */
+    border: none;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 700;
+    border-radius: 43px;
+    transition: padding 0.3s ease;
+    padding: 0.5rem 1rem;
+}
+
+.boton-reporte :hover {
+    background-color: #D5A100; /* Verde oscuro */
+}
+
+.boton-reporte img {
+    width: 30px;
+    height: 30px;
+    padding-right: 5px;
+}

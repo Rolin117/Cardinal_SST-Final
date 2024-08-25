@@ -96,3 +96,30 @@ ALTER TABLE tb_ofertas
 ADD COLUMN fecha_inicio DATE DEFAULT NULL,
 ADD COLUMN fecha_fin DATE DEFAULT NULL;
 
+DELIMITER $$
+
+CREATE TRIGGER tr_registrar_venta
+AFTER INSERT ON tb_detalle_pedido
+FOR EACH ROW
+BEGIN
+    DECLARE id_oferta INT;
+
+    -- Verificar si el producto del detalle de pedido está en oferta
+    SELECT o.id_oferta 
+    INTO id_oferta
+    FROM tb_ofertas o
+    WHERE o.id_producto = NEW.id_producto 
+    AND CURDATE() BETWEEN o.fecha_inicio AND o.fecha_fin 
+    LIMIT 1;
+
+    -- Si el producto está en oferta, registrar la venta en tb_ventas
+    IF id_oferta IS NOT NULL THEN
+        INSERT INTO tb_ventas (id_producto, cantidad_vendida, fecha_venta, id_oferta)
+        VALUES (NEW.id_producto, NEW.cantidad, CURDATE(), id_oferta);
+    END IF;
+END$$
+
+DELIMITER ;
+
+
+

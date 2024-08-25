@@ -31,9 +31,11 @@ class ServicioHandler
 
     public function createRow()
     {
-        $sql = 'INSERT INTO tb_servicios(nombre_servicio, descripcion_servicio)
-                VALUES(?, ?)';
-        $params = array($this->nombre, $this->descripcion);
+        $this->id_admin = $_SESSION['id_administrador'];
+
+        $sql = 'INSERT INTO tb_servicios(nombre_servicio, descripcion_servicio, id_admin)
+                VALUES(?, ?, ?)';
+        $params = array($this->nombre, $this->descripcion, $this->id_admin);
         return Database::executeRow($sql, $params);
     }
 
@@ -71,7 +73,7 @@ class ServicioHandler
         return Database::executeRow($sql, $params);
     }
 
-    public function serviciosAdmin()
+    public function serviciosPorAdministrador()
     {
         $sql = 'SELECT 
                     a.nombre_admin AS nombre_administrador,
@@ -79,13 +81,14 @@ class ServicioHandler
                     s.nombre_servicio
                 FROM 
                     tb_servicios s
-                INNER JOIN 
+                INNER JOIN  
                     tb_administradores a 
                 ON 
                     s.id_admin = a.id_administrador
                 ORDER BY 
-                    a.nombre_admin, a.apellido_admin;
-                ';
+                    a.nombre_admin, a.apellido_admin';
         return Database::getRows($sql);
     }
+    
+    
 }

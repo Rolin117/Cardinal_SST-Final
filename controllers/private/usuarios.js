@@ -36,19 +36,24 @@ const fillTable = async (form = null) => {
 
             TABLE_BODY.innerHTML +=
                 `<tr>
-                    <td scope="row">${row.id_cliente}</td>
-                    <td>${row.nombre_cliente}</td>
-                    <td>${row.correo_cliente}</td>
-                    <td>${row.telefono_cliente}</td>
-                    <td>
-                        <button class="boton-accion boton-editar" onclick="openUpdate(${row.id_cliente})">
-                            <img src="../../resources/img/info.png" alt="">
-                        </button>
-                        <button class="boton-accion boton-eliminar" onclick="openDelete(${row.id_cliente})">
-                            <img src="../../resources/img/icon-eliminar.svg" alt="">
-                        </button>
-                    </td>
-                </tr>`;
+    <td scope="row">${row.id_cliente}</td>
+    <td>${row.nombre_cliente}</td>
+    <td>${row.correo_cliente}</td>
+    <td>${row.telefono_cliente}</td>
+    <td>
+        <button class="boton-accion boton-editar" onclick="openUpdate(${row.id_cliente})">
+            <img src="../../resources/img/info.png" alt="">
+        </button>
+        <button class="boton-accion boton-eliminar" onclick="openDelete(${row.id_cliente})">
+            <img src="../../resources/img/icon-eliminar.svg" alt="">
+        </button>
+        <!-- Nuevo botón para generar reporte -->
+        <button class="boton-accion boton-reporte" onclick="openReportPC(${row.id_cliente})">
+            <img src="../../resources/img/reporte.png" alt="">
+        </button>
+    </td>
+</tr>
+`;
         });
     } else {
         sweetAlert(4, DATA.error, true);
@@ -124,3 +129,11 @@ const openDelete = async (id) => {
     }
 }
 
+const openReportPC = (id) => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reports/private/pedidos_cliente.php`);
+    // Se agrega un parámetro a la ruta con el valor del registro seleccionado.
+    PATH.searchParams.append('id_cliente', id);
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
+}

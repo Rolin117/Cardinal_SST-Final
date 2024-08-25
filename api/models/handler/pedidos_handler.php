@@ -113,23 +113,15 @@ class PedidoHandler
         return Database::getRows($sql);
     }
 
-    public function pedidosClientes()
+    public function pedidosPorCliente()
     {
-        $sql = 'SELECT 
-                    c.nombre_cliente AS nombre_cliente,
-                    c.apellido_cliente AS apellido_cliente,
-                    p.fecha AS fecha_pedido,
-                    p.total AS total_pedido
-                FROM 
-                    tb_pedidos p
-                INNER JOIN 
-                    tb_clientes c 
-                ON 
-                    p.id_cliente = c.id_cliente
-                ORDER BY 
-                    c.nombre_cliente, c.apellido_cliente, p.fecha DESC;
-        ';
-
-        return Database::getRows($sql);
+        $sql = 'SELECT p.id_pedido, p.fecha, p.total, dp.cantidad, pr.nombre_producto
+                FROM tb_pedidos p
+                INNER JOIN tb_detalle_pedido dp ON p.id_pedido = dp.id_pedido
+                INNER JOIN tb_productos pr ON dp.id_producto = pr.id_producto
+                WHERE p.id_cliente = ?';
+        $params = array($this->id_cliente);
+        return Database::getRows($sql, $params);
     }
+    
 }

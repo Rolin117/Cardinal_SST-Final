@@ -1,5 +1,5 @@
 main {
-    margin: 13rem 0 10rem 0;
+    margin: 9.8rem 0 10rem 0;
 }
 
 .titulo {
@@ -35,4 +35,9 @@ main {
 }
 .report-card ul li a:hover {
     color: #007bff;
+}
+
+.boton-li {
+    border-style: none;
+    background-color: white;
 }

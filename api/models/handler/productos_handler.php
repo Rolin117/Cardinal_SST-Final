@@ -39,11 +39,16 @@ class ProductoHandler
 
     public function createRow()
     {
-        $sql = 'INSERT INTO tb_productos(nombre_producto, precio_producto, descripcion, cantidad_producto, imagen_producto, id_categoria)
-                VALUES(?, ?, ?, ?, ?, ?)';
-        $params = array($this->nombre, $this->precio, $this->descripcion, $this->cantidad, $this->imagen, $this->id_categoria);
+        // Obtener el ID del administrador desde la sesión
+        $this->id_admin = $_SESSION['id_administrador'];
+    
+        $sql = 'INSERT INTO tb_productos(nombre_producto, precio_producto, descripcion, cantidad_producto, imagen_producto, id_categoria, id_admin)
+        VALUES(?, ?, ?, ?, ?, ?, ?)';
+
+        $params = array($this->nombre, $this->precio, $this->descripcion, $this->cantidad, $this->imagen, $this->id_categoria, $this->id_admin);
         return Database::executeRow($sql, $params);
     }
+    
 
 
     public function readAll()
@@ -169,6 +174,16 @@ class ProductoHandler
             ";
 
     return Database::getRows($sql);
+}
+
+
+public function productosBajoStock()
+{
+    $sql = 'SELECT nombre_producto, cantidad_producto, precio_producto
+            FROM tb_productos
+            WHERE cantidad_producto <= ?';
+    $params = array($this->cantidad);
+    return Database::getRows($sql, $params);
 }
 
 

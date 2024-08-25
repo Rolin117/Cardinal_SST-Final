@@ -26,7 +26,7 @@
     </header>
 
     <main class="container">
-        <h1 class="text-center mb-4">Reportes</h1>
+        <h1 class="text-center mb-4">Reportes generales</h1>
 
 
         <div class="row">
@@ -34,29 +34,55 @@
                 <div class="report-card">
                     <h2>Reportes de Productos</h2>
                     <ul>
-                        <li><a href="#">Distribución por categoría</a></li>
-                        <li><a href="#">Top 5 productos más caros</a></li>
-                        <li><a href="#">Productos con bajo stock</a></li>
+                        <li><a href="#" onclick="openReportA()">Productos agotados</a></li>
+                        <!-- Botón que abre el modal -->
+<button type="button" class="boton-li" data-bs-toggle="modal" data-bs-target="#cantidadMinimaModal">
+    <li><a href="#">Productos con bajo stock</a></li>
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="cantidadMinimaModal" tabindex="-1" aria-labelledby="cantidadMinimaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cantidadMinimaModalLabel">Cantidad Mínima de Stock</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="cantidadMinimaForm" action="../../api/reports/private/productos_stock.php" method="GET">
+                    <div class="mb-3">
+                        <label for="cantidad_minima" class="form-label">Cantidad Mínima</label>
+                        <input type="number" class="form-control" id="cantidad_minima" name="cantidad_minima" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" form="cantidadMinimaForm" class="btn btn-primary">Generar Reporte</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+                        <li><a href="#" onclick="openReportO()">Productos con ofertas</a></li>
+                        <li><a href="#" onclick="openReportD()">Predicción de productos con demanda</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3">
+            <div class="col-md-6 col-lg-3">     
                 <div class="report-card">
                     <h2>Reportes de Ventas</h2>
                     <ul>
-                        <li><a href="#">Ventas totales por mes</a></li>
-                        <li><a href="#">Productos más vendidos</a></li>
-                        <li><a href="#">Ventas por categoría</a></li>
+                        <li><a href="#" onclick="openReportM()">Ventas totales por mes</a></li>
+                        <li><a href="#" onclick="openReportVM()">Predicción de ventas por mes</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-md-6 col-lg-3">
                 <div class="report-card">
-                    <h2>Reportes de Clientes</h2>
+                    <h2>Reportes de Clientes</h2>   
                     <ul>
-                        <li><a href="#">Pedidos por cliente</a></li>
-                        <li><a href="#">Clientes más activos</a></li>
-                        <li><a href="#">Evolución de registros</a></li>
+                        <li><a href="#" onclick="openReportPM()">Pedidos por mes</a></li>
                     </ul>
                 </div>
             </div>
@@ -64,9 +90,8 @@
                 <div class="report-card">
                     <h2>Reportes de Administración</h2>
                     <ul>
-                        <li><a href="#">Productos por administrador</a></li>
-                        <li><a href="#">Servicios por administrador</a></li>
-                        <li><a href="#">Comparativa productos vs servicios</a></li>
+                        <li><a href="#" onclick="openReportPA()">Productos por administrador</a></li>
+                        <li><a href="#" onclick="openReportSA()">Servicios por administrador</a></li>
                     </ul>
                 </div>
             </div>
@@ -88,6 +113,7 @@
 
     <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
     <script type="text/javascript" src="../../controllers/utils/components.js"></script>
+    <script type="text/javascript" src="../../controllers/private/reportes.js"></script>
     
 </body>
 </html>

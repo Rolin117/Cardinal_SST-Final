@@ -79,24 +79,30 @@ const fillTable = async (form = null) => {
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             TABLE_BODY.innerHTML += `
             <div class="col">
-                <div class="card h-100 border-light">
-                    <img src="${SERVER_URL}images/categorias/${row.imagen}" class="card-img-top" alt="..." loading="lazy">
-                    <div class="card-body">
-                        <h5 class="card-title">${row.nombre_cat}</h5>
-                        <div class="descripcion-precio">
-                        </div>
-                        <div class="botones-cards">
-                            <button class="boton-editar" onclick="openUpdate(${row.id_categoria})">
-                                <img src="../../resources/img/icon-editar.svg" alt="">Editar categoria
-                            </button>
-
-                            <button class="boton-eliminar" onclick="openDelete(${row.id_categoria})">
-                                <img src="../../resources/img/icon-eliminar.svg" alt="">Eliminar categoria
-                            </button>
-                        </div>
-                    </div>
-                </div>
+    <div class="card h-100 border-light">
+        <img src="${SERVER_URL}images/categorias/${row.imagen}" class="card-img-top" alt="..." loading="lazy">
+        <div class="card-body">
+            <h5 class="card-title">${row.nombre_cat}</h5>
+            <div class="descripcion-precio">
             </div>
+            <div class="botones-cards">
+                <button class="boton-editar" onclick="openUpdate(${row.id_categoria})">
+                    <img src="../../resources/img/icon-editar.svg" alt="">Editar 
+                </button>
+
+                <button class="boton-eliminar" onclick="openDelete(${row.id_categoria})">
+                    <img src="../../resources/img/icon-eliminar.svg" alt="">Eliminar 
+                </button>
+
+                <!-- Nuevo botón para generar reporte -->
+                <button class="boton-reporte" onclick="openReportP(${row.id_categoria})">
+                    <img src="../../resources/img/reporte.png" alt="">
+                </button> 
+            </div>
+        </div>
+    </div>
+</div>
+
             `;
         });
 
@@ -179,9 +185,9 @@ const openDelete = async (id) => {
 *   Parámetros: id (identificador del registro seleccionado).
 *   Retorno: ninguno.
 */
-const openReport = (id) => {
+const openReportP = (id) => {
     // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
-    const PATH = new URL(`${SERVER_URL}reports/admin/productos_categoria.php`);
+    const PATH = new URL(`${SERVER_URL}reports/private/productos_categoria.php`);
     // Se agrega un parámetro a la ruta con el valor del registro seleccionado.
     PATH.searchParams.append('id_categoria', id);
     // Se abre el reporte en una nueva pestaña.

@@ -116,4 +116,6 @@ class OfertaHandler
                 ';
         return Database::getRows($sql);
     }
+
+    /*a*/
 }

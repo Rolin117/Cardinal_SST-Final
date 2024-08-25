@@ -117,13 +117,12 @@ class ProductoData extends ProductoHandler
         }
     }
 
-    public function setIdAdmin($value)
+    public function setIdAdmin($id_admin)
     {
-        if (Validator::validateNaturalNumber($value)) {
-            $this->id_admin = $value;
+        if (Validator::validateNaturalNumber($id_admin)) {
+            $this->id_admin = $id_admin;
             return true;
         } else {
-            $this->data_error = 'El identificador del administrador es incorrecto';
             return false;
         }
     }

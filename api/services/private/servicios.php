@@ -26,7 +26,25 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'createRow':
+                if (session_status() === PHP_SESSION_NONE) {
+                    session_start();
+                }
+            
                 $_POST = Validator::validateForm($_POST);
+            
+                // Verificar que el ID del administrador está en la sesión
+                if (!isset($_SESSION['id_administrador'])) {
+                    $result['error'] = 'Sesión de administrador no encontrada.';
+                    break;
+                }
+            
+                // Asignar el ID del administrador al objeto $servicio
+                if (!$servicio->setIdAdmin($_SESSION['id_administrador'])) {
+                    $result['error'] = 'ID de administrador inválido.';
+                    break;
+                }
+            
+                
                 if (
                     !$servicio->setNombre($_POST['nombre_servicio']) or
                     !$servicio->setDescripcion($_POST['descripcion_servicio'])

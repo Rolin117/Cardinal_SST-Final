@@ -6,13 +6,13 @@ require_once('../../helpers/report.php');
 $pdf = new Report;
 
 // Se incluyen las clases para la transferencia y acceso a datos.
-require_once('../../models/data/servicio_data.php');
+require_once('../../models/data/servicios_data.php');
 
 // Se instancia la entidad correspondiente.
 $servicio = new ServicioData;
 
 // Se verifica si existen registros para mostrar, de lo contrario se imprime un mensaje.
-if ($dataServicios = $servicio->serviciosAdmin()) {
+if ($dataServicios = $servicio->serviciosPorAdministrador()) {
     // Se inicia el reporte con el encabezado del documento.
     $pdf->startReport('Servicios por Administrador');
 

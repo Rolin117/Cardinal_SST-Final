@@ -21,26 +21,46 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay coincidencias';
                 }
                 break;
-            case 'createRow':
-                $_POST = Validator::validateForm($_POST);
-                if (
-                    !$producto->setNombre($_POST['nombre_producto']) or
-                    !$producto->setDescripcion($_POST['descripcion']) or
-                    !$producto->setPrecio($_POST['precio_producto']) or
-                    !$producto->setCantidad($_POST['cantidad_producto']) or
-                    !$producto->setIdCategoria($_POST['categoriaProducto']) or
-                    !$producto->setImagen($_FILES['imagen_producto'])
-                ) {
-                    $result['error'] = $producto->getDataError();
-                } elseif ($producto->createRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Producto creado correctamente';
-                    // Se asigna el estado del archivo después de insertar.
-                    $result['fileStatus'] = Validator::saveFile($_FILES['imagen_producto'], $producto::RUTA_IMAGEN);
-                } else {
-                    $result['error'] = 'Ocurrió un problema al crear el producto';
-                }
-            break;
+                case 'createRow':
+                    // Iniciar sesión si no se ha hecho ya
+                    if (session_status() === PHP_SESSION_NONE) {
+                        session_start();
+                    }
+                
+                    $_POST = Validator::validateForm($_POST);
+                
+                    // Verificar que el ID del administrador está en la sesión
+                    if (!isset($_SESSION['id_administrador'])) {
+                        $result['error'] = 'Sesión de administrador no encontrada.';
+                        break;
+                    }
+                
+                    // Asignar el ID del administrador al objeto $producto
+                    if (!$producto->setIdAdmin($_SESSION['id_administrador'])) {
+                        $result['error'] = 'ID de administrador inválido.';
+                        break;
+                    }
+                
+                    // Asignar y validar otros campos
+                    if (
+                        !$producto->setNombre($_POST['nombre_producto']) ||
+                        !$producto->setDescripcion($_POST['descripcion']) ||
+                        !$producto->setPrecio($_POST['precio_producto']) ||
+                        !$producto->setCantidad($_POST['cantidad_producto']) ||
+                        !$producto->setIdCategoria($_POST['categoriaProducto']) ||
+                        !$producto->setImagen($_FILES['imagen_producto'])
+                    ) {
+                        $result['error'] = $producto->getDataError();
+                    } elseif ($producto->createRow()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Producto creado correctamente';
+                        // Se asigna el estado del archivo después de insertar.
+                        $result['fileStatus'] = Validator::saveFile($_FILES['imagen_producto'], ProductoHandler::RUTA_IMAGEN);
+                    } else {
+                        $result['error'] = 'Ocurrió un problema al crear el producto';
+                    }
+                    break;
+                
             case 'readAll':
                 if ($result['dataset'] = $producto->readAll()) {
                     $result['status'] = 1;
