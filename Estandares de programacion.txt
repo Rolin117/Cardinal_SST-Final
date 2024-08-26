@@ -1,13 +1,70 @@
-PHP:
- - Manejo de errores y excepciones
- - Comentarios claros
- - Nomenclatura clara
- - Validación de datos
- - Responsabilidad única
+1. Nomenclatura de Variables y Funciones:
+-Nombres Descriptivos: Se utilizan nombres descriptivos en mayúsculas con guiones bajos para las constantes
+y en camelCase para las funciones.
+Nombres Significativos: Los nombres de variables y funciones indican claramente su propósito.
 
-JS:
- - Uso consistente de comentarios
- - Nombres de constantes 
- - Manejo adecuado de eventos
- - Validación de datos
- - Separación de funciones
+
+2.Indentación:
+La indentación en programación se refiere al espacio en blanco que se inserta al comienzo de una línea de código. 
+Este espacio en blanco ayuda a estructurar el código de manera visual, haciendo que la jerarquía y el flujo del código
+sean más claros y fáciles de seguir.
+
+-Consistente: Se usa una indentación consistente de 4 espacios por nivel para mejorar la legibilidad del código.
+
+
+3.Punto y Coma:
+-Inclusión de Puntos y Comas: Se incluyen puntos y comas al final de las líneas para evitar problemas potenciales.
+
+4.Declaración de Variables:
+-Const y Let: Se utiliza const para declarar variables cuyo valor no cambiará y let para aquellas que pueden cambiar. 
+Se evita el uso de var.
+
+5.Comentarios:
+-Comentarios Descriptivos: Se documenta el código utilizando comentarios descriptivos para explicar la lógica detrás 
+del código.
+
+
+6. Evitar la Escritura en Línea:
+-Legibilidad: Se evita escribir múltiples declaraciones en una sola línea para mejorar la legibilidad del código.
+
+
+7.Manejo de Errores:
+-Uso de try catch: Se utilizan bloques try catch para manejar errores de manera adecuada y proporcionar mensajes significativos.
+
+
+
+Estructura del Código:
+
+1. Organización de Archivos y Directorios:
+Clases y Modelos: Las clases que manejan lógica de negocio o datos deben estar ubicadas en el directorio de modelos: 
+- /modelos/handler: que se utiliza para manejar la lógica del negocio. 
+- /modelos/data: que se utiliza para el manejo de datos.
+
+Servicios: Los scripts que manejan solicitudes y respuestas deben estar ubicados en un directorio separado, en este caso: 
+/servicios.
+
+2. Nombres de Clases y Métodos:
+-Clases: Deben utilizar el formato snake_casa y ser descriptivas de su función, 
+
+
+-Métodos: Deben utilizar el formato camelCase y describir claramente la acción que realizan
+
+3. Comentarios:
+Clases: Incluir un comentario descriptivo al inicio de cada clase.
+
+Métodos: Incluir un comentario antes de cada método describiendo su propósito y, 
+si es necesario, sus parámetros y valores de retorno.
+
+Código: Usar comentarios en línea para explicar partes complejas del código.
+
+4. Espaciado e Identación:
+La indentación en programación se refiere al espacio en blanco que se inserta al comienzo de una línea de código. 
+Este espacio en blanco ayuda a estructurar el código de manera visual, haciendo que la jerarquía y el flujo del código
+sean más claros y fáciles de seguir.
+
+Identación: Usar 4 espacios por nivel de identación.
+
+Espacios en Blanco: Dejar una línea en blanco entre métodos para mejorar la legibilidad.
+
+5. Nomenclatura de Variables:
+-Nombres Descriptivos: Se utilizan nombres descriptivos en minusculas para las variables dentro del handler
