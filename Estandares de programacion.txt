@@ -68,3 +68,39 @@ Espacios en Blanco: Dejar una línea en blanco entre métodos para mejorar la le
 
 5. Nomenclatura de Variables:
 -Nombres Descriptivos: Se utilizan nombres descriptivos en minusculas para las variables dentro del handler
+
+Estandares de JavaScrip:
+
+1- ADMINISTRADOR_API:
+Ruta a la API utilizada para realizar solicitudes relacionadas con la gestión de administradores.
+
+2- TABLE_BODY:
+Hace referencia al elemento del DOM donde se inserta el contenido de la tabla que muestra los administradores.
+
+3- SAVE_MODAL:
+Instancia de un componente modal de Bootstrap, utilizado para mostrar formularios de creación o edición de administradores.
+
+4- MODAL_TITLE:
+Referencia al elemento que muestra el título dentro del modal.
+
+5- SAVE_FORM:
+Hace referencia al formulario que se utiliza para guardar o actualizar la información del administrador.
+
+
+Estandares de php:
+
+1- Convención de Nombres: Los nombres de las clases y métodos están en inglés y utilizan notación PascalCase 
+para la clase AdministradorHandler y camelCase para los métodos como checkUser, editProfile, etc.
+
+2- Etiquetas de apertura: Se utiliza la etiqueta de apertura estándar <?php sin la opción corta.
+
+3- Aunque no es directamente un estándar PSR, el uso de atributos protegidos (protected) 
+como $id, $nombre, etc., indica una buena práctica de encapsulación, protegiendo la integridad de los datos 
+y alineándose con principios de programación orientada a objetos.
+
+4- Uso de password_verify: Se utiliza password_verify para validar contraseñas, 
+lo cual es una buena práctica de seguridad, recomendada para manejar contraseñas de forma segura.
+
+5- Espacios en blanco: Se utilizan espacios en blanco alrededor de operadores y dentro de parámetros de métodos 
+para mejorar la legibilidad.
+
