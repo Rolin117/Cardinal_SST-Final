@@ -92,8 +92,8 @@ FROM
 INNER JOIN 
     tb_productos p ON v.id_producto = p.id_producto
 GROUP BY 
-    fecha_venta;
-
+    fecha_venta
+LIMIT 12;
         ';
         return Database::getRows($sql);
     }
