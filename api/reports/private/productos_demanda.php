@@ -24,10 +24,10 @@ if ($dataProductosDemanda = $prediccion->prediccionProductosDemanda()) {
         $pdf->setTextColor(255, 255, 255); // Color de texto blanco para los encabezados
 
         // Se imprimen las celdas con los encabezados.
-        $pdf->cell(80, 10, 'Producto', 1, 0, 'C', 1);
+        $pdf->cell(60, 10, 'Producto', 1, 0, 'C', 1);
         $pdf->cell(40, 10, 'Precio', 1, 0, 'C', 1);
-        $pdf->cell(60, 10, 'Oferta', 1, 0, 'C', 1);
-        $pdf->cell(30, 10, 'Cantidad Vendida', 1, 1, 'C', 1);
+        $pdf->cell(50, 10, 'Oferta', 1, 0, 'C', 1);
+        $pdf->cell(50, 10, 'Cantidad Vendida', 1, 1, 'C', 1);
 
         // Se establece la fuente para los datos.
         $pdf->setFont('Arial', '', 11);
@@ -38,10 +38,10 @@ if ($dataProductosDemanda = $prediccion->prediccionProductosDemanda()) {
         foreach ($dataProductosDemanda as $rowProducto) {
             // Se imprimen las celdas con los datos de los productos.
             $pdf->setFillColor($fill ? 230 : 255); // Color de relleno gris más claro y blanco alternante
-            $pdf->cell(80, 10, $pdf->encodeString($rowProducto['nombre_producto']), 1, 0, '', $fill);
+            $pdf->cell(60, 10, $pdf->encodeString($rowProducto['nombre_producto']), 1, 0, '', $fill);
             $pdf->cell(40, 10, '$' . number_format($rowProducto['precio_producto'], 2), 1, 0, 'R', $fill);
-            $pdf->cell(60, 10, $pdf->encodeString($rowProducto['nombre_oferta']), 1, 0, '', $fill);
-            $pdf->cell(30, 10, $rowProducto['cantidad_total_vendida'], 1, 1, 'R', $fill);
+            $pdf->cell(50, 10, $pdf->encodeString($rowProducto['nombre_oferta']), 1, 0, '', $fill);
+            $pdf->cell(50, 10, $rowProducto['cantidad_total_vendida'], 1, 1, 'R', $fill);
             // Alternar color de relleno
             $fill = !$fill;
         }

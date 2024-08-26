@@ -18,7 +18,7 @@ if ($dataOfertasProductos = $ofertaHandler->OfertasProductos()) {
         $pdf->startReport('Productos con Ofertas');
 
         // Se establece un color de relleno para los encabezados.
-        $pdf->setFillColor(200, 200, 200);
+        $pdf->setFillColor(50, 50, 50);
         // Se establece la fuente para los encabezados.
         $pdf->setFont('Arial', 'B', 11);
         $pdf->setTextColor(255, 255, 255); // Color de texto blanco para los encabezados

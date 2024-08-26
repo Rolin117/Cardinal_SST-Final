@@ -26,7 +26,7 @@ if ($dataProductosAdmin = $producto->productosAdmin()) {
     $pdf->cell(50, 10, 'Nombre Administrador', 1, 0, 'C', 1);
     $pdf->cell(50, 10, 'Apellido Administrador', 1, 0, 'C', 1);
     $pdf->cell(70, 10, 'Nombre Producto', 1, 0, 'C', 1);
-    $pdf->cell(30, 10, 'Precio Producto (US$)', 1, 1, 'C', 1);
+    $pdf->cell(30, 10, 'Precio', 1, 1, 'C', 1);
 
     // Se establece la fuente para los datos de los productos.
     $pdf->setFont('Arial', '', 11);

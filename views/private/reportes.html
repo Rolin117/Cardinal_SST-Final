@@ -52,7 +52,7 @@
                 <form id="cantidadMinimaForm" action="../../api/reports/private/productos_stock.php" method="GET">
                     <div class="mb-3">
                         <label for="cantidad_minima" class="form-label">Cantidad Mínima</label>
-                        <input type="number" class="form-control" id="cantidad_minima" name="cantidad_minima" required>
+                        <input type="number" min="1" pattern="^[0-9]+" class="form-control" id="cantidad_minima" name="cantidad_minima" required>
                     </div>
                 </form>
             </div>

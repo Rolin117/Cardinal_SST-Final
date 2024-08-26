@@ -28,11 +28,37 @@ class PedidoHandler
 
     public function readAll()
     {
-        $sql = 'SELECT id_pedido, fecha, total, id_cliente
-                FROM tb_pedidos
-                ORDER BY fecha DESC';
+        $sql = 'SELECT p.id_pedido, p.fecha, p.total, c.nombre_cliente
+                FROM tb_pedidos p
+                INNER JOIN tb_clientes c ON p.id_cliente = c.id_cliente
+                ORDER BY p.fecha DESC';
         return Database::getRows($sql);
     }
+
+
+    public function searchRows()
+    {
+        $value = '%' . Validator::getSearchValue() . '%';
+        $sql = 'SELECT p.id_pedido, p.fecha, p.total, c.nombre_cliente, c.apellido_cliente, c.correo_cliente, c.telefono_cliente
+            FROM tb_pedidos p
+            INNER JOIN tb_clientes c ON p.id_cliente = c.id_cliente
+            WHERE c.nombre_cliente LIKE ? OR c.apellido_cliente LIKE ? OR c.correo_cliente LIKE ? OR c.telefono_cliente LIKE ?
+            ORDER BY p.fecha DESC';
+        $params = array($value, $value, $value, $value);
+        return Database::getRows($sql, $params);
+    }
+
+
+    public function getClientePorPedido()
+    {
+        $sql = 'SELECT c.id_cliente, c.nombre_cliente, c.apellido_cliente, c.correo_cliente, c.telefono_cliente
+                FROM tb_pedidos p
+                INNER JOIN tb_clientes c ON p.id_cliente = c.id_cliente
+                WHERE p.id_pedido = ?';
+        $params = array($this->id);
+        return Database::getRow($sql, $params);
+    }
+
 
     public function readOne()
     {

@@ -14,6 +14,33 @@ if (isset($_GET['action'])) {
     if (isset($_SESSION['id_administrador'])) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
+            case 'readOne':
+                if (!$pedido->setId($_POST['id_pedido'])) {
+                    $result['error'] = 'Pedido incorrecto';
+                } elseif ($result['dataset'] = $pedido->readOne()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Pedido inexistente';
+                }
+                break;
+            case 'readAll':
+                if ($result['dataset'] = $pedido->readAll()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen pedidos registrados';
+                }
+                break;
+                case 'searchRows':
+                    if (!Validator::validateSearch($_POST['search'])) {
+                        $result['error'] = Validator::getSearchError();
+                    } elseif ($result['dataset'] = $pedido->searchRows()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Existen ' . count($result['dataset']) . ' coincidencias';
+                    } else {
+                        $result['error'] = 'No hay coincidencias';
+                    }
+                    break; 
             case 'pedidosPorClienteG':
                 $result['dataset'] = $pedido->pedidosPorClienteG();
                 if ($result['dataset'] !== false) {
@@ -24,6 +51,16 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No se pudieron obtener los pedidos';
                 }
                 break;
+                case 'getClientePorPedido':
+                    $result['dataset'] = $pedido->getClientePorPedido();
+                    if ($result) {
+                        $response['status'] = 1;
+                        $response['dataset'] = $result;
+                        $response['message'] = 'Información del cliente obtenida correctamente';
+                    } else {
+                        $response['error'] = 'No se pudo obtener la información del cliente';
+                    }
+                    break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }
