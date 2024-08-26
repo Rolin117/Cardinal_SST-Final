@@ -95,6 +95,46 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar la categoría';
                 }
                 break;
+            case 'getCategoriaAdvancedStats':
+                $result['dataset'] = $categoria->getCategoriaAdvancedStats();
+                if ($result['dataset'] !== false) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Estadísticas avanzadas de categorías obtenidas correctamente';
+                } else {
+                    $result['status'] = 0;
+                    $result['error'] = 'No se pudieron obtener las estadísticas avanzadas de las categorías';
+                }
+                break;
+            case 'getCategoriaPrecioBoxplot':
+                $result['dataset'] = $categoria->getCategoriaPrecioBoxplot();
+                if ($result['dataset'] !== false) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Categorias obtenidas correctamente';
+                } else {
+                    $result['status'] = 0;
+                    $result['error'] = 'No se pudieron obtener las categorías';
+                }
+                break;
+            case 'PrecioCategorias':
+                    $result['dataset'] = $categoria->PrecioCategorias();
+                    if ($result['dataset'] !== false) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Categorias obtenidas correctamente';
+                    } else {
+                        $result['status'] = 0;
+                        $result['error'] = 'No se pudieron obtener las categorías';
+                    }
+                break;
+                case 'productosCategorias':
+                    $result['dataset'] = $categoria->productosCategorias();
+                    if ($result['dataset'] !== false) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Categorias obtenidas correctamente';
+                    } else {
+                        $result['status'] = 0;
+                        $result['error'] = 'No se pudieron obtener las categorías';
+                    }
+                break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

@@ -40,7 +40,7 @@ class OfertaHandler
         $sqlCheck = 'SELECT hasDiscount FROM tb_productos WHERE id_producto = ?';
         $paramsCheck = array($this->id_producto);
         $checkResult = Database::getRow($sqlCheck, $paramsCheck);
-    
+
         // Si hasDiscount ya es 1, no permitimos crear el row y retornamos false
         if ($checkResult && $checkResult['hasDiscount'] == 1) {
             return false;
@@ -49,7 +49,7 @@ class OfertaHandler
             $sqlUpdate = 'UPDATE tb_productos SET hasDiscount = 1 WHERE id_producto = ?';
             $paramsUpdate = array($this->id_producto);
             Database::executeRow($sqlUpdate, $paramsUpdate);
-    
+
             // Ahora procedemos con la inserción en tb_ofertas, incluyendo las fechas
             $sqlInsert = 'INSERT INTO tb_ofertas (nombre_oferta, descripcion_oferta, descuento, id_producto, fecha_inicio, fecha_fin)
                           VALUES (?, ?, ?, ?, ?, ?)';
@@ -57,7 +57,7 @@ class OfertaHandler
             return Database::executeRow($sqlInsert, $paramsInsert);
         }
     }
-    
+
 
     public function readOne()
     {
@@ -116,6 +116,23 @@ class OfertaHandler
                 ';
         return Database::getRows($sql);
     }
+
+    /*Graficos*/
+    public function OfertasProductosA()
+    {
+        $sql = 'SELECT 
+    p.nombre_producto, 
+    COUNT(o.id_oferta) AS total_ofertas
+FROM 
+    tb_productos p
+LEFT JOIN 
+    tb_ofertas o ON p.id_producto = o.id_producto
+GROUP BY 
+    p.nombre_producto;
+';
+        return Database::getRows($sql);
+    }
+
 
     /*a*/
 }

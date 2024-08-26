@@ -89,6 +89,21 @@ class ServicioHandler
                     a.nombre_admin, a.apellido_admin';
         return Database::getRows($sql);
     }
-    
-    
+
+
+    /*Graficos*/
+    public function graficoServicios()
+    {
+        $sql = "SELECT 
+    CONCAT(a.nombre_admin, ' ', a.apellido_admin) AS administrador, 
+    COUNT(s.id_servicio) AS total_servicios
+FROM 
+    tb_administradores a
+LEFT JOIN 
+    tb_servicios s ON a.id_administrador = s.id_admin
+GROUP BY 
+    administrador;
+";
+        return Database::getRows($sql);
+    }
 }

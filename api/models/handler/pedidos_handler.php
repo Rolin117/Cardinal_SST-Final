@@ -123,5 +123,21 @@ class PedidoHandler
         $params = array($this->id_cliente);
         return Database::getRows($sql, $params);
     }
-    
+
+
+    /*Graficos*/
+    public function pedidosPorClienteG()
+    {
+        $sql = "SELECT 
+    CONCAT(c.nombre_cliente, ' ', c.apellido_cliente) AS cliente, 
+    COUNT(p.id_pedido) AS total_pedidos
+FROM 
+    tb_clientes c
+INNER JOIN 
+    tb_pedidos p ON c.id_cliente = p.id_cliente
+GROUP BY 
+    cliente;
+";
+        return Database::getRows($sql);
+    }
 }

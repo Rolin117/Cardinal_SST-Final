@@ -101,6 +101,16 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar el servicio';
                 }
                 break;
+                case 'graficoServicios':
+                    $result['dataset'] = $servicio->graficoServicios();
+                    if ($result['dataset'] !== false) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Servicios obtenidos correctamente';
+                    } else {
+                        $result['status'] = 0;
+                        $result['error'] = 'No se pudieron obtener los servicios';
+                    }
+                    break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
 

@@ -30,55 +30,101 @@
     <main class="contenedor">
         <div class="container mt-5">
             <div class="row">
-                <!-- Grafica de los productos más vendidos -->
-                <div class="col-lg-6">
+                <!-- Fila 1 -->
+                <div class="col-lg-6 mb-4">
                     <div class="grafica">
-                        <h5>Productos más vendidos</h5>
-                        <canvas id="productosMasVendidos"></canvas>
+                        <h5>Detalles de las categorías</h5>
+                        <div class="canvas-container">
+                            <canvas id="chart1"></canvas>
+                        </div>
                     </div>
                 </div>
-                <!-- Tabla de los clientes registrados -->
-                <div class="col-lg-6">
-                    <table class="table tb-clientes table-hover">
-                        <label>
-                            <h5>Clientes registrados</h5>
-                        </label>
-                        <thead>
-                            <tr>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Correo</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Alvaro</td>
-                                <td>Correo1@gmail.com</td>
-                            </tr>
-                            <tr>
-                                <td>Kevin</td>
-                                <td>Correo2@gmail.com</td>
-                            </tr>
-                            <tr>
-                                <td>Dominic</td>
-                                <td>Correo3@gmail.com</td>
-                            </tr>
-                            <tr>
-                                <td>Ricardo</td>
-                                <td>Correo5@gmail.com</td>
-                            </tr>
-                            <tr>
-                                <td>Tamayo</td>
-                                <td>Correo6@gmail.com</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="col-lg-6 mb-4">
+                    <div class="grafica">
+                        <h5>Productos con ofertas</h5>
+                        <div class="canvas-container">
+                            <canvas id="chart2"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fila 2 -->
+                <div class="col-lg-6 mb-4">
+                    <div class="grafica">
+                        <h5>Servicios administrados</h5>
+                        <div class="canvas-container">
+                            <canvas id="chart3"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="grafica">
+                        <h5>Ventas totales por día</h5>
+                        <div class="canvas-container">
+                            <canvas id="chart4"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fila 3 -->
+                <div class="col-lg-6 mb-4">
+                    <div class="grafica">
+                        <h5>Promedio de precios de productos por categoría</h5>
+                        <div class="canvas-container">
+                            <canvas id="chart5"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="grafica">
+                        <h5>Productos por categoría</h5>
+                        <div class="canvas-container">
+                            <canvas id="chart6"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fila 4 -->
+                <div class="col-lg-6 mb-4">
+                    <div class="grafica">
+                        <h5>Ventas por producto</h5>
+                        <div class="canvas-container">
+                            <canvas id="chartVentas"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="grafica">
+                        <h5>Pedidos por cliente</h5>
+                        <div class="canvas-container">
+                            <canvas id="chartPedidos"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fila 5 -->
+                <div class="col-lg-6 mb-4">
+                    <div class="grafica">
+                        <h5>Predicción de ventas mensuales</h5>
+                        <div class="canvas-container">
+                            <canvas id="chartVentasMensuales"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="grafica">
+                        <h5>Predicción de inventario de productos</h5>
+                        <div class="canvas-container">
+                            <canvas id="chartInventario"></canvas>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        
     </main>
+    
+    
     <footer></footer>
+    <script type="text/javascript" src="../../resources/js/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-boxplot@3.1.0/dist/chartjs-plugin-boxplot.min.js"></script>    
     <script src="../../resources/js/private/dashboard.js"></script>
 
     <script type="text/javascript" src="../../resources/js/bootstrap.bundle.min.js"></script>
@@ -90,7 +136,8 @@
     <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
     <script type="text/javascript" src="../../controllers/utils/components.js"></script>
     <script type="text/javascript" src="../../controllers/private/administrador.js"></script>
-
+    <script type="text/javascript" src="../../controllers/private/dashboard.js"></script>
+    
 </body>
 
 </html>

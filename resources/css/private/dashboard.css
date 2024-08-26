@@ -239,3 +239,71 @@ th {
         height: 20px;
     }
 }
+
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: #ffff;
+}
+
+main {
+    margin-top: 6rem;
+    margin-bottom: 5rem;
+}
+
+.container {
+    gap: 1rem;
+}
+
+.grafica {
+    margin-bottom: 20px; /* Margen inferior entre gráficos */
+}
+
+.grafica h5 {
+    font-weight: normal;
+    padding: 0.5rem;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    margin: 0;
+}
+
+/* Ajuste para los contenedores de los gráficos */
+.canvas-container {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* Relación de aspecto 16:9 para pantallas grandes */
+    height: 0;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    background-color: #fff;
+}
+
+/* Ajustes para dispositivos móviles */
+@media (max-width: 768px) {
+    .grafica {
+        width: 100%; /* Asegura que el gráfico use el ancho completo del contenedor */
+    }
+
+    .canvas-container {
+        padding-top: 75%; /* Relación de aspecto 4:3 para pantallas más pequeñas */
+    }
+}
+
+@media (max-width: 576px) {
+    .grafica {
+        margin-bottom: 15px; /* Menor margen en pantallas más pequeñas */
+    }
+
+    .canvas-container {
+        padding-top: 75%; /* Ajusta la relación de aspecto para mejor visualización en pantallas más pequeñas */
+    }
+}

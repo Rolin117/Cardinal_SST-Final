@@ -285,4 +285,59 @@ const fetchData = async (filename, action, form = null) => {
         // Se muestra un mensaje en la consola del navegador web cuando ocurre un problema.
         console.log(error);
     }
+
+    const createBarChart = (id, categorias, totalProductos, precioMinimo, precioMaximo, rangoPrecios, title) => {
+        const ctx = document.getElementById(id).getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: categorias,
+                datasets: [
+                    {
+                        label: 'Total Productos',
+                        data: totalProductos,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Precio Mínimo',
+                        data: precioMinimo,
+                        backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                        borderColor: 'rgba(255, 159, 64, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Precio Máximo',
+                        data: precioMaximo,
+                        backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                        borderColor: 'rgba(153, 102, 255, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Rango Precios',
+                        data: rangoPrecios,
+                        backgroundColor: 'rgba(255, 205, 86, 0.2)',
+                        borderColor: 'rgba(255, 205, 86, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    text: title
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    }
+    
 }

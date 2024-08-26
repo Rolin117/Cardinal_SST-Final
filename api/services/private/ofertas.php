@@ -88,6 +88,16 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar la oferta';
                 }
                 break;
+                case 'OfertasProductosA':
+                    $result['dataset'] = $ofertas->OfertasProductosA();
+                    if ($result['dataset'] !== false) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Estadísticas de ofertas por producto obtenidas correctamente';
+                    } else {
+                        $result['status'] = 0;
+                        $result['error'] = 'No se pudieron obtener las estadísticas de ofertas por producto';
+                    }
+                    break;                
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

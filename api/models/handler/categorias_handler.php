@@ -80,9 +80,83 @@ class CategoriaHandler
         // Primero, elimina todos los productos asociados con la categoría
         $sqlProducts = 'DELETE FROM tb_productos WHERE id_categoria = ?';
         Database::executeRow($sqlProducts, array($this->id));
-    
+
         // Luego, elimina la categoría
         $sqlCategory = 'DELETE FROM tb_categorias WHERE id_categoria = ?';
         return Database::executeRow($sqlCategory, array($this->id));
+    }
+
+    public function getCategoriaAdvancedStats()
+    {
+        $sql = 'SELECT 
+                c.id_categoria, 
+                c.nombre_cat, 
+                COUNT(p.id_producto) AS total_productos,
+                MIN(p.precio_producto) AS precio_minimo,
+                MAX(p.precio_producto) AS precio_maximo,
+                (MAX(p.precio_producto) - MIN(p.precio_producto)) AS rango_precios
+            FROM 
+                tb_categorias c
+            LEFT JOIN 
+                tb_productos p ON c.id_categoria = p.id_categoria
+            GROUP BY 
+                c.id_categoria, c.nombre_cat';
+
+        try {
+            $result = Database::getRows($sql);
+            if ($result === false) {
+                // Si getRows devuelve false, lanza una excepción
+                throw new Exception("Error executing query");
+            }
+            return $result;
+        } catch (Exception $e) {
+            // Log the error and return false to indicate failure
+            error_log('Error in getCategoriaAdvancedStats: ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function getCategoriaPrecioBoxplot()
+    {
+        $sql = 'SELECT 
+    c.nombre_cat, 
+    p.precio_producto
+FROM 
+    tb_productos p
+INNER JOIN 
+    tb_categorias c ON p.id_categoria = c.id_categoria;
+        ';
+        return Database::getRows($sql);
+    }
+
+    public function PrecioCategorias()
+    {
+        $sql = 'SELECT 
+    c.nombre_cat, 
+    AVG(p.precio_producto) AS precio_promedio
+FROM 
+    tb_productos p
+INNER JOIN 
+    tb_categorias c ON p.id_categoria = c.id_categoria
+GROUP BY 
+    c.nombre_cat;
+';
+        return Database::getRows($sql);
+    }
+
+    public function productosCategorias()
+    {
+        $sql = 'SELECT 
+    c.nombre_cat, 
+    COUNT(p.id_producto) AS total_productos
+FROM 
+    tb_categorias c
+LEFT JOIN 
+    tb_productos p ON c.id_categoria = p.id_categoria
+GROUP BY 
+    c.nombre_cat;
+';
+return Database::getRows($sql);
+
     }
 }
