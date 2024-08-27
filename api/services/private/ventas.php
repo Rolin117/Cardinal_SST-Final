@@ -35,10 +35,9 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'VentasMensualesP':
-                $result['dataset'] = $ventas->VentasMensualesP();
-                if ($result['dataset'] !== false) {
+                if ($result['dataset'] = $ventas->predictVentasMensuales()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Estadísticas de ventas obtenidas correctamente';
+                    $result['message'] = 'Existen' . count($result['dataset']) . 'registros';
                 } else {
                     $result['status'] = 0;
                     $result['error'] = 'No se pudieron obtener las ventas';

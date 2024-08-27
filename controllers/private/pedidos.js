@@ -64,7 +64,7 @@ const openCustomerInfo = async (id) => {
         SAVE_MODAL.show();
         MODAL_TITLE.textContent = 'Información del Cliente';
         const ROW = DATA.dataset;
-        ID_CLIENTE.value = ROW.id_cliente;''
+        ID_CLIENTE.value = ROW.id_cliente;
         NOMBRE_CLIENTE.value = ROW.nombre_cliente;
         TELEFONO_CLIENTE.value = ROW.telefono_cliente;
         CORREO_CLIENTE.value = ROW.correo_cliente;

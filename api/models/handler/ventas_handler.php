@@ -1,6 +1,10 @@
 <?php
 
 require_once('../../helpers/database.php');
+require 'vendor/autoload.php';
+
+use Phpml\Regression\LeastSquares;
+use Phpml\Math\Matrix;
 
 class ventaHandler
 {
@@ -114,23 +118,68 @@ LIMIT 12;
         return Database::getRows($sql);
     }
 
-    public function VentasMensualesP()
-    {
-        $sql = "SELECT 
+    public function predictVentasMensuales()
+{
+    // Consulta para obtener las ventas mensuales
+    $sql = "SELECT 
                 DATE_FORMAT(fecha_venta, '%Y-%m') AS mes,
-                    SUM(cantidad_vendida * p.precio_producto) AS total_ventas
-                FROM 
-                    tb_ventas v
-                INNER JOIN 
-                    tb_productos p ON v.id_producto = p.id_producto
-                GROUP BY 
-                    mes
-                ORDER BY 
-                    mes DESC
-                LIMIT 12; -- Ajusta este límite según el rango de datos que necesites
-                ";
-        return Database::getRows($sql);
+                SUM(cantidad_vendida * p.precio_producto) AS total_ventas
+            FROM 
+                tb_ventas v
+            INNER JOIN 
+                tb_productos p ON v.id_producto = p.id_producto
+            GROUP BY 
+                mes
+            ORDER BY 
+                mes ASC;"; // Ordenar ascendentemente para predicciones cronológicas
+    $rows = Database::getRows($sql);
+
+    if (empty($rows)) {
+        return [];
     }
+
+    // Preparar datos para la regresión
+    $meses = [];
+    $ventas = [];
+
+    foreach ($rows as $row) {
+        $date = DateTime::createFromFormat('Y-m', $row['mes']);
+        $meses[] = $date->getTimestamp(); // Convertir fecha a timestamp
+        $ventas[] = $row['total_ventas'];
+    }
+
+    $predicciones = [];
+    $numMesesFuturos = 3; // Número de meses para predecir
+
+    // Calcular la regresión para los próximos meses
+    for ($i = 1; $i <= $numMesesFuturos; $i++) {
+        $X = array_slice($meses, 0, count($meses));
+        $y = array_slice($ventas, 0, count($ventas));
+
+        // Crear el modelo de regresión lineal
+        $regression = new LeastSquares();
+        $regression->train(array_map(function ($timestamp) {
+            return [$timestamp];
+        }, $X), $y);
+
+        // Predecir las ventas para el mes
+        $timestamp = end($meses) + $i * 30 * 24 * 60 * 60; // Sumar aproximadamente 1 mes en segundos
+        $predictedSales = $regression->predict([$timestamp]);
+
+        // Redondear el resultado a 2 decimales
+        $predictedSales = round($predictedSales, 2);
+        // Convertir timestamp a mes en formato 'Y-m'
+        $date = (new DateTime())->setTimestamp($timestamp)->format('Y-m');
+
+        $predicciones[] = [
+            'mes' => $date,
+            'total_ventas' => $predictedSales
+        ];
+    }
+
+    return $predicciones;
+}
+
 
     public function InventarioProductosP()
     {
