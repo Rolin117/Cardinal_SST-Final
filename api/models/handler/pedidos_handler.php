@@ -51,7 +51,7 @@ class PedidoHandler
 
     public function getClientePorPedido()
     {
-        $sql = 'SELECT c.id_cliente, c.nombre_cliente, c.apellido_cliente, c.correo_cliente, c.telefono_cliente
+        $sql = 'SELECT c.id_cliente, c.nombre_cliente, c.telefono_cliente, c.correo_cliente
                 FROM tb_pedidos p
                 INNER JOIN tb_clientes c ON p.id_cliente = c.id_cliente
                 WHERE p.id_pedido = ?';

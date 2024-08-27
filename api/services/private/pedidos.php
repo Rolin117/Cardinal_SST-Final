@@ -2,6 +2,7 @@
 // Se incluye la clase del modelo.
 require_once('../../models/data/pedidos_data.php');
 
+
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
@@ -16,11 +17,11 @@ if (isset($_GET['action'])) {
         switch ($_GET['action']) {
             case 'readOne':
                 if (!$pedido->setId($_POST['id_pedido'])) {
-                    $result['error'] = 'Pedido incorrecto';
+                    $result['error'] = $pedido->getDataError();
                 } elseif ($result['dataset'] = $pedido->readOne()) {
                     $result['status'] = 1;
                 } else {
-                    $result['error'] = 'Pedido inexistente';
+                    $result['error'] = 'oferta inexistente';
                 }
                 break;
             case 'readAll':
@@ -52,13 +53,13 @@ if (isset($_GET['action'])) {
                 }
                 break;
                 case 'getClientePorPedido':
-                    $result['dataset'] = $pedido->getClientePorPedido();
-                    if ($result) {
-                        $response['status'] = 1;
-                        $response['dataset'] = $result;
-                        $response['message'] = 'Información del cliente obtenida correctamente';
+                    if (!$pedido->setId($_POST['id_pedido'])) {
+                        $result['error'] = 'ID de pedido inválido';
+                    } elseif ($result['dataset'] = $pedido->getClientePorPedido()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Información del cliente obtenida correctamente';
                     } else {
-                        $response['error'] = 'No se pudo obtener la información del cliente';
+                        $result['error'] = 'No se pudo obtener la información del cliente';
                     }
                     break;
             default:

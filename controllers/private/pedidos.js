@@ -42,7 +42,7 @@ const fillTable = async (form = null) => {
                                 <td>${row.total}</td>
                                 <td>${row.nombre_cliente}</td>
                                 <td>
-                                    <button class="boton-accion boton-editar" onclick="openCustomerInfo(${row.id_cliente})">
+                                    <button class="boton-accion boton-editar" onclick="openCustomerInfo(${row.id_pedido})">
                                         <img src="../../resources/img/info.png" alt="Info">
                                     </button>
                                 </td>
@@ -57,26 +57,18 @@ const fillTable = async (form = null) => {
 
 
 const openCustomerInfo = async (id) => {
-    // Se define una constante tipo objeto con los datos del registro seleccionado.
     const FORM = new FormData();
     FORM.append('id_pedido', id);
-    // Petición para obtener los datos del registro solicitado.
     const DATA = await fetchData(PEDIDO_API, 'getClientePorPedido', FORM);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
-        // Se muestra la caja de diálogo con su título.
         SAVE_MODAL.show();
         MODAL_TITLE.textContent = 'Información del Cliente';
-        // Se prepara el formulario.
-        SAVE_FORM.reset();
-        // Se inicializan los campos con los datos.
         const ROW = DATA.dataset;
-        ID_CLIENTE.value = ROW.id_cliente;
+        ID_CLIENTE.value = ROW.id_cliente;''
         NOMBRE_CLIENTE.value = ROW.nombre_cliente;
         TELEFONO_CLIENTE.value = ROW.telefono_cliente;
         CORREO_CLIENTE.value = ROW.correo_cliente;
     } else {
         sweetAlert(2, DATA.error, false);
-        
     }
 }
