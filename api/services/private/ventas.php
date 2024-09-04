@@ -43,16 +43,15 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No se pudieron obtener las ventas';
                 }
                 break;
-            case 'InventarioProductosP':
-                $result['dataset'] = $ventas->InventarioProductosP();
-                if ($result['dataset'] !== false) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Estadísticas de ventas obtenidas correctamente';
-                } else {
-                    $result['status'] = 0;
-                    $result['error'] = 'No se pudieron obtener las ventas';
-                }
-                break;
+                case 'InventarioProductosP':
+                    if ($result['dataset'] = $ventas->InventarioProductosP()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Existen' . count($result['dataset']) . 'registros';
+                    } else {
+                        $result['status'] = 0;
+                        $result['error'] = 'No se pudieron obtener las ventas';
+                    }
+                    break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

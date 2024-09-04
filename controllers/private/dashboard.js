@@ -725,6 +725,7 @@ const createLineChart2 = (id, labels, data, title) => {
                 data: data,
                 fill: false, // No llenar el área bajo la línea
                 borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(0, 120, 183, 0.4)',
                 tension: 0.1 // Suaviza la línea
             }]
         },
@@ -764,21 +765,36 @@ const inventarioProductos = async () => {
         // Petición para obtener los datos del gráfico.
         const DATA = await fetchData(VENTA_API, 'InventarioProductosP');
         
-        // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
         if (DATA.status) {
             // Se declaran los arreglos para guardar los datos a graficar.
             let productos = [];
-            let totalVendidos = [];
-            
-            // Se recorre el conjunto de registros fila por fila a través del objeto row.
+            let meses = [];
+            let totalVendidosPorMes = {};
+
             DATA.dataset.forEach(row => {
-                // Se agregan los datos a los arreglos.
-                productos.push(row.nombre_producto);
-                totalVendidos.push(row.total_vendido);
+                if (!productos.includes(row.nombre_producto)) {
+                    productos.push(row.nombre_producto);
+                }
+                if (!meses.includes(row.mes)) {
+                    meses.push(row.mes);
+                }
+                if (!totalVendidosPorMes[row.nombre_producto]) {
+                    totalVendidosPorMes[row.nombre_producto] = [];
+                }
+                totalVendidosPorMes[row.nombre_producto].push(row.total_vendido);
             });
 
-            // Llamada a la función para generar y mostrar un gráfico de barras.
-            createBarChartInventario('chartInventario', productos, totalVendidos, 'Top 10 Productos Más Vendidos');
+            const datasets = productos.map(producto => {
+                return {
+                    label: producto,
+                    data: totalVendidosPorMes[producto],
+                    fill: false,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    tension: 0.1
+                };
+            });
+
+            createLineChartInventario('chartInventario', meses, datasets, 'Ventas Mensuales por Producto');
             
         } else {
             document.getElementById('chartInventario').remove();
@@ -789,48 +805,41 @@ const inventarioProductos = async () => {
     }
 }
 
-const createBarChartInventario = (id, labels, data, title) => {
+const createLineChartInventario = (id, labels, datasets, title) => {
     const ctx = document.getElementById(id).getContext('2d');
     new Chart(ctx, {
-        type: 'bar',
+        type: 'line',
         data: {
             labels: labels,
-            datasets: [{
-                label: 'Total Vendido',
-                data: data,
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                borderColor: 'rgba(255, 99, 132, 1)',
-                borderWidth: 1
-            }]
+            datasets: datasets
         },
         options: {
             responsive: true,
             plugins: {
                 title: {
                     display: true,
-                    text: title
+                    text: title // Título de la gráfica
                 }
             },
             scales: {
                 x: {
                     title: {
                         display: true,
-                        text: 'Productos'
+                        text: 'Meses' // Etiqueta para el eje X
                     },
                     ticks: {
                         autoSkip: true,
-                        maxTicksLimit: 10
+                        maxTicksLimit: 10 // Limitar la cantidad de etiquetas en el eje X
                     }
                 },
                 y: {
                     title: {
                         display: true,
-                        text: 'Total Vendido'
+                        text: 'Total Vendido' // Etiqueta para el eje Y
                     },
-                    beginAtZero: true
+                    beginAtZero: true // Iniciar el eje Y en 0
                 }
             }
         }
     });
 }
-
