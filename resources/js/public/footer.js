@@ -8,7 +8,7 @@ FOOTER.innerHTML = `
     <span></span> <!-- Línea verde -->
 </div> 
 <div class="footer-nav">
-    <p class="email">info@Suministros y Servicios Técnicos.com</p>
+    <p class="email">alejandro.ayala.14@hotmail.com</p>
     <ul class="menu links">
         <li><a href="index.html">Inicio</a></li>
         <li><a href="servicios.html">Servicios</a></li>
