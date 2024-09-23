@@ -278,15 +278,32 @@ if (isset($_GET['action'])) {
                 break;
             case 'logIn':
                 $_POST = Validator::validateForm($_POST);
-                if ($administrador->checkUser($_POST['correo_admin'], $_POST['contrasenia_admin'])) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Autenticación correcta';
+
+                // Comprobar si hay un tiempo de bloqueo
+                if (isset($_SESSION['bloqueado']) && time() < $_SESSION['bloqueado']) {
+                    $result['error'] = 'Demasiados intentos fallidos. Inténtalo de nuevo más tarde.';
                 } else {
-                    $result['error'] = 'Credenciales incorrectas';
+                    // Reiniciar el contador si se está fuera del tiempo de bloqueo
+                    if (time() >= $_SESSION['bloqueado'] ?? 0) {
+                        unset($_SESSION['intentos']);
+                    }
+
+                    if ($administrador->checkUser($_POST['correo_admin'], $_POST['contrasenia_admin'])) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Autenticación correcta';
+                        // Reiniciar intentos tras un login exitoso
+                        unset($_SESSION['intentos']);
+                    } else {
+                        $_SESSION['intentos'] = ($_SESSION['intentos'] ?? 0) + 1;
+
+                        if ($_SESSION['intentos'] >= $maxIntentos) {
+                            $_SESSION['bloqueado'] = time() + $tiempoBloqueo; // Bloquear durante 5 minutos
+                            $result['error'] = 'Demasiados intentos fallidos. Inténtalo de nuevo más tarde.';
+                        } else {
+                            $result['error'] = 'Credenciales incorrectas. Intento ' . $_SESSION['intentos'] . ' de ' . $maxIntentos;
+                        }
+                    }
                 }
-                break;
-            default:
-                $result['error'] = 'Acción no disponible fuera de la sesión';
                 break;
         }
     }
