@@ -42,7 +42,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <!-- Formulario para actualizar contraseña -->
-                <form id="passwordForm">
+                <form id="passwordForm" autocomplete="off">
                     <div class="modal-body row g-3">
                         <div class="col-sm-12 col-md-6 offset-md-3">
                             <label for="claveActual" class="form-label">Contraseña actual</label>
@@ -74,7 +74,7 @@
     <main>
         <div id="profileContainer">
             <h2 class="profile-title">Perfil</h2>
-            <form class="row g-3" id="profileForm">
+            <form class="row g-3" id="profileForm" autocomplete="off">
                 <div class="col-sm-12 col-md-6">
                     <label for="nombre_admin" class="form-label">Nombre:</label>
                     <input id="nombre_admin" type="text" name="nombre_admin" class="form-control" required>
@@ -124,6 +124,8 @@
     <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
     <script type="text/javascript" src="../../controllers/utils/components.js"></script>
     <script type="text/javascript" src="../../controllers/private/perfil_usuario.js"></script>
+    <script type="text/javascript" src="../../controllers/utils/inactivity.js"></script>
+
 </body>
 
 </html>
