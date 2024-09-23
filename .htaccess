@@ -2,8 +2,8 @@
 # | Custom error messages/pages                                        |
 # ----------------------------------------------------------------------
  
-ErrorDocument 403 /d-m-systems-ptc/resources/error/403.html
-ErrorDocument 404 /d-m-systems-ptc/resources/error/404.html
+ErrorDocument 403 /Cardinal_SST-Final/resources/error/403.html
+ErrorDocument 404 /Cardinal_SST-Final/resources/error/404.html
  
 # ----------------------------------------------------------------------
 # | Character encodings                                                |
@@ -70,6 +70,14 @@ AddDefaultCharset utf-8
 # | File access                                                        |
 # ----------------------------------------------------------------------
  
+
+
+
+ <FilesMatch "\.slq$">
+    Require all denied
+</FilesMatch>
+
+
 # Block access to directories without a default document.
 #
 # You should leave the following uncommented, as you shouldn't allow
