@@ -284,7 +284,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Demasiados intentos fallidos. Inténtalo de nuevo más tarde.';
                 } else {
                     // Reiniciar el contador si se está fuera del tiempo de bloqueo
-                    if (time() >= $_SESSION['bloqueado'] ?? 0) {
+                    if (time() >= $_SESSION['bloqueado'] ?? 10) {
                         unset($_SESSION['intentos']);
                     }
 
