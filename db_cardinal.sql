@@ -12,6 +12,10 @@ CREATE TABLE tb_administradores (
     contrasenia_admin VARCHAR(100) NOT NULL
 );
 
+ALTER TABLE tb_administradores 
+ADD COLUMN intentos_fallidos INT DEFAULT 0,
+ADD COLUMN ultimo_intento DATETIME DEFAULT NULL;
+
 CREATE TABLE tb_clientes (
     id_cliente INT PRIMARY KEY AUTO_INCREMENT,
     nombre_cliente VARCHAR(200) NOT NULL,
