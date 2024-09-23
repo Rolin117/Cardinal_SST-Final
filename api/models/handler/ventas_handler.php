@@ -1,7 +1,7 @@
 <?php
 
 require_once('../../helpers/database.php');
-require('C:/xampp/htdocs/Cardinal_SST-Final/vendor/autoload.php');
+require('/var/www/html/Cardinal_SST-Final/vendor/autoload.php');
 
 use Phpml\Regression\LeastSquares;
 use Phpml\Math\Matrix;

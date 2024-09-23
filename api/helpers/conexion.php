@@ -7,7 +7,7 @@ date_default_timezone_set('America/El_Salvador');
 define('SERVER', 'localhost');
 define('DATABASE', 'db_cardinal');
 define('USERNAME', 'root'); 
-define('PASSWORD', '');
+define('PASSWORD', '12345678');
 // define('USERNAME', 'userAdminC'); 
 // define('PASSWORD', '123');
 

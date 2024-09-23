@@ -22,20 +22,61 @@ class AdministradorHandler
      */
     public function checkUser($username, $password)
     {
-        $sql = 'SELECT id_administrador, correo_admin, contrasenia_admin
+        // Consulta para obtener el administrador
+        $sql = 'SELECT id_administrador, correo_admin, contrasenia_admin, intentos_fallidos, ultimo_intento
                 FROM tb_administradores
                 WHERE correo_admin = ?';
         $params = array($username);
-        if (!($data = Database::getRow($sql, $params))) {
-            return false;
-        } elseif (password_verify($password, $data['contrasenia_admin'])) {
+        $data = Database::getRow($sql, $params);
+    
+        // Verificar si el administrador existe
+        if (!$data) {
+            return ['status' => false, 'message' => 'Usuario no encontrado.'];
+        }
+    
+        // Verificar si la cuenta está bloqueada
+        if ($data['intentos_fallidos'] >= 3) {
+            $tiempoBloqueo = new DateTime($data['ultimo_intento']);
+            $tiempoActual = new DateTime();
+            $diferencia = $tiempoActual->diff($tiempoBloqueo);
+    
+            if ($diferencia->i < 1) {
+                return ['status' => false, 'message' => 'La cuenta está bloqueada. Intenta nuevamente más tarde.'];
+            } else {
+                // Reiniciar intentos fallidos si han pasado más de 15 minutos
+                $this->resetIntentos($data['id_administrador']);
+            }
+        }
+    
+        // Verificar la contraseña
+        if (password_verify($password, $data['contrasenia_admin'])) {
+            $this->resetIntentos($data['id_administrador']);
             $_SESSION['id_administrador'] = $data['id_administrador'];
             $_SESSION['correo_admin'] = $data['correo_admin'];
-            return true;
+            return ['status' => true, 'message' => 'Autenticación correcta.'];
         } else {
-            return false;
+            $this->incrementarIntentos($data['id_administrador']);
+            return ['status' => false, 'message' => 'Credenciales incorrectas.'];
         }
     }
+    
+
+    // Método para incrementar intentos fallidos
+    public function incrementarIntentos($id_admin)
+    {
+        $sql = "UPDATE tb_administradores SET intentos_fallidos = intentos_fallidos + 1, ultimo_intento = NOW() WHERE id_administrador = ?";
+        $params = array($id_admin);
+        Database::executeRow($sql, $params);
+    }
+
+    // Método para reiniciar intentos fallidos
+    public function resetIntentos($id_admin)
+    {
+        $sql = "UPDATE tb_administradores SET intentos_fallidos = 0 WHERE id_administrador = ?";
+        $params = array($id_admin);
+        Database::executeRow($sql, $params);
+    }
+
 
     public function checkPassword($password)
     {
@@ -69,7 +110,7 @@ class AdministradorHandler
         $params = array($this->nombre, $this->apellido, $this->correo, $this->telefono, $_SESSION['id_administrador']);
         return Database::executeRow($sql, $params);
     }
-    
+
     public function readProfile()
     {
         $sql = 'SELECT id_administrador, nombre_admin, apellido_admin, correo_admin, telefono_admin
@@ -134,7 +175,4 @@ class AdministradorHandler
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
-
-    
 }
-
