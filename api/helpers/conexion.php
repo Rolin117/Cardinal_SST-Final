@@ -6,8 +6,10 @@ date_default_timezone_set('America/El_Salvador');
 // Constantes para establecer las credenciales de conexión con el servidor de bases de datos.
 define('SERVER', 'localhost');
 define('DATABASE', 'db_cardinal');
-define('USERNAME', 'userAdminC'); 
-define('PASSWORD', '123');
+define('USERNAME', 'root'); 
+define('PASSWORD', '');
+// define('USERNAME', 'userAdminC'); 
+// define('PASSWORD', '123');
 
  // Intentar establecer conexión con la base de datos
 //    $conn = new mysqli(SERVER, USERNAME, PASSWORD, DATABASE);
