@@ -70,29 +70,14 @@ AddDefaultCharset utf-8
 # | File access                                                        |
 # ----------------------------------------------------------------------
  
- <FilesMatch "\.js$">
-    Require all denied
-</FilesMatch>
 
- <FilesMatch "\.php$">
-    Require all denied
-</FilesMatch>
+
 
  <FilesMatch "\.slq$">
     Require all denied
 </FilesMatch>
 
- <FilesMatch "\.json$">
-    Require all denied
-</FilesMatch>
 
- <FilesMatch "\.lock$">
-    Require all denied
-</FilesMatch>
-
- <FilesMatch "\.css$">
-    Require all denied
-</FilesMatch>
 # Block access to directories without a default document.
 #
 # You should leave the following uncommented, as you shouldn't allow
