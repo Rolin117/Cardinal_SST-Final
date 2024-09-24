@@ -10,6 +10,7 @@ class ComposerStaticInit161063ac4ca51fc49e6bcb5a58487262
         'P' => 
         array (
             'Phpml\\' => 6,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
     );
 
@@ -17,6 +18,10 @@ class ComposerStaticInit161063ac4ca51fc49e6bcb5a58487262
         'Phpml\\' => 
         array (
             0 => __DIR__ . '/..' . '/php-ai/php-ml/src',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
     );
 
