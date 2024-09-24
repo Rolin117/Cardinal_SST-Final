@@ -40,7 +40,7 @@ class AdministradorHandler
             $tiempoActual = new DateTime();
             $diferencia = $tiempoActual->diff($tiempoBloqueo);
     
-            if ($diferencia->i < 1) {
+            if ($diferencia->i < 1440) {
                 return ['status' => false, 'message' => 'La cuenta está bloqueada. Intenta nuevamente más tarde.'];
             } else {
                 // Reiniciar intentos fallidos si han pasado más de 15 minutos
