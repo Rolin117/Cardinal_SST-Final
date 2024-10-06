@@ -9,7 +9,7 @@ if (isset($_GET['action'])) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
     session_start();
 
-    $limiteInactividad = 30; // 5 * 60 = 300 segundos
+    $limiteInactividad = 300; // 5 * 60 = 300 segundos
 
     // Verificar si hay tiempo de actividad previo
     if (isset($_SESSION['ultimoTiempoActividad'])) {

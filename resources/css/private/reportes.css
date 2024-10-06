@@ -1,5 +1,9 @@
+.manuales {
+    margin-bottom: 15rem;
+}
+
 main {
-    margin: 9.8rem 0 10rem 0;
+    margin: 9.8rem 0 0 0;
 }
 
 .titulo {
@@ -40,4 +44,27 @@ main {
 .boton-li {
     border-style: none;
     background-color: white;
+}
+
+.manual-card {
+    transition: transform 0.2s ease-in-out;
+}
+.manual-card:hover {
+    transform: scale(1.05);
+}
+
+.boton-agregar {
+    background-color: #00B207;
+    border: none;
+    color: #ffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 43px;
+    transition: padding 0.3s ease;
+    padding: 0.5rem 1rem;  /* Modificado para ser más adaptable */
+}
+
+.boton-agregar:hover {
+    background-color: #008a06; /* Un color más oscuro para el hover */
 }

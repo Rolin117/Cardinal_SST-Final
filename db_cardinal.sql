@@ -8,7 +8,7 @@ CREATE TABLE tb_administradores (
     nombre_admin VARCHAR(200) NOT NULL,
     apellido_admin VARCHAR(200) NOT NULL,
     correo_admin VARCHAR(250) NOT NULL UNIQUE,
-    telefono_admin varchar(9) NOT NULL,
+    telefono_admin VARCHAR(9) NOT NULL,
     contrasenia_admin VARCHAR(100) NOT NULL
 );
 
