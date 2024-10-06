@@ -1,6 +1,7 @@
 <?php
 // Se incluye la clase para trabajar con la base de datos.
 require_once('../../helpers/database.php');
+require_once('../../helpers/email.php');
 
 /*
  *  Clase para manejar el comportamiento de los datos de la tabla cliente.
@@ -133,5 +134,60 @@ class ClienteHandler
                 WHERE id_cliente = ?';
         $params = array($this->id);
         return Database::executeRow($sql, $params);
+    }
+    
+    public function getIdByEmail($userEmail)
+    {
+        $sql = 'SELECT id_cliente FROM tb_clientes WHERE correo_cliente = ?';
+        $params = array($userEmail);
+        $data = Database::getRow($sql, $params);
+        return $data ? $data['id_cliente'] : null; // Retorna null si no hay datos
+    }
+
+
+    public function getPasswordHash($userId)
+    {
+        $sql = 'SELECT contrasenia_cliente FROM tb_clientes WHERE id_cliente = ?';
+        $params = array($userId);
+        $data = Database::getRow($sql, $params);
+        return $data['contrasenia_cliente'];
+    }
+
+    public function getUserNameById($userId)
+    {
+        $sql = 'SELECT nombre_cliente FROM tb_clientes WHERE id_cliente = ?';
+        $params = array($userId);
+        $data = Database::getRow($sql, $params);
+        return $data ? $data['nombre_cliente'] : null;
+    }
+
+    public function getEmailById($userId)
+    {
+        $sql = 'SELECT correo_cliente FROM tb_clientes WHERE id_cliente = ?';
+        $params = array($userId);
+        $data = Database::getRow($sql, $params);
+        return $data ? $data['correo_cliente'] : null; // Retorna null si no hay datos
+    }
+
+    public function changePasswordFromEmail()
+    {
+        $sql = 'UPDATE tb_clientes SET contrasenia_cliente = ? WHERE correo_cliente = ?';
+        $params = array($this->clave, $_SESSION['usuario_correo_vcc']['correo']);
+        return Database::executeRow($sql, $params);
+    }
+
+    public function verifyExistingEmail()
+    {
+        $sql = 'SELECT COUNT(*) as count
+                FROM tb_clientes
+                WHERE correo_cliente = ?';
+        $params = array($this->correo);
+        $result = Database::getRow($sql, $params);
+
+        if ($result['count'] > 0) {
+            return true; // Hay resultados
+        } else {
+            return false; // No hay resultados
+        }
     }
 }
