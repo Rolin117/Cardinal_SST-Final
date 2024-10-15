@@ -235,3 +235,7 @@ main {
     border-radius: 10px;
     font-size: 1rem;
 }
+
+.custom-width {
+    max-width: 80%; /* Ajusta el valor según tus necesidades */
+}

@@ -185,14 +185,37 @@ class Validator
     public static function validatePassword($value)
     {
         if (strlen($value) < 8) {
-            self::$password_error = 'La contraseña es menor a 8 caracteres';
-            return false;
-        } elseif (strlen($value) <= 72) {
-            return true;
-        } else {
-            self::$password_error = 'La contraseña es mayor a 72 caracteres';
+            self::$password_error = "La contraseña debe tener al menos 8 caracteres.";
             return false;
         }
+
+        // Verifica que contenga al menos una letra mayúscula
+        if (!preg_match('/[A-Z]/', $value)) {
+            self::$password_error = "La contraseña debe contener al menos una letra mayúscula.";
+            return false;
+        }
+
+        // Verifica que contenga al menos una letra minúscula
+        if (!preg_match('/[a-z]/', $value)) {
+            self::$password_error = "La contraseña debe contener al menos una letra minúscula.";
+            return false;
+        }
+
+        // Verifica que contenga al menos un número
+        if (!preg_match('/[0-9]/', $value)) {
+            self::$password_error = "La contraseña debe contener al menos un número.";
+            return false;
+        }
+
+        // Verifica que contenga al menos un carácter especial
+        if (!preg_match('/[\W_]/', $value)) {
+            self::$password_error = "La contraseña debe contener al menos un carácter especial.";
+            return false;
+        }
+
+        // Si pasa todas las validaciones
+        self::$password_error = null;
+        return true;
     }
 
     // Validar el formato de un DUI (Documento Único de Identidad).

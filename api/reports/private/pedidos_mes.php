@@ -25,7 +25,7 @@ if ($dataPedidos = $pedido->pedidosMes()) {
     // Se imprimen las celdas con los encabezados.
     $pdf->cell(30, 10, 'Mes', 1, 0, 'C', 1);
     $pdf->cell(40, 10, 'Total Pedidos', 1, 0, 'C', 1);
-    $pdf->cell(40, 10, 'Ingresos Totales (US$)', 1, 1, 'C', 1);
+    $pdf->cell(60, 10, 'Ingresos Totales (US$)', 1, 1, 'C', 1);
 
     // Se establece la fuente para los datos de los pedidos.
     $pdf->setFont('Arial', '', 11);
@@ -38,7 +38,7 @@ if ($dataPedidos = $pedido->pedidosMes()) {
         $pdf->setFillColor($fill ? 230 : 255); // Color de relleno gris más claro y blanco alternante
         $pdf->cell(30, 10, $pdf->encodeString($rowPedido['mes']), 1, 0, '', $fill);
         $pdf->cell(40, 10, $rowPedido['total_pedidos'], 1, 0, 'R', $fill);
-        $pdf->cell(40, 10, number_format($rowPedido['ingresos_totales'], 2), 1, 1, 'R', $fill);
+        $pdf->cell(60, 10, number_format($rowPedido['ingresos_totales'], 2), 1, 1, 'R', $fill);
         // Alternar color de relleno
         $fill = !$fill;
     }

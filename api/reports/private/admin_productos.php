@@ -25,7 +25,7 @@ if ($dataProductosAdmin = $producto->productosAdmin()) {
     // Se imprimen las celdas con los encabezados.
     $pdf->cell(50, 10, 'Nombre Administrador', 1, 0, 'C', 1);
     $pdf->cell(50, 10, 'Apellido Administrador', 1, 0, 'C', 1);
-    $pdf->cell(70, 10, 'Nombre Producto', 1, 0, 'C', 1);
+    $pdf->cell(50, 10, 'Nombre Producto', 1, 0, 'C', 1);
     $pdf->cell(30, 10, 'Precio', 1, 1, 'C', 1);
 
     // Se establece la fuente para los datos de los productos.
@@ -39,7 +39,7 @@ if ($dataProductosAdmin = $producto->productosAdmin()) {
         $pdf->setFillColor($fill ? 230 : 255); // Color de relleno gris más claro y blanco alternante
         $pdf->cell(50, 10, $pdf->encodeString($rowProducto['nombre_administrador']), 1, 0, '', $fill);
         $pdf->cell(50, 10, $pdf->encodeString($rowProducto['apellido_administrador']), 1, 0, '', $fill);
-        $pdf->cell(70, 10, $pdf->encodeString($rowProducto['nombre_producto']), 1, 0, '', $fill);
+        $pdf->cell(50, 10, $pdf->encodeString($rowProducto['nombre_producto']), 1, 0, '', $fill);
         $pdf->cell(30, 10, number_format($rowProducto['precio_producto'], 2), 1, 1, 'R', $fill);
         // Alternar color de relleno
         $fill = !$fill;
