@@ -154,12 +154,14 @@ class Validator
     // Validar una cadena de texto permitiendo letras, dígitos y espacios.
     public static function validateAlphanumeric($value)
     {
-        if (preg_match('/^[a-zA-Z0-9ñÑáÁéÉíÍóÓúÚ\s]+$/', $value)) {
+        // Permite letras, números, espacios, guiones y barras
+        if (preg_match('/^[a-zA-Z0-9ñÑáÁéÉíÍóÓúÚ\s\-\/]+$/', $value)) {
             return true;
         } else {
             return false;
         }
     }
+    
 
     // Validar la longitud de una cadena de texto.
     public static function validateLength($value, $min, $max)
