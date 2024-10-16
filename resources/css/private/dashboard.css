@@ -316,3 +316,7 @@ canvas {
         padding-top: 75%; /* Ajusta la relación de aspecto para mejor visualización en pantallas más pequeñas */
     }
 }
+
+.grafico-p {
+    height: 20%;
+}

@@ -29,17 +29,27 @@ document.addEventListener('DOMContentLoaded', async () => {
 PROFILE_FORM.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
-    // Constante tipo objeto con los datos del formulario.
-    const FORM = new FormData(PROFILE_FORM);
-    // Petición para actualizar los datos personales del usuario.
-    const DATA = await fetchData(USER_API, 'editProfile', FORM);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-    if (DATA.status) {
-        sweetAlert(1, DATA.message, true);
-    } else {
-        sweetAlert(2, DATA.error, false);
+    
+    // Pregunta de confirmación para editar el perfil.
+    const RESPONSE = await confirmAction('¿Está seguro de que desea editar su perfil?');
+    
+    // Si el usuario confirma, se procede con la actualización del perfil.
+    if (RESPONSE) {
+        // Constante tipo objeto con los datos del formulario.
+        const FORM = new FormData(PROFILE_FORM);
+        
+        // Petición para actualizar los datos personales del usuario.
+        const DATA = await fetchData(USER_API, 'editProfile', FORM);
+        
+        // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+        if (DATA.status) {
+            sweetAlert(1, DATA.message, true);
+        } else {
+            sweetAlert(2, DATA.error, false);
+        }
     }
 });
+
 
 PASSWORD_FORM.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
